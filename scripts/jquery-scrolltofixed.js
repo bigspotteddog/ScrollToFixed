@@ -4,10 +4,10 @@
  * element to continue to move left or right with the horizontal scroll.
  * 
  * Given an option marginTop, the element will stop moving vertically upward
- * once the vertical scroll has reached the target position; but, the
- * element will still move horizontally as the page is scrolled left or right.
- * Once the page has been scrolled back down passed the target position, the
- * element will be restored to its original position on the page.
+ * once the vertical scroll has reached the target position; but, the element
+ * will still move horizontally as the page is scrolled left or right. Once the
+ * page has been scrolled back down passed the target position, the element will
+ * be restored to its original position on the page.
  * 
  * This plugin has been tested in Firefox 3/4, Google Chrome 10/11, Safari 5,
  * and Internet Explorer 8/9.
@@ -41,9 +41,9 @@
         // scroll.
         var offsetLeft = 0;
 
-        // This is the last offset used to move the element horizontally. This
-        // is used to determine if we need to move the element because we would
-        // not want to do that for no reason.
+        // This last offset used to move the element horizontally. This is used
+        // to determine if we need to move the element because we would not want
+        // to do that for no reason.
         var lastOffsetLeft = -1;
 
         // This is the element used to fill the void left by the target element
@@ -72,14 +72,16 @@
             isReset = true;
         }
 
+        // Returns whether the target element is fixed or not.
+        function isFixed() {
+            return target.css('position') == 'fixed';
+        }
+
         // Sets the target element to fixed. Also, sets the spacer to fill the
         // void left by the target element.
         function setFixed() {
-            // Check to see if the target element is already fixed.
-            var fixed = target.css('position') == 'fixed';
-
             // Only fix the target element and the spacer if we need to.
-            if (!fixed) {
+            if (!isFixed()) {
                 // Set the spacer to fill the height and width of the target
                 // element, then display it.
                 spacer.css({
@@ -101,17 +103,14 @@
 
         // Sets the target element back to unfixed. Also, hides the spacer.
         function setUnfixed() {
-            // Check to see if the target element is already not fixed.
-            var fixed = target.css('position') == 'fixed';
-
             // Only unfix the target element and the spacer if we need to.
-            if (fixed) {
+            if (isFixed()) {
                 // Hide the spacer now that the target element will fill the
                 // space.
                 spacer.css('display', 'none');
 
-                // Remove the target's style attributes. This will reverse them
-                // back to the target element's orginal style.
+                // Remove the style attributes that were added to the target.
+                // This will reverse the target back to the its original style.
                 target.css({
                     'width' : '',
                     'position' : '',
@@ -124,12 +123,15 @@
         // Moves the target element left or right relative to the horizontal
         // scroll position.
         function setleft(x) {
-            // Hold the last horizontal position set.
-            lastOffsetLeft = x;
+            // Only if the scroll is not what it was last time we did this.
+            if (x != lastOffsetLeft) {
+                // Move the target element horizontally relative to its original
+                // horizontal position.
+                target.css('left', offsetLeft - x);
 
-            // Move the target element horizontally relative to its original
-            // horizontal position.
-            target.css('left', offsetLeft - x);
+                // Hold the last horizontal position set.
+                lastOffsetLeft = x;
+            }
         }
 
         // Checks to see if we need to do something based on new scroll position
@@ -153,9 +155,7 @@
             if (y >= offsetTop - base.options.marginTop) {
                 // If the page has been scrolled horizontally as well, move the
                 // target element accordingly.
-                if (x != lastOffsetLeft) {
-                    setleft(x);
-                }
+                setleft(x);
 
                 // Set the target element to fixed.
                 setFixed();
