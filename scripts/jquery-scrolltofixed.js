@@ -41,9 +41,9 @@
         // scroll.
         var offsetLeft = 0;
 
-        // This last offset used to move the element horizontally. This is used
-        // to determine if we need to move the element because we would not want
-        // to do that for no reason.
+        // This is the last offset used to move the element horizontally. This
+        // is used to determine if we need to move the element because we would
+        // not want to do that for no reason.
         var lastOffsetLeft = -1;
 
         // This is the element used to fill the void left by the target element
