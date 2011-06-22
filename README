@@ -1,5 +1,6 @@
 ScrollToFixed - 06/21/2011
 ==========================
+
 This plugin is used to fix elements to the top of the page, if the element
 would have been scrolled out of view, vertically; however, it does allow the
 element to continue to move left or right with the horizontal scroll.
