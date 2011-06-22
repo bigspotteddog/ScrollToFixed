@@ -13,3 +13,9 @@ element will be restored to its original position on the page.
 
 This plugin has been tested in Firefox 3/4, Google Chrome 10/11, Safari 5,
 and Internet Explorer 8/9.
+
+## Usage ##
+
+    $(document).ready(function() {
+        $('h2').scrollToFixed();
+    });
