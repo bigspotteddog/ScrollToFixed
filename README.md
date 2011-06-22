@@ -17,5 +17,5 @@ and Internet Explorer 8/9.
 ## Usage ##
 
     $(document).ready(function() {
-        $('h2').scrollToFixed();
+        $('#mydiv').scrollToFixed();
     });
