@@ -19,3 +19,8 @@ and Internet Explorer 8/9.
     $(document).ready(function() {
         $('#mydiv').scrollToFixed();
     });
+
+## Demo ##
+
+http://jsfiddle.net/y3qV5/
+    
