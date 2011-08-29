@@ -22,6 +22,6 @@ and Internet Explorer 8/9.
 
 ## Demo ##
 
-http://jsfiddle.net/y3qV5/
-http://jsfiddle.net/k2R3G/1/
+* http://jsfiddle.net/y3qV5/
+* http://jsfiddle.net/k2R3G/1/
     
