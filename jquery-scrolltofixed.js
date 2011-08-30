@@ -105,6 +105,8 @@
         function setUnfixed() {
             // Only unfix the target element and the spacer if we need to.
             if (isFixed()) {
+                lastOffsetLeft = -1;
+
                 // Hide the spacer now that the target element will fill the
                 // space.
                 spacer.css('display', 'none');
@@ -150,15 +152,23 @@
             var y = $(window).scrollTop();
 
             // If the vertical scroll position, plus the optional margin, would
+            // put the target element at the specified limit, set the target
+            // element to absolute.
+            if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
+                target.css('position', 'absolute');
+                target.css('top', base.options.limit);
+
+            // If the vertical scroll position, plus the optional margin, would
             // put the target element above the top of the page, set the target
             // element to fixed.
-            if (y >= offsetTop - base.options.marginTop) {
+            } else if (y >= offsetTop - base.options.marginTop) {
+                // Set the target element to fixed.
+                setFixed();
+
                 // If the page has been scrolled horizontally as well, move the
                 // target element accordingly.
                 setleft(x);
 
-                // Set the target element to fixed.
-                setFixed();
             } else {
                 // Set the target element to unfixed, placing it where it was
                 // before.
@@ -215,7 +225,8 @@
 
     // Sets the option defaults.
     $.ScrollToFixed.defaultOptions = {
-        marginTop : 0
+        marginTop : 0,
+        limit : 0
     };
 
     // Returns enhanced elements that will fix to the top of the page when the
