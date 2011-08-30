@@ -33,3 +33,4 @@ Margin and Limit options:
 * http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
 * http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
 * http://jsfiddle.net/ZczEt/ - banner that gives way to a fixed header.
+* http://jsfiddle.net/y3qV5/21/ - 2 cart summaries that scroll up and stop at different intervals.
