@@ -16,9 +16,13 @@ and Internet Explorer 8/9.
 
 ## Usage ##
 
+Default options:
+
     $(document).ready(function() {
         $('#mydiv').scrollToFixed();
     });
+
+Margin and Limit options:
 
     $(document).ready(function() {
         $('#cart').scrollToFixed({ marginTop: 10, limit: $($('h2')[5]).offset().top });
