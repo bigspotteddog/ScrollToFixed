@@ -30,6 +30,6 @@ Margin and Limit options:
 
 ## Demos ##
 
-* http://jsfiddle.net/y3qV5/ - floating cart summary.
+* http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
 * http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
 * http://jsfiddle.net/ZczEt/ - banner that gives way to a fixed header.
