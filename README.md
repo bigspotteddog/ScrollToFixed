@@ -22,6 +22,6 @@ and Internet Explorer 8/9.
 
 ## Demos ##
 
-* http://jsfiddle.net/y3qV5/
-* http://jsfiddle.net/k2R3G/2/
-    
+* http://jsfiddle.net/y3qV5/ - floating cart summary.
+* http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
+* http://jsfiddle.net/ZczEt/ - banner that gives way to a fixed header.
