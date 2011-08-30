@@ -20,6 +20,10 @@ and Internet Explorer 8/9.
         $('#mydiv').scrollToFixed();
     });
 
+    $(document).ready(function() {
+        $('#cart').scrollToFixed({ marginTop: 10, limit: $($('h2')[5]).offset().top });
+    });
+
 ## Demos ##
 
 * http://jsfiddle.net/y3qV5/ - floating cart summary.
