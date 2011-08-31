@@ -87,7 +87,8 @@
                 spacer.css({
                     'display' : target.css('display'),
                     'width' : target.outerWidth(true),
-                    'height' : target.outerHeight(true)
+                    'height' : target.outerHeight(true),
+                    'float' : target.css('float')
                 });
 
                 // Set the target element to fixed and set its width so it does
