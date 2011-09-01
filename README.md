@@ -29,6 +29,7 @@ Margin and Limit options:
     });
 
 Fixed Header and Fixed Footer with a Limit
+
     // The fixed footer will go unfixed to reveal whatever is below it when scrolled
     // past the limit.
     $(document).ready(function() {
