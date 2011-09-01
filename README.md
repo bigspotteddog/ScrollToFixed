@@ -14,14 +14,6 @@ element will be restored to its original position on the page.
 This plugin has been tested in Firefox 3/4, Google Chrome 10/11, Safari 5,
 and Internet Explorer 8/9.
 
-## Notice ##
-
-It appears that recent work on the fixed footer is effecting the carts.
-For carts, please use this version of the min.js until this issue has been
-resolved.
-
-https://raw.github.com/bigspotteddog/ScrollToFixed/a630bdb2876d823b39311ab14606a0254d5deecc/jquery-scrolltofixed-min.js
-
 ## Usage ##
 
 Default options:
