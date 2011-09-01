@@ -70,6 +70,10 @@
 
             // Set that this has been called at least once.
             isReset = true;
+            
+            if (base.options.bottom != -1) {
+                setFixed();
+            }
         }
 
         // Returns whether the target element is fixed or not.
@@ -97,7 +101,8 @@
                 target.css({
                     'width' : target.width(),
                     'position' : 'fixed',
-                    'top' : base.options.marginTop
+                    'top' : base.options.bottom == -1?base.options.marginTop:'',
+                    'bottom' : base.options.bottom == -1?'':base.options.bottom
                 });
             }
         }
@@ -125,7 +130,7 @@
 
         // Moves the target element left or right relative to the horizontal
         // scroll position.
-        function setleft(x) {
+        function setLeft(x) {
             // Only if the scroll is not what it was last time we did this.
             if (x != lastOffsetLeft) {
                 // Move the target element horizontally relative to its original
@@ -168,12 +173,16 @@
 
                 // If the page has been scrolled horizontally as well, move the
                 // target element accordingly.
-                setleft(x);
+                setLeft(x);
 
             } else {
-                // Set the target element to unfixed, placing it where it was
-                // before.
-                setUnfixed();
+                if (base.options.bottom != -1) {
+                    setLeft(x);
+                } else {
+                    // Set the target element to unfixed, placing it where it was
+                    // before.
+                    setUnfixed();
+                }
             }
         }
 
@@ -218,6 +227,10 @@
             $(window).bind('scroll', function(event) {
                 checkScroll();
             });
+            
+            if (base.options.bottom != -1) {
+                setFixed();
+            }
         };
 
         // Initialize the plugin.
@@ -227,7 +240,8 @@
     // Sets the option defaults.
     $.ScrollToFixed.defaultOptions = {
         marginTop : 0,
-        limit : 0
+        limit : 0,
+        bottom : -1
     };
 
     // Returns enhanced elements that will fix to the top of the page when the
