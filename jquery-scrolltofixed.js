@@ -160,37 +160,40 @@
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.limit > 0) {
-                if (base.options.bottom == -1 && y >= base.options.limit - base.options.marginTop) {
+            if (base.options.bottom == -1) {
+                // If the vertical scroll position, plus the optional margin, would
+                // put the target element at the specified limit, set the target
+                // element to absolute.
+                if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
                     target.css('position', 'absolute');
                     target.css('top', base.options.limit);
-                } else if (base.options.bottom != -1) {
+    
+                // If the vertical scroll position, plus the optional margin, would
+                // put the target element above the top of the page, set the target
+                // element to fixed.
+                } else if (y >= offsetTop - base.options.marginTop) {
+                    // Set the target element to fixed.
+                    setFixed();
+    
+                    // If the page has been scrolled horizontally as well, move the
+                    // target element accordingly.
+                    setLeft(x);
+    
+                } else {
+                    // Set the target element to unfixed, placing it where it was
+                    // before.
+                    setUnfixed();
+                }
+            } else {
+                if (base.options.limit > 0) {
                     if (y + $(window).height() - target.outerHeight() >= base.options.limit - base.options.marginTop) {
                         setUnfixed();
                     } else {
                         setFixed();
                         setLeft(x);
                     }
-                }
-
-            // If the vertical scroll position, plus the optional margin, would
-            // put the target element above the top of the page, set the target
-            // element to fixed.
-            } else if (y >= offsetTop - base.options.marginTop) {
-                // Set the target element to fixed.
-                setFixed();
-
-                // If the page has been scrolled horizontally as well, move the
-                // target element accordingly.
-                setLeft(x);
-
-            } else {
-                if (base.options.bottom != -1) {
-                    setLeft(x);
                 } else {
-                    // Set the target element to unfixed, placing it where it was
-                    // before.
-                    setUnfixed();
+                    setLeft(x);
                 }
             }
         }
