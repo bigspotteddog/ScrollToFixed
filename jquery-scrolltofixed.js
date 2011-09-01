@@ -160,9 +160,18 @@
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
-                target.css('position', 'absolute');
-                target.css('top', base.options.limit);
+            if (base.options.limit > 0) {
+                if (base.options.bottom == -1 && y >= base.options.limit - base.options.marginTop) {
+                    target.css('position', 'absolute');
+                    target.css('top', base.options.limit);
+                } else if (base.options.bottom != -1) {
+                    if (y + $(window).height() - target.outerHeight() >= base.options.limit - base.options.marginTop) {
+                        setUnfixed();
+                    } else {
+                        setFixed();
+                        setLeft(x);
+                    }
+                }
 
             // If the vertical scroll position, plus the optional margin, would
             // put the target element above the top of the page, set the target
