@@ -28,9 +28,17 @@ Margin and Limit options:
         $('#cart').scrollToFixed({ marginTop: 10, limit: $($('h2')[5]).offset().top });
     });
 
+Fixed Header and Fixed Footer with a Limit
+    // The fixed footer will go unfixed to reveal whatever is below it when scrolled
+    // past the limit.
+    $(document).ready(function() {
+        $('.header').scrollToFixed();
+        $('.footer').scrollToFixed( { bottom: 0, limit: $('.footer').offset().top } );
+    });
+
 ## Demos ##
 
 * http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
 * http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
-* http://jsfiddle.net/ZczEt/3/ - banner that gives way to a fixed header, with a fixed footer.
+* http://jsfiddle.net/ZczEt/4/ - banner that gives way to a fixed header, with a fixed footer that has a limit.
 * http://jsfiddle.net/y3qV5/21/ - 2 cart summaries that scroll up and stop at different intervals.
