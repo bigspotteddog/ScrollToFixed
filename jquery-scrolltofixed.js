@@ -174,17 +174,17 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
-                    console.log('absolute, ' + x + ', ' + offsetLeft + ', ' + target.offset().left);
-                    target.css('position', 'absolute');
-                    target.css('top', base.options.limit);
-                    target.css('left', offsetLeft);
+                    if (!isAbsolute()) {
+                        target.css('width', target.width());
+                        target.css('position', 'absolute');
+                        target.css('top', base.options.limit);
+                        target.css('left', offsetLeft);
+                    }
 
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
                 // element to fixed.
                 } else if (y >= offsetTop - base.options.marginTop) {
-                    console.log('fixed');
-
                     // Set the target element to fixed.
                     setFixed();
                     
@@ -196,7 +196,6 @@
                     setLeft(x);
 
                 } else {
-                    console.log('unfixed');
                     // Set the target element to unfixed, placing it where it was
                     // before.
                     setUnfixed();
