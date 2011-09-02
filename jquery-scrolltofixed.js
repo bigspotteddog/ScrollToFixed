@@ -40,7 +40,8 @@
         // used to move the element left or right relative to the horizontal
         // scroll.
         var offsetLeft = 0;
-
+        var originalOffsetLeft = -1;
+        
         // This last offset used to move the element horizontally. This is used
         // to determine if we need to move the element because we would not want
         // to do that for no reason.
@@ -67,6 +68,9 @@
 
             // Capture the offset left of the target element.
             offsetLeft = target.offset().left;
+            if (originalOffsetLeft == -1) {
+                orginalOffsetLeft = offsetLeft;
+            }
 
             // Set that this has been called at least once.
             isReset = true;
@@ -79,6 +83,11 @@
         // Returns whether the target element is fixed or not.
         function isFixed() {
             return target.css('position') == 'fixed';
+        }
+
+        // Returns whether the target element is absolute or not.
+        function isAbsolute() {
+            return target.css('position') == 'absolute';
         }
 
         // Sets the target element to fixed. Also, sets the spacer to fill the
@@ -102,7 +111,7 @@
                     'width' : target.width(),
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?base.options.marginTop:'',
-                    'bottom' : base.options.bottom == -1?'':base.options.bottom
+                    'bottom' : base.options.bottom == -1?'':base.options.bottom,
                 });
             }
         }
@@ -110,7 +119,7 @@
         // Sets the target element back to unfixed. Also, hides the spacer.
         function setUnfixed() {
             // Only unfix the target element and the spacer if we need to.
-            if (isFixed()) {
+            if (isFixed() || isAbsolute()) {
                 lastOffsetLeft = -1;
 
                 // Hide the spacer now that the target element will fill the
@@ -165,21 +174,29 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
+                    console.log('absolute, ' + x + ', ' + offsetLeft + ', ' + target.offset().left);
                     target.css('position', 'absolute');
                     target.css('top', base.options.limit);
-    
+                    target.css('left', offsetLeft);
+
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
                 // element to fixed.
                 } else if (y >= offsetTop - base.options.marginTop) {
+                    console.log('fixed');
+
                     // Set the target element to fixed.
                     setFixed();
-    
+                    
+                    // Reset the last offset left because we just went fixed.
+                    lastOffsetLeft = -1;
+                    
                     // If the page has been scrolled horizontally as well, move the
                     // target element accordingly.
                     setLeft(x);
-    
+
                 } else {
+                    console.log('unfixed');
                     // Set the target element to unfixed, placing it where it was
                     // before.
                     setUnfixed();
