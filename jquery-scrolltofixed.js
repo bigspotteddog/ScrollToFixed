@@ -175,10 +175,12 @@
                 // element to absolute.
                 if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
                     if (!isAbsolute()) {
-                        target.css('width', target.width());
-                        target.css('position', 'absolute');
-                        target.css('top', base.options.limit);
-                        target.css('left', offsetLeft);
+                        target.css({
+                            'width' : target.width(),
+                            'position' : 'absolute',
+                            'top' : base.options.limit,
+                            'left' : offsetLeft
+                        });
                     }
 
                 // If the vertical scroll position, plus the optional margin, would
