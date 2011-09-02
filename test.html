@@ -4,7 +4,7 @@
 body {
     font-family: arial, sans-serif;
     margin: 0 auto 0;
-    width: 800px;
+    width: 960px;
 }
 body h1, h2 {
     font-weight: bold;
@@ -18,10 +18,6 @@ body ul {
     list-style: none;
     padding: 0px;
     margin: 0px;
-}
-body li {
-    display: inline-block;
-    vertical-align: top;
 }
 .banner {
     background-color: #aaa;
@@ -38,11 +34,44 @@ body li {
 .content {
     padding: 5px;
 }
+.content li {
+    display: inline-block;
+    vertical-align: top;
+}
 .footer {
     background-color: #eee;
     height: 50px;
     padding: 5px;
     width: 100%;
+}
+.footer-content {
+    background-color: #aaa;
+    padding: 5px;
+    width: 100%;
+}
+#left {
+    width: 770px;
+}
+#right {
+    width: 150px;
+    margin-left: 20px;
+}
+#summary {
+    border: 1px solid #dddddd;
+    position: absolute;
+    top: 300px;
+    width: 150px;
+}
+#summary .title {
+    border-bottom: 1px solid #dddddd;
+    width: 100%;
+    background-color: #dddddd;
+    font-size: 12pt;
+    font-weight: bold;
+}
+#summary .contents {
+    margin: 5px;
+    font-size: 80%;
 }
 </style>
 <title>Scroll to Fixed Plugin Demo</title>
@@ -52,6 +81,7 @@ body li {
 $(document).ready(function() {
     $('.header').scrollToFixed();
     $('.footer').scrollToFixed( { bottom: 0, limit: $('.footer').offset().top } );
+    $('#summary').scrollToFixed( { marginTop: $('.header').outerHeight() + 10, limit: 800, zIndex: 999 } );
 });
 </script>
 </head>
@@ -64,12 +94,26 @@ $(document).ready(function() {
             <h1>Header</h1>
         </li>
         <li class="content">
-            <h1>Lorem ipsum dolor</h1><h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p><h2>Velit sed eget donec placerat vestibulum</h2><p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p><h2>Scelerisque in justo neque ultricies vel eget libero quam vitae metus ante nonummy amet augue</h2><p>Velit tellus enim. Vitae et ultrices. Odio torquent ligula. Quam in a scelerisque malesuada non. Sem enim congue sed odio libero. Lacinia commodo feugiat sed nonummy lobortis erat maecenas vivamus. Lectus diam pede. Eget risus mauris. In dapibus libero suspendisse pellentesque urna. Id metus libero. Metus id accumsan curabitur id congue. Elementum diam placerat posuere vivamus felis. Arcu ante vestibulum. Orci ut ut magna nibh eu aliquam mi qui vel pretium nullam. Tellus ligula malesuada. Consequat id nulla. Feugiat suscipit ligula dolor amet congue urna etiam amet accumsan consequat distinctio natoque placerat nec. Eget lectus mauris molestie fusce dui. Vel consectetuer imperdiet tempus at sed. Proin aliquam nec. Ligula sit elit eget faucibus cras arcu in rhoncus. Lorem id integer. Vestibulum nec cum. Ligula aliquam tellus elit nisl lectus in diam tortor wisi mauris tempus.</p><p>Fermentum ipsum augue. Lectus in nunc vulputate tellus neque tortor erat cursus. Congue wisi enim. Nam eget dui auctor amet quis donec ipsum nibh. Nisl leo magna officia leo nibh.</p><h2>Mollis in ornare</h2><p>Nec a ut. Ut nullam urna. Quis tortor mauris blandit non corrupti. Rutrum in at id dignissim dictum. Duis ac ornare parturient ultrices amet odio feugiat aenean cras mus pede. Praesent egestas netus. Urna esse pharetra commodi commodo curabitur. A lacinia sed etiam ut vel maxime platea porta odio mollis non nisl nulla nullam. Vitae impedit pulvinar.</p><h2>Sem velit maiores</h2><p>Accumsan blandit ut. Varius velit ante. Leo tincidunt nulla lorem gravida nulla tempus volutpat donec phasellus aliquet nec. Sapien tempor id pharetra magna mi. Nunc fusce venenatis nam mi nam. Eget senectus convallis donec urna suscipit donec natoque lacinia rutrum lorem est adipiscing sed lectus. Dictumst faucibus ut. Vulputate sodales ipsum. Purus vehicula sed vestibulum eget integer.</p><h2>Ut turpis tempor integer fusce bibendum sem ipsum rutrum</h2><p>Nec in nibh. A amet condimentum. Commodo fringilla amet sit ut quis. Facilisi ac a ut id morbi. Aut pretium orci donec dui vel risus eros amet quis ut molestiae. Molestie nulla sem vestibulum urna aptent aliquam etiam auctor. Erat eu duis. Imperdiet vestibulum ut. Nibh risus fusce viverra wisi lectus.</p><h2>Sed curabitur ut vel condimentum fermentum a felis suspendisse</h2><p>Neque lacus lorem ut massa lacinia. Amet nulla est. Vitae in vel turpis diam elit lacinia amet quis. Sem a in. Architecto magna sit vel vehicula elit ullam consectetuer non. Vel vulputate elit facilisis accumsan justo. Ridiculus pharetra fusce. A volutpat curabitur. Senectus amet in elementum ipsum ut sit eros tellus.</p><h2>Phasellus enim metus vestibulum scelerisque mauris</h2><p>Donec nisl massa. Hendrerit suscipit turpis sed eget quis. Mauris wisi aenean amet semper morbi. Orci hendrerit vestibulum dolor a semper nullam nesciunt amet.</p><p>Erat ac non. Accumsan arcu mauris. Consectetuer vivamus convallis. Vestibulum neque vitae risus vivamus ut. Egestas elit eget. Venenatis mattis orci. Malesuada eget massa vitae est nec lacus et parturient nunc enim curabitur mollis vitae dictumst et malesuada non amet wisi amet sit lacus cras quis accumsan tortor tempore vulputate ante. Corrupti est sem dignissim ante vehicula ac cursus in tempus suspendisse at. Neque pariatur sed. Ac malesuada a. Hac duis pellentesque. Libero varius fugiat. Iaculis aliquam ac eros tempus sit sit in fusce. Luctus wisi amet. Vestibulum est vitae ut libero massa. Eu hendrerit velit. Et per massa congue vivamus sapien. Nibh nibh pulvinar. Libero velit est. Et lorem ipsum. Pretium sagittis nisl. Id ut viverra. Arcu dis sapien vehicula amet lacus sodales sagittis quam minim in mauris integer ante eu. Nisl id id eget sed molestie nec ac mauris nonummy proin porttitor. Vestibulum orci a sed in ligula.</p><h2>Lorem pede adipiscing massa eu eros</h2><p>Proin a at. Sagittis congue vitae. Eu arcu sem. A pede cras volutpat faucibus dui. Est ridiculus vestibulum blandit a dui montes dignissim mauris ac tellus diam. Rutrum gravida orci id eget morbi. Nec ut mollis. Dolore nulla donec. Nunc accumsan consectetuer. Erat orci vel. Primis erat nostra nec laoreet tempor eos porttitor sem hendrerit dignissim venenatis faucibus vel pellentesque. Lobortis in mi vitae donec metus faucibus amet viverra at ut dolor varius felis ante blandit sit litora ac autem ante. Pellentesque pede quisque. In nonummy pulvinar. Eget nunc quam. Massa torquent ut penatibus hendrerit et nulla scelerisque odio dolor vitae quis. In in quam dolor nec arcu. Magna vitae feugiat. Donec fermentum bibendum.</p><h2>Pretium dui dui</h2><p>Convallis wisi urna. Ipsum tellus ultricies. Non ac pretium. In non accumsan purus nec aliquip hendrerit fusce ornare ut turpis quis dictum tincidunt in vestibulum fringilla ad. In et dui. Eget tellus quisque arcu varius per tellus neque sit convallis nulla tellus. Nam faucibus aliquam. Vitae vel sed turpis nascetur ultricies aliquam vitae ultricies sed lobortis vestibulum sapien non eu. Sem amet nulla. Leo elit ipsum imperdiet sit dictumst. Enim turpis vivamus. Posuere odio ipsum in augue quisque nisl duis metus. Etiam imperdiet curabitur. Quis velit arcu. Ipsum turpis libero vel donec et. Ac risus a tempus.</p>
+            <ul>
+                <li id="left">
+                    <h1>Lorem ipsum dolor</h1><h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p><h2>Velit sed eget donec placerat vestibulum</h2><p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p><h2>Scelerisque in justo neque ultricies vel eget libero quam vitae metus ante nonummy amet augue</h2><p>Velit tellus enim. Vitae et ultrices. Odio torquent ligula. Quam in a scelerisque malesuada non. Sem enim congue sed odio libero. Lacinia commodo feugiat sed nonummy lobortis erat maecenas vivamus. Lectus diam pede. Eget risus mauris. In dapibus libero suspendisse pellentesque urna. Id metus libero. Metus id accumsan curabitur id congue. Elementum diam placerat posuere vivamus felis. Arcu ante vestibulum. Orci ut ut magna nibh eu aliquam mi qui vel pretium nullam. Tellus ligula malesuada. Consequat id nulla. Feugiat suscipit ligula dolor amet congue urna etiam amet accumsan consequat distinctio natoque placerat nec. Eget lectus mauris molestie fusce dui. Vel consectetuer imperdiet tempus at sed. Proin aliquam nec. Ligula sit elit eget faucibus cras arcu in rhoncus. Lorem id integer. Vestibulum nec cum. Ligula aliquam tellus elit nisl lectus in diam tortor wisi mauris tempus.</p><p>Fermentum ipsum augue. Lectus in nunc vulputate tellus neque tortor erat cursus. Congue wisi enim. Nam eget dui auctor amet quis donec ipsum nibh. Nisl leo magna officia leo nibh.</p><h2>Mollis in ornare</h2><p>Nec a ut. Ut nullam urna. Quis tortor mauris blandit non corrupti. Rutrum in at id dignissim dictum. Duis ac ornare parturient ultrices amet odio feugiat aenean cras mus pede. Praesent egestas netus. Urna esse pharetra commodi commodo curabitur. A lacinia sed etiam ut vel maxime platea porta odio mollis non nisl nulla nullam. Vitae impedit pulvinar.</p><h2>Sem velit maiores</h2><p>Accumsan blandit ut. Varius velit ante. Leo tincidunt nulla lorem gravida nulla tempus volutpat donec phasellus aliquet nec. Sapien tempor id pharetra magna mi. Nunc fusce venenatis nam mi nam. Eget senectus convallis donec urna suscipit donec natoque lacinia rutrum lorem est adipiscing sed lectus. Dictumst faucibus ut. Vulputate sodales ipsum. Purus vehicula sed vestibulum eget integer.</p><h2>Ut turpis tempor integer fusce bibendum sem ipsum rutrum</h2><p>Nec in nibh. A amet condimentum. Commodo fringilla amet sit ut quis. Facilisi ac a ut id morbi. Aut pretium orci donec dui vel risus eros amet quis ut molestiae. Molestie nulla sem vestibulum urna aptent aliquam etiam auctor. Erat eu duis. Imperdiet vestibulum ut. Nibh risus fusce viverra wisi lectus.</p><h2>Sed curabitur ut vel condimentum fermentum a felis suspendisse</h2><p>Neque lacus lorem ut massa lacinia. Amet nulla est. Vitae in vel turpis diam elit lacinia amet quis. Sem a in. Architecto magna sit vel vehicula elit ullam consectetuer non. Vel vulputate elit facilisis accumsan justo. Ridiculus pharetra fusce. A volutpat curabitur. Senectus amet in elementum ipsum ut sit eros tellus.</p><h2>Phasellus enim metus vestibulum scelerisque mauris</h2><p>Donec nisl massa. Hendrerit suscipit turpis sed eget quis. Mauris wisi aenean amet semper morbi. Orci hendrerit vestibulum dolor a semper nullam nesciunt amet.</p><p>Erat ac non. Accumsan arcu mauris. Consectetuer vivamus convallis. Vestibulum neque vitae risus vivamus ut. Egestas elit eget. Venenatis mattis orci. Malesuada eget massa vitae est nec lacus et parturient nunc enim curabitur mollis vitae dictumst et malesuada non amet wisi amet sit lacus cras quis accumsan tortor tempore vulputate ante. Corrupti est sem dignissim ante vehicula ac cursus in tempus suspendisse at. Neque pariatur sed. Ac malesuada a. Hac duis pellentesque. Libero varius fugiat. Iaculis aliquam ac eros tempus sit sit in fusce. Luctus wisi amet. Vestibulum est vitae ut libero massa. Eu hendrerit velit. Et per massa congue vivamus sapien. Nibh nibh pulvinar. Libero velit est. Et lorem ipsum. Pretium sagittis nisl. Id ut viverra. Arcu dis sapien vehicula amet lacus sodales sagittis quam minim in mauris integer ante eu. Nisl id id eget sed molestie nec ac mauris nonummy proin porttitor. Vestibulum orci a sed in ligula.</p><h2>Lorem pede adipiscing massa eu eros</h2><p>Proin a at. Sagittis congue vitae. Eu arcu sem. A pede cras volutpat faucibus dui. Est ridiculus vestibulum blandit a dui montes dignissim mauris ac tellus diam. Rutrum gravida orci id eget morbi. Nec ut mollis. Dolore nulla donec. Nunc accumsan consectetuer. Erat orci vel. Primis erat nostra nec laoreet tempor eos porttitor sem hendrerit dignissim venenatis faucibus vel pellentesque. Lobortis in mi vitae donec metus faucibus amet viverra at ut dolor varius felis ante blandit sit litora ac autem ante. Pellentesque pede quisque. In nonummy pulvinar. Eget nunc quam. Massa torquent ut penatibus hendrerit et nulla scelerisque odio dolor vitae quis. In in quam dolor nec arcu. Magna vitae feugiat. Donec fermentum bibendum.</p><h2>Pretium dui dui</h2><p>Convallis wisi urna. Ipsum tellus ultricies. Non ac pretium. In non accumsan purus nec aliquip hendrerit fusce ornare ut turpis quis dictum tincidunt in vestibulum fringilla ad. In et dui. Eget tellus quisque arcu varius per tellus neque sit convallis nulla tellus. Nam faucibus aliquam. Vitae vel sed turpis nascetur ultricies aliquam vitae ultricies sed lobortis vestibulum sapien non eu. Sem amet nulla. Leo elit ipsum imperdiet sit dictumst. Enim turpis vivamus. Posuere odio ipsum in augue quisque nisl duis metus. Etiam imperdiet curabitur. Quis velit arcu. Ipsum turpis libero vel donec et. Ac risus a tempus.</p>
+                </li>
+                <li id="right">
+                    <ul id="summary">
+                        <li class="title">Summary</li>
+                        <li class="contents">
+                            <p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse.</p><p>Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient.</p><p>Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </li>
         <li class="footer">
             <h1>Footer</h1>
         </li>
+        <li class="footer-content">
+            <h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+        </li>
     </ul>
-    <h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
 </body>
 </html>

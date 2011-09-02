@@ -236,7 +236,7 @@
             // Put the target element on top of everything that could be below
             // it. This reduces flicker when the target element is transitioning
             // to fixed.
-            base.$el.css('z-index', 1000);
+            base.$el.css('z-index', base.options.zIndex);
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
@@ -271,7 +271,8 @@
     $.ScrollToFixed.defaultOptions = {
         marginTop : 0,
         limit : 0,
-        bottom : -1
+        bottom : -1,
+        zIndex : 1000
     };
 
     // Returns enhanced elements that will fix to the top of the page when the
