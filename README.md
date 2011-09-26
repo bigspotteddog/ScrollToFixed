@@ -37,9 +37,42 @@ Fixed Header and Fixed Footer with a Limit
         $('.footer').scrollToFixed( { bottom: 0, limit: $('.footer').offset().top } );
     });
 
+Very Full Example
+
+    $(document).ready(function() {
+        // banner gives way to header, header changes color when it goes fixed,
+        // header clears color when it is no longer fixed
+        $('.header').scrollToFixed({
+            preFixed: function(el) { $('.header h1').css('color', 'blue'); },
+            postFixed: function(el) { $('.header h1').css('color', ''); }
+        });
+        
+        // floating summary changes color when it goes fixed, goes absolute if
+        // the footer pushes it up the page, changes to red when it goes absolute,
+        // clears color when it is no longer fixed or absolute
+        $('#summary').scrollToFixed({
+            marginTop: $('.header').outerHeight() + 10,
+            limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
+            zIndex: 999,
+            preFixed: function(el) { $('#summary .title').css('color', 'blue'); },
+            preAbsolute: function(el) { $('#summary .title').css('color', 'red'); },
+            postFixed: function(el) { $('#summary .title').css('color', ''); },
+            postAbsolute: function(el) { $('#summary .title').css('color', ''); }
+        });
+        
+        // footer reveals more when scrolled past it, changes color when it goes fixed,
+        // clears color when it is no longer fixed
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
+            preFixed: function(el) { $('.footer h1').css('color', 'blue'); },
+            postFixed: function(el) { $('.footer h1').css('color', ''); }
+        });
+    });
+
 ## Demos ##
 
 * http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
 * http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
-* http://jsfiddle.net/ZczEt/4/ - banner that gives way to a fixed header, with a fixed footer that has a limit.
+* http://jsfiddle.net/ZczEt/14/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/21/ - 2 cart summaries that scroll up and stop at different intervals.
