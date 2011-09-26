@@ -90,6 +90,10 @@
             return target.css('position') == 'absolute';
         }
 
+        function isUnfixed() {
+            return !(isFixed() || isAbsolute());
+        }
+
         // Sets the target element to fixed. Also, sets the spacer to fill the
         // void left by the target element.
         function setFixed() {
@@ -119,7 +123,7 @@
         // Sets the target element back to unfixed. Also, hides the spacer.
         function setUnfixed() {
             // Only unfix the target element and the spacer if we need to.
-            if (isFixed() || isAbsolute()) {
+            if (!isUnfixed()) {
                 lastOffsetLeft = -1;
 
                 // Hide the spacer now that the target element will fill the
@@ -174,38 +178,67 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
-                    target.css({
-                        'width' : target.width(),
-                        'position' : 'absolute',
-                        'top' : base.options.limit,
-                        'left' : offsetLeft
-                    });
+                    if (!isAbsolute()) {
+                        postPosition();
+                        if (base.options.preAbsolute) {
+                            base.options.preAbsolute(target);
+                        }
 
+                        target.css({
+                            'width' : target.width(),
+                            'position' : 'absolute',
+                            'top' : base.options.limit,
+                            'left' : offsetLeft
+                        });
+                    }
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
                 // element to fixed.
                 } else if (y >= offsetTop - base.options.marginTop) {
-                    // Set the target element to fixed.
-                    setFixed();
-                    
-                    // Reset the last offset left because we just went fixed.
-                    lastOffsetLeft = -1;
-                    
+                    if (!isFixed()) {
+                        postPosition();
+                        if (base.options.preFixed) {
+                            base.options.preFixed(target);
+                        }
+
+                        // Set the target element to fixed.
+                        setFixed();
+                        
+                        // Reset the last offset left because we just went fixed.
+                        lastOffsetLeft = -1;
+                    }
                     // If the page has been scrolled horizontally as well, move the
                     // target element accordingly.
                     setLeft(x);
-
                 } else {
                     // Set the target element to unfixed, placing it where it was
                     // before.
-                    setUnfixed();
+                    if (isFixed()) {
+                        postPosition();
+                        if (base.options.preUnfixed) {
+                            base.options.preUnfixed(target);
+                        }
+                        setUnfixed();
+                    }
                 }
             } else {
                 if (base.options.limit > 0) {
                     if (y + $(window).height() - target.outerHeight() >= base.options.limit - base.options.marginTop) {
-                        setUnfixed();
+                        if (isFixed()) {
+                            postPosition();
+                            if (base.options.preUnfixed) {
+                                base.options.preUnfixed(target);
+                            }
+                            setUnfixed();
+                        }
                     } else {
-                        setFixed();
+                        if (!isFixed()) {
+                            postPosition();
+                            if (base.options.preFixed) {
+                                base.options.preFixed(target);
+                            }
+                            setFixed();
+                        }
                         setLeft(x);
                     }
                 } else {
@@ -214,6 +247,24 @@
             }
         }
 
+        function postPosition() {
+            var position = target.css('position');
+            
+            if (position == 'absolute') {
+                if (base.options.postAbsolute) {
+                    base.options.postAbsolute(target);
+                }
+            } else if (position == 'fixed') {
+                if (base.options.postFixed) {
+                    base.options.postFixed(target);
+                }
+            } else {
+                if (base.options.postUnfixed) {
+                    base.options.postUnfixed(target);
+                }
+            }
+        }
+        
         // Initializes this plugin. Captures the options passed in, turns this
         // off for iOS, adds the spacer, and binds to the window scroll and
         // resize events.
