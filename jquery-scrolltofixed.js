@@ -308,7 +308,13 @@
             });
             
             if (base.options.bottom != -1) {
-                setFixed();
+                if (!isFixed()) {
+                    postPosition();
+                    if (base.options.preFixed) {
+                        base.options.preFixed(target);
+                    }
+                    setFixed();
+                }
             }
         };
 

@@ -81,9 +81,7 @@ body ul {
 $(document).ready(function() {
     $('.header').scrollToFixed({
         preFixed: function(el) { $('.header h1').css('color', 'blue'); },
-        preAbsolute: function(el) { $('.header h1').css('color', 'red'); },
-        postFixed: function(el) { $('.header h1').css('color', ''); },
-        postAbsolute: function(el) { $('.header h1').css('color', ''); },
+        postFixed: function(el) { $('.header h1').css('color', ''); }
     });
     $('#summary').scrollToFixed({
         marginTop: $('.header').outerHeight() + 10,
@@ -98,9 +96,7 @@ $(document).ready(function() {
         bottom: 0,
         limit: $('.footer').offset().top,
         preFixed: function(el) { $('.footer h1').css('color', 'blue'); },
-        preAbsolute: function(el) { $('.footer h1').css('color', 'red'); },
-        postFixed: function(el) { $('.footer h1').css('color', ''); },
-        postAbsolute: function(el) { $('.footer h1').css('color', ''); },
+        postFixed: function(el) { $('.footer h1').css('color', ''); }
     });
 });
 </script>
