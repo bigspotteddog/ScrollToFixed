@@ -187,6 +187,7 @@
                             'top' : base.options.limit,
                             'left' : offsetLeft
                         });
+                        target.trigger("unfixed");
                     }
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
@@ -198,9 +199,11 @@
 
                         // Set the target element to fixed.
                         setFixed();
-                        
+
                         // Reset the last offset left because we just went fixed.
                         lastOffsetLeft = -1;
+
+                        target.trigger('fixed');
                     }
                     // If the page has been scrolled horizontally as well, move the
                     // target element accordingly.
@@ -212,6 +215,7 @@
                         postPosition();
                         target.trigger('preUnfixed');
                         setUnfixed();
+                        target.trigger("unfixed");
                     }
                 }
             } else {
@@ -221,6 +225,7 @@
                             postPosition();
                             target.trigger('preUnfixed');
                             setUnfixed();
+                            target.trigger("unfixed");
                         }
                     } else {
                         if (!isFixed()) {
@@ -229,6 +234,7 @@
                             setFixed();
                         }
                         setLeft(x);
+                        target.trigger("fixed");
                     }
                 } else {
                     setLeft(x);
@@ -290,14 +296,6 @@
                 checkScroll();
             });
             
-            if (base.options.bottom != -1) {
-                if (!isFixed()) {
-                    postPosition();
-                    target.trigger('preFixed');
-                    setFixed();
-                }
-            }
-            
             if (base.options.preFixed) {
                 target.bind('preFixed', base.options.preFixed);
             }
@@ -315,6 +313,20 @@
             }
             if (base.options.postAbsolute) {
                 target.bind('postAbsolute', base.options.postAbsolute);
+            }
+            if (base.options.fixed) {
+                target.bind('fixed', base.options.fixed);
+            }
+            if (base.options.unfixed) {
+                target.bind('unfixed', base.options.unfixed);
+            }
+
+            if (base.options.bottom != -1) {
+                if (!isFixed()) {
+                    postPosition();
+                    target.trigger('preFixed');
+                    setFixed();
+                }
             }
         };
 

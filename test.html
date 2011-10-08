@@ -78,24 +78,28 @@ body ul {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
-$(document).ready(function() {
-    $('.header').scrollToFixed();
-    $('.header').bind('preFixed', function() { $(this).css('color', 'red'); });
-    $('.header').bind('postFixed', function() { $(this).css('color', ''); });
-
-    $('#summary').scrollToFixed({
-        marginTop: $('.header').outerHeight() + 10,
-        limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
-        zIndex: 999
+    $(document).ready(function() {
+        $('.header').scrollToFixed();
+        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
+        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
+    
+        $('#summary').scrollToFixed({
+            marginTop: $('.header').outerHeight() + 10,
+            limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
+            zIndex: 999,
+            fixed: function() { $(this).css('color', 'red'); },
+            unfixed: function() { $(this).css('color', ''); }
+        });
+        $('#summary').bind('unfixed', function() { $('.header').trigger('unfixed'); });
+        $('#summary').bind('fixed', function() { $('.header').trigger('fixed'); });
+    
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
+            preFixed: function() { $(this).css('color', 'blue'); },
+            postFixed: function() { $(this).css('color', ''); },
+        });
     });
-    $('#summary').bind('preFixed', function() { $('.header').trigger('postFixed'); });
-
-    $('.footer').scrollToFixed( {
-        bottom: 0,
-        limit: $('.footer').offset().top,
-        preFixed: function() { $(this).css('color', 'blue'); }
-    });
-});
 </script>
 </head>
 <body>
@@ -125,7 +129,7 @@ $(document).ready(function() {
             <h1>Footer</h1>
         </li>
         <li class="footer-content">
-            <h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+            <h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p><h2>Velit sed eget donec placerat vestibulum</h2><p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
         </li>
     </ul>
 </body>

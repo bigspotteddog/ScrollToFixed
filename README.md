@@ -40,33 +40,25 @@ Fixed Header and Fixed Footer with a Limit
 Very Full Example
 
     $(document).ready(function() {
-        // banner gives way to header, header changes color when it goes fixed,
-        // header clears color when it is no longer fixed
-        $('.header').scrollToFixed({
-            preFixed: function(el) { $('.header h1').css('color', 'blue'); },
-            postFixed: function(el) { $('.header h1').css('color', ''); }
-        });
-        
-        // floating summary changes color when it goes fixed, goes absolute if
-        // the footer pushes it up the page, changes to red when it goes absolute,
-        // clears color when it is no longer fixed or absolute
+        $('.header').scrollToFixed();
+        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
+        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
+    
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight() + 10,
             limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
             zIndex: 999,
-            preFixed: function(el) { $('#summary .title').css('color', 'blue'); },
-            preAbsolute: function(el) { $('#summary .title').css('color', 'red'); },
-            postFixed: function(el) { $('#summary .title').css('color', ''); },
-            postAbsolute: function(el) { $('#summary .title').css('color', ''); }
+            fixed: function() { $(this).css('color', 'red'); },
+            unfixed: function() { $(this).css('color', ''); }
         });
-        
-        // footer reveals more when scrolled past it, changes color when it goes fixed,
-        // clears color when it is no longer fixed
+        $('#summary').bind('unfixed', function() { $('.header').trigger('unfixed'); });
+        $('#summary').bind('fixed', function() { $('.header').trigger('fixed'); });
+    
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
-            preFixed: function(el) { $('.footer h1').css('color', 'blue'); },
-            postFixed: function(el) { $('.footer h1').css('color', ''); }
+            preFixed: function() { $(this).css('color', 'blue'); },
+            postFixed: function() { $(this).css('color', ''); },
         });
     });
 
