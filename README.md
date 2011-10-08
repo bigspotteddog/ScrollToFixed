@@ -1,9 +1,9 @@
-ScrollToFixed - 06/21/2011
+ScrollToFixed
 ==========================
 
-This plugin is used to fix elements to the top of the page, if the element
-would have scrolled out of view, vertically; however, it does allow the
-element to continue to move left or right with the horizontal scroll.
+This plugin is used to fix elements on the page (top, bottom, anywhere);
+however, it still allows the element to continue to move left or right
+with the horizontal scroll.
 
 Given an option marginTop, the element will stop moving vertically upward
 once the vertical scroll has reached the target position; but, the
@@ -11,7 +11,7 @@ element will still move horizontally as the page is scrolled left or right.
 Once the page has been scrolled back down past the target position, the
 element will be restored to its original position on the page.
 
-This plugin has been tested in Firefox 3/4, Google Chrome 10/11, Safari 5,
+This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+,
 and Internet Explorer 8/9.
 
 ## Usage ##
@@ -43,17 +43,22 @@ Very Full Example
         $('.header').scrollToFixed();
         $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
         $('.header').bind('unfixed', function() { $(this).css('color', ''); });
-    
+
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight() + 10,
             limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
             zIndex: 999,
-            fixed: function() { $(this).css('color', 'red'); },
-            unfixed: function() { $(this).css('color', ''); }
+            fixed: function() {  },
         });
-        $('#summary').bind('unfixed', function() { $('.header').trigger('unfixed'); });
-        $('#summary').bind('fixed', function() { $('.header').trigger('fixed'); });
-    
+        $('#summary').bind('unfixed', function() {
+            $(this).css('color', '');
+            $('.header').trigger('unfixed');
+        });
+        $('#summary').bind('fixed', function() {
+            $(this).css('color', 'red');
+            $('.header').trigger('fixed');
+        });
+
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
