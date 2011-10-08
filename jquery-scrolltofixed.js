@@ -114,7 +114,7 @@
                 target.css({
                     'width' : target.width(),
                     'position' : 'fixed',
-                    'top' : base.options.bottom == -1?base.options.marginTop:'',
+                    'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                 });
             }
@@ -155,6 +155,10 @@
             }
         }
 
+        function getMarginTop() {
+            return base.options.marginTop;
+        }
+
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
@@ -177,7 +181,7 @@
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element at the specified limit, set the target
                 // element to absolute.
-                if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
+                if (base.options.limit > 0 && y >= base.options.limit - getMarginTop()) {
                     if (!isAbsolute()) {
                         postPosition();
                         target.trigger('preAbsolute');
@@ -192,7 +196,7 @@
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
                 // element to fixed.
-                } else if (y >= offsetTop - base.options.marginTop) {
+                } else if (y >= offsetTop - getMarginTop()) {
                     if (!isFixed()) {
                         postPosition();
                         target.trigger('preFixed');
@@ -220,7 +224,7 @@
                 }
             } else {
                 if (base.options.limit > 0) {
-                    if (y + $(window).height() - target.outerHeight() >= base.options.limit - base.options.marginTop) {
+                    if (y + $(window).height() - target.outerHeight() >= base.options.limit - getMarginTop()) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed');
