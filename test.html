@@ -92,7 +92,8 @@ $(document).ready(function() {
 
     $('.footer').scrollToFixed( {
         bottom: 0,
-        limit: $('.footer').offset().top
+        limit: $('.footer').offset().top,
+        preFixed: function() { $(this).css('color', 'blue'); }
     });
 });
 </script>

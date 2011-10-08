@@ -297,6 +297,25 @@
                     setFixed();
                 }
             }
+            
+            if (base.options.preFixed) {
+                target.bind('preFixed', base.options.preFixed);
+            }
+            if (base.options.postFixed) {
+                target.bind('postFixed', base.options.postFixed);
+            }
+            if (base.options.preUnfixed) {
+                target.bind('preUnfixed', base.options.preUnfixed);
+            }
+            if (base.options.postUnfixed) {
+                target.bind('postUnfixed', base.options.postUnfixed);
+            }
+            if (base.options.preAbsolute) {
+                target.bind('preAbsolute', base.options.preAbsolute);
+            }
+            if (base.options.postAbsolute) {
+                target.bind('postAbsolute', base.options.postAbsolute);
+            }
         };
 
         // Initialize the plugin.
