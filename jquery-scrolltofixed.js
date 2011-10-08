@@ -9,7 +9,7 @@
  * page has been scrolled back down passed the target position, the element will
  * be restored to its original position on the page.
  * 
- * This plugin has been tested in Firefox 3/4, Google Chrome 10/11, Safari 5,
+ * This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+,
  * and Internet Explorer 8/9.
  */
 (function($) {
@@ -180,10 +180,7 @@
                 if (base.options.limit > 0 && y >= base.options.limit - base.options.marginTop) {
                     if (!isAbsolute()) {
                         postPosition();
-                        if (base.options.preAbsolute) {
-                            base.options.preAbsolute(target);
-                        }
-
+                        target.trigger('preAbsolute');
                         target.css({
                             'width' : target.width(),
                             'position' : 'absolute',
@@ -197,9 +194,7 @@
                 } else if (y >= offsetTop - base.options.marginTop) {
                     if (!isFixed()) {
                         postPosition();
-                        if (base.options.preFixed) {
-                            base.options.preFixed(target);
-                        }
+                        target.trigger('preFixed');
 
                         // Set the target element to fixed.
                         setFixed();
@@ -215,9 +210,7 @@
                     // before.
                     if (isFixed()) {
                         postPosition();
-                        if (base.options.preUnfixed) {
-                            base.options.preUnfixed(target);
-                        }
+                        target.trigger('preUnfixed');
                         setUnfixed();
                     }
                 }
@@ -226,17 +219,13 @@
                     if (y + $(window).height() - target.outerHeight() >= base.options.limit - base.options.marginTop) {
                         if (isFixed()) {
                             postPosition();
-                            if (base.options.preUnfixed) {
-                                base.options.preUnfixed(target);
-                            }
+                            target.trigger('preUnfixed');
                             setUnfixed();
                         }
                     } else {
                         if (!isFixed()) {
                             postPosition();
-                            if (base.options.preFixed) {
-                                base.options.preFixed(target);
-                            }
+                            target.trigger('preFixed');
                             setFixed();
                         }
                         setLeft(x);
@@ -251,17 +240,11 @@
             var position = target.css('position');
             
             if (position == 'absolute') {
-                if (base.options.postAbsolute) {
-                    base.options.postAbsolute(target);
-                }
+                target.trigger('postAbsolute');
             } else if (position == 'fixed') {
-                if (base.options.postFixed) {
-                    base.options.postFixed(target);
-                }
+                target.trigger('postFixed');
             } else {
-                if (base.options.postUnfixed) {
-                    base.options.postUnfixed(target);
-                }
+                target.trigger('postUnfixed');
             }
         }
         
@@ -310,9 +293,7 @@
             if (base.options.bottom != -1) {
                 if (!isFixed()) {
                     postPosition();
-                    if (base.options.preFixed) {
-                        base.options.preFixed(target);
-                    }
+                    target.trigger('preFixed');
                     setFixed();
                 }
             }
