@@ -84,8 +84,8 @@ body ul {
         $('.header').bind('unfixed', function() { $(this).css('color', ''); });
 
         $('#summary').scrollToFixed({
-            marginTop: $('.header').outerHeight() + 10,
-            limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
+            marginTop: $('.header').outerHeight(true) + 10,
+            limit: $('.footer').offset().top - $('#summary').outerHeight(true) - 10,
             zIndex: 999,
             fixed: function() {  },
         });

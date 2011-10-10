@@ -115,7 +115,7 @@
                     'width' : target.width(),
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
-                    'bottom' : base.options.bottom == -1?'':base.options.bottom,
+                    'bottom' : base.options.bottom == -1?'':base.options.bottom
                 });
             }
         }
@@ -224,7 +224,7 @@
                 }
             } else {
                 if (base.options.limit > 0) {
-                    if (y + $(window).height() - target.outerHeight() >= base.options.limit - getMarginTop()) {
+                    if (y + $(window).height() - target.outerHeight(true) >= base.options.limit - getMarginTop()) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed');
