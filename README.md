@@ -40,30 +40,24 @@ Fixed Header and Fixed Footer with a Limit
 Very Full Example
 
     $(document).ready(function() {
-        $('.header').scrollToFixed();
-        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
-
+        $('.header').scrollToFixed({
+            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+            postFixed: function() { $(this).find('h1').css('color', ''); }
+        });
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight() + 10,
             limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
             zIndex: 999,
-            fixed: function() {  },
+            preFixed: function() { $(this).find('.title').css('color', 'blue'); },
+            preAbsolute: function() { $(this).find('.title').css('color', 'red'); },
+            postFixed: function() { $(this).find('.title').css('color', ''); },
+            postAbsolute: function() { $(this).find('.title').css('color', ''); }
         });
-        $('#summary').bind('unfixed', function() {
-            $(this).css('color', '');
-            $('.header').trigger('unfixed');
-        });
-        $('#summary').bind('fixed', function() {
-            $(this).css('color', 'red');
-            $('.header').trigger('fixed');
-        });
-
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
-            preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
+            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+            postFixed: function() { $(this).find('h1').css('color', ''); }
         });
     });
 
