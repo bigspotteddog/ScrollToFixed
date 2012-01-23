@@ -11,8 +11,7 @@ element will still move horizontally as the page is scrolled left or right.
 Once the page has been scrolled back down past the target position, the
 element will be restored to its original position on the page.
 
-This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+,
-and Internet Explorer 8/9.
+This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
 
 ## Usage ##
 
