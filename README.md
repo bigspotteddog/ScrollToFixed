@@ -11,8 +11,7 @@ element will still move horizontally as the page is scrolled left or right.
 Once the page has been scrolled back down past the target position, the
 element will be restored to its original position on the page.
 
-This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+,
-and Internet Explorer 8/9.
+This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
 
 ## Usage ##
 
@@ -40,30 +39,24 @@ Fixed Header and Fixed Footer with a Limit
 Very Full Example
 
     $(document).ready(function() {
-        $('.header').scrollToFixed();
-        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
-
+        $('.header').scrollToFixed({
+            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+            postFixed: function() { $(this).find('h1').css('color', ''); }
+        });
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight() + 10,
             limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
             zIndex: 999,
-            fixed: function() {  },
+            preFixed: function() { $(this).find('.title').css('color', 'blue'); },
+            preAbsolute: function() { $(this).find('.title').css('color', 'red'); },
+            postFixed: function() { $(this).find('.title').css('color', ''); },
+            postAbsolute: function() { $(this).find('.title').css('color', ''); }
         });
-        $('#summary').bind('unfixed', function() {
-            $(this).css('color', '');
-            $('.header').trigger('unfixed');
-        });
-        $('#summary').bind('fixed', function() {
-            $(this).css('color', 'red');
-            $('.header').trigger('fixed');
-        });
-
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
-            preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
+            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+            postFixed: function() { $(this).find('h1').css('color', ''); }
         });
     });
 
@@ -71,5 +64,5 @@ Very Full Example
 
 * http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
 * http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
-* http://jsfiddle.net/ZczEt/15/ - very full example: fixed header, footer and floating summary, with events.
+* http://jsfiddle.net/ZczEt/43/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/21/ - 2 cart summaries that scroll up and stop at different intervals.
