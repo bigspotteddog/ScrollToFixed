@@ -60,6 +60,10 @@ Very Full Example
         });
     });
 
+Remove
+
+    $('.header').trigger('remove');
+    
 ## Demos ##
 
 * http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
