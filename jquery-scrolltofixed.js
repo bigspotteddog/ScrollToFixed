@@ -258,6 +258,15 @@
             }
         }
         
+        var windowResize = function(event) {
+            resetScroll();
+            checkScroll();
+        }
+        
+        var windowScroll = function(event) {
+            checkScroll();
+        }
+        
         // Initializes this plugin. Captures the options passed in, turns this
         // off for iOS, adds the spacer, and binds to the window scroll and
         // resize events.
@@ -289,46 +298,48 @@
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
-            $(window).bind('resize', function(event) {
-                resetScroll();
-                checkScroll();
-            });
+            $(window).bind('resize.ScrollToFixed', windowResize);
 
             // When the window scrolls, check to see if we need to fix or unfix
             // the target element.
-            $(window).bind('scroll', function(event) {
-                checkScroll();
-            });
+            $(window).bind('scroll.ScrollToFixed', windowScroll);
             
             if (base.options.preFixed) {
-                target.bind('preFixed', base.options.preFixed);
+                target.bind('preFixed.ScrollToFixed', base.options.preFixed);
             }
             if (base.options.postFixed) {
-                target.bind('postFixed', base.options.postFixed);
+                target.bind('postFixed.ScrollToFixed', base.options.postFixed);
             }
             if (base.options.preUnfixed) {
-                target.bind('preUnfixed', base.options.preUnfixed);
+                target.bind('preUnfixed.ScrollToFixed', base.options.preUnfixed);
             }
             if (base.options.postUnfixed) {
-                target.bind('postUnfixed', base.options.postUnfixed);
+                target.bind('postUnfixed.ScrollToFixed', base.options.postUnfixed);
             }
             if (base.options.preAbsolute) {
-                target.bind('preAbsolute', base.options.preAbsolute);
+                target.bind('preAbsolute.ScrollToFixed', base.options.preAbsolute);
             }
             if (base.options.postAbsolute) {
-                target.bind('postAbsolute', base.options.postAbsolute);
+                target.bind('postAbsolute.ScrollToFixed', base.options.postAbsolute);
             }
             if (base.options.fixed) {
-                target.bind('fixed', base.options.fixed);
+                target.bind('fixed.ScrollToFixed', base.options.fixed);
             }
             if (base.options.unfixed) {
-                target.bind('unfixed', base.options.unfixed);
+                target.bind('unfixed.ScrollToFixed', base.options.unfixed);
             }
 
+            target.bind('remove.ScrollToFixed', function() {
+                setUnfixed();
+                $(window).unbind('resize', windowResize);
+                $(window).unbind('scroll', windowScroll);
+                target.unbind('.ScrollToFixed');
+            });
+            
             if (base.options.bottom != -1) {
                 if (!isFixed()) {
                     postPosition();
-                    target.trigger('preFixed');
+                    target.trigger('preFixed.ScrollToFixed');
                     setFixed();
                 }
             }
