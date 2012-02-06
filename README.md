@@ -63,7 +63,7 @@ Very Full Example
 Remove
 
     $('.header').trigger('remove');
-    
+
 ## Demos ##
 
 * http://jsfiddle.net/y3qV5/434/ - floating cart summary with a limit.
