@@ -63,10 +63,10 @@ Very Full Example
 Remove
 
     $('.header').trigger('remove');
-    
+
 ## Demos ##
 
-* http://jsfiddle.net/y3qV5/7/ - floating cart summary with a limit.
-* http://jsfiddle.net/k2R3G/2/ - fixed header; allows content to flow under it.
-* http://jsfiddle.net/ZczEt/43/ - very full example: fixed header, footer and floating summary, with events.
-* http://jsfiddle.net/y3qV5/21/ - 2 cart summaries that scroll up and stop at different intervals.
+* http://jsfiddle.net/y3qV5/434/ - floating cart summary with a limit.
+* http://jsfiddle.net/k2R3G/81/  - fixed header; allows content to flow under it.
+* http://jsfiddle.net/ZczEt/167/ - very full example: fixed header, footer and floating summary, with events.
+* http://jsfiddle.net/y3qV5/435/ - 2 cart summaries that scroll up and stop at different intervals.
