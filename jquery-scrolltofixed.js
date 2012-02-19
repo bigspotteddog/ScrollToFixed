@@ -279,7 +279,7 @@
             // what to do with them, or until iOS5 comes out which is supposed
             // to support position:fixed.
             if (navigator.platform === 'iPad' || navigator.platform === 'iPhone' || navigator.platform === "iPod") {
-                if (!navigator.userAgent.match(/OS 5_\d like Mac OS X/i)) {
+                if (!navigator.userAgent.match(/OS 5_.*\ like Mac OS X/i)) {
                     return;
                 }
             }
