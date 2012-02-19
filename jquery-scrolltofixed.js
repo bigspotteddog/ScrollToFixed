@@ -278,10 +278,10 @@
             // Turn off this functionality for iOS devices until we figure out
             // what to do with them, or until iOS5 comes out which is supposed
             // to support position:fixed.
-            if (navigator.platform == 'iPad' || navigator.platform == 'iPhone'
-                    || navigator.platform == "iPod") {
-
-                return;
+            if (navigator.platform === 'iPad' || navigator.platform === 'iPhone' || navigator.platform === "iPod") {
+                if (!navigator.userAgent.match(/OS 5_\d like Mac OS X/i)) {
+                    return;
+                }
             }
 
             // Put the target element on top of everything that could be below
