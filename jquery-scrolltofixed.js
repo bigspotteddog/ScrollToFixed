@@ -329,6 +329,10 @@
                 target.bind('unfixed.ScrollToFixed', base.options.unfixed);
             }
 
+            target.bind('scroll.ScrollToFixed', function() {
+                checkScroll();
+            });
+
             target.bind('remove.ScrollToFixed', function() {
                 setUnfixed();
                 $(window).unbind('resize', windowResize);
