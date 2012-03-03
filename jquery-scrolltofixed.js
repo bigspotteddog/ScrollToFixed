@@ -330,6 +330,7 @@
             }
 
             target.bind('scroll.ScrollToFixed', function() {
+                setUnfixed();
                 checkScroll();
             });
 
