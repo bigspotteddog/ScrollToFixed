@@ -51,6 +51,8 @@
         // when it goes fixed; otherwise, everything below it moves up the page.
         var spacer = null;
 
+        var spacerClass;
+
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
         // scrolled. For some reason, calling this before the page is first
@@ -291,7 +293,7 @@
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
-            spacer = $('<div/>');
+            spacer = $('<div />');
 
             // Place the spacer right after the target element.
             base.$el.after(spacer);
@@ -328,6 +330,15 @@
             if (base.options.unfixed) {
                 target.bind('unfixed.ScrollToFixed', base.options.unfixed);
             }
+
+            if (base.options.spacerClass) {
+                spacer.addClass(base.options.spacerClass);
+            }
+
+            target.bind('scroll.ScrollToFixed', function() {
+                setUnfixed();
+                checkScroll();
+            });
 
             target.bind('remove.ScrollToFixed', function() {
                 setUnfixed();
