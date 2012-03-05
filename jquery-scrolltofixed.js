@@ -69,7 +69,7 @@
             offsetTop = target.offset().top;
 
             // Capture the offset left of the target element.
-            offsetLeft = target.offset().left;
+            offsetLeft = target.offset().left + (target.offset().left - target.position().left);
             if (originalOffsetLeft == -1) {
                 orginalOffsetLeft = offsetLeft;
             }
@@ -334,6 +334,10 @@
             if (base.options.spacerClass) {
                 spacer.addClass(base.options.spacerClass);
             }
+
+            target.bind('resize', function() {
+                spacer.height(target.height());
+            });
 
             target.bind('scroll.ScrollToFixed', function() {
                 setUnfixed();
