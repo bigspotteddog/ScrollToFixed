@@ -114,7 +114,7 @@
                 // not fill the rest of the page horizontally. Also, set its top
                 // to the margin top specified in the options.
                 target.css({
-                    'width' : target.width(),
+                    'width' : target.outerWidth(true),
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom
