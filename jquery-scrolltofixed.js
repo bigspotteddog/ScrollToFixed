@@ -296,7 +296,7 @@
             spacer = $('<div />');
 
             // Place the spacer right after the target element.
-            base.$el.after(spacer);
+            if (isUnfixed()) base.$el.after(spacer);
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
