@@ -73,5 +73,5 @@ Remove
 
 ## Contributors ##
 
-* bigspotteddog
-* megamatron
+* https://github.com/bigspotteddog
+* https://github.com/megamattron
