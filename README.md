@@ -70,3 +70,8 @@ Remove
 * http://jsfiddle.net/k2R3G/81/  - fixed header; allows content to flow under it.
 * http://jsfiddle.net/ZczEt/167/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/435/ - 2 cart summaries that scroll up and stop at different intervals.
+
+## Contributors ##
+
+* https://github.com/bigspotteddog
+* https://github.com/megamatron
