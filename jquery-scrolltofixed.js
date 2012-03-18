@@ -41,7 +41,9 @@
         // scroll.
         var offsetLeft = 0;
         var originalOffsetLeft = -1;
-        
+
+        var originalPosition;
+
         // This last offset used to move the element horizontally. This is used
         // to determine if we need to move the element because we would not want
         // to do that for no reason.
@@ -72,6 +74,10 @@
             offsetLeft = target.offset().left + (target.offset().left - target.position().left);
             if (originalOffsetLeft == -1) {
                 orginalOffsetLeft = offsetLeft;
+            }
+
+            if (!originalPosition) {
+                originalPosition = target.css('position');
             }
 
             // Set that this has been called at least once.
@@ -219,7 +225,7 @@
                 } else {
                     // Set the target element to unfixed, placing it where it was
                     // before.
-                    if (isFixed() || wasReset) {
+                    if (isFixed() || originalPosition != target.css('position') || !wasReset) {
                         postPosition();
                         target.trigger('preUnfixed');
                         setUnfixed();
