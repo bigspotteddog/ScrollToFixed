@@ -164,6 +164,8 @@
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
+            var wasReset = isReset;
+
             // If resetScroll has not yet been called, call it. This only
             // happens once.
             if (!isReset) {
@@ -184,7 +186,7 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (base.options.limit > 0 && y >= base.options.limit - getMarginTop()) {
-                    if (!isAbsolute()) {
+                    if (!isAbsolute() || !wasReset) {
                         postPosition();
                         target.trigger('preAbsolute');
                         target.css({
@@ -199,7 +201,7 @@
                 // put the target element above the top of the page, set the target
                 // element to fixed.
                 } else if (y >= offsetTop - getMarginTop()) {
-                    if (!isFixed()) {
+                    if (!isFixed() || !wasReset) {
                         postPosition();
                         target.trigger('preFixed');
 
@@ -217,7 +219,7 @@
                 } else {
                     // Set the target element to unfixed, placing it where it was
                     // before.
-                    if (isFixed()) {
+                    if (isFixed() || wasReset) {
                         postPosition();
                         target.trigger('preUnfixed');
                         setUnfixed();
@@ -261,7 +263,7 @@
         }
         
         var windowResize = function(event) {
-            resetScroll();
+            isReset = false;
             checkScroll();
         }
         
