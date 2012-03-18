@@ -32,6 +32,8 @@
         // the page.
         var target = base.$el;
 
+        var position;
+
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
         var offsetTop = 0;
@@ -41,8 +43,6 @@
         // scroll.
         var offsetLeft = 0;
         var originalOffsetLeft = -1;
-
-        var originalPosition;
 
         // This last offset used to move the element horizontally. This is used
         // to determine if we need to move the element because we would not want
@@ -76,9 +76,7 @@
                 orginalOffsetLeft = offsetLeft;
             }
 
-            if (!originalPosition) {
-                originalPosition = target.css('position');
-            }
+            position = target.css('position');
 
             // Set that this has been called at least once.
             isReset = true;
@@ -90,12 +88,12 @@
 
         // Returns whether the target element is fixed or not.
         function isFixed() {
-            return target.css('position') == 'fixed';
+            return position === 'fixed';
         }
 
         // Returns whether the target element is absolute or not.
         function isAbsolute() {
-            return target.css('position') == 'absolute';
+            return position === 'absolute';
         }
 
         function isUnfixed() {
@@ -125,7 +123,20 @@
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom
                 });
+
+                position = 'fixed';
             }
+        }
+
+        function setAbsolute() {
+            target.css({
+                'width' : target.width(),
+                'position' : 'absolute',
+                'top' : base.options.limit,
+                'left' : offsetLeft
+            });
+
+            position = 'absolute';
         }
 
         // Sets the target element back to unfixed. Also, hides the spacer.
@@ -146,6 +157,8 @@
                     'left' : '',
                     'top' : ''
                 });
+
+                position = null;
             }
         }
 
@@ -195,13 +208,8 @@
                     if (!isAbsolute() || !wasReset) {
                         postPosition();
                         target.trigger('preAbsolute');
-                        target.css({
-                            'width' : target.width(),
-                            'position' : 'absolute',
-                            'top' : base.options.limit,
-                            'left' : offsetLeft
-                        });
-                        target.trigger("unfixed");
+                        setAbsolute();
+                        target.trigger('unfixed');
                     }
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
@@ -225,7 +233,7 @@
                 } else {
                     // Set the target element to unfixed, placing it where it was
                     // before.
-                    if (isFixed() || originalPosition != target.css('position') || !wasReset) {
+                    if (!isUnfixed() || !wasReset) {
                         postPosition();
                         target.trigger('preUnfixed');
                         setUnfixed();
@@ -267,16 +275,16 @@
                 target.trigger('postUnfixed');
             }
         }
-        
+
         var windowResize = function(event) {
             isReset = false;
             checkScroll();
         }
-        
+
         var windowScroll = function(event) {
             checkScroll();
         }
-        
+
         // Initializes this plugin. Captures the options passed in, turns this
         // off for iOS, adds the spacer, and binds to the window scroll and
         // resize events.
@@ -302,6 +310,8 @@
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
             spacer = $('<div />');
+
+            position = target.css('position');
 
             // Place the spacer right after the target element.
             if (isUnfixed()) base.$el.after(spacer);
