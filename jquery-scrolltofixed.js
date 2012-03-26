@@ -73,7 +73,7 @@
             // Capture the offset left of the target element.
             offsetLeft = target.offset().left + (target.offset().left - target.position().left);
             if (originalOffsetLeft == -1) {
-                orginalOffsetLeft = offsetLeft;
+                originalOffsetLeft = offsetLeft;
             }
 
             position = target.css('position');
