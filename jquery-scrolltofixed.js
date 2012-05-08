@@ -200,7 +200,14 @@
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.bottom == -1) {
+            if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+                if (!isUnfixed() || !wasReset) {
+                    postPosition();
+                    target.trigger('preUnfixed');
+                    setUnfixed();
+                    target.trigger("unfixed");
+                }
+            } else if (base.options.bottom == -1) {
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element at the specified limit, set the target
                 // element to absolute.
