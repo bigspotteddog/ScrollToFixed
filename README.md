@@ -70,7 +70,7 @@ Remove
 * http://jsfiddle.net/k2R3G/81/  - fixed header; allows content to flow under it.
 * http://jsfiddle.net/ZczEt/167/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/435/ - 2 cart summaries that scroll up and stop at different intervals.
-* http://jsfiddle.net/y3qV5/761/ - Another multi-cart example using floats, with section stops.
+* http://jsfiddle.net/y3qV5/769/ - Another multi-cart example using floats, with section stops.
 
 ## Contributors ##
 
