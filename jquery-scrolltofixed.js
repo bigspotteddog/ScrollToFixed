@@ -86,6 +86,16 @@
             }
         }
 
+        function getLimit() {
+            var limit = base.options.limit;
+            if (!limit) return 0;
+
+            if (typeof(limit) === 'function') {
+                return limit();
+            }
+            return limit;
+        }
+
         // Returns whether the target element is fixed or not.
         function isFixed() {
             return position === 'fixed';
@@ -132,7 +142,7 @@
             target.css({
                 'width' : target.width(),
                 'position' : 'absolute',
-                'top' : base.options.limit,
+                'top' : getLimit(),
                 'left' : offsetLeft
             });
 
@@ -197,14 +207,24 @@
             // Grab the current vertical scroll position.
             var y = $(window).scrollTop();
 
+            // Get the limit, if there is one.
+            var limit = getLimit();
+
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.bottom == -1) {
+            if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+                if (!isUnfixed() || !wasReset) {
+                    postPosition();
+                    target.trigger('preUnfixed');
+                    setUnfixed();
+                    target.trigger("unfixed");
+                }
+            } else if (base.options.bottom == -1) {
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element at the specified limit, set the target
                 // element to absolute.
-                if (base.options.limit > 0 && y >= base.options.limit - getMarginTop()) {
+                if (limit > 0 && y >= limit - getMarginTop()) {
                     if (!isAbsolute() || !wasReset) {
                         postPosition();
                         target.trigger('preAbsolute');
@@ -241,8 +261,8 @@
                     }
                 }
             } else {
-                if (base.options.limit > 0) {
-                    if (y + $(window).height() - target.outerHeight(true) >= base.options.limit - getMarginTop()) {
+                if (limit > 0) {
+                    if (y + $(window).height() - target.outerHeight(true) >= limit - getMarginTop()) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed');
