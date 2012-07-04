@@ -85,7 +85,10 @@ body ul {
 
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight(true) + 10,
-            limit: $('.footer').offset().top - $('#summary').outerHeight(true) - 10,
+            limit: function() {
+                var limit = $('.footer').offset().top - $('#summary').outerHeight(true) - 10;
+                return limit;
+            },
             minWidth: 1000,
             zIndex: 999,
             fixed: function() {  },
