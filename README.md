@@ -78,7 +78,7 @@ $(document).ready(function() {
 
 * __marginTop__ - the number of pixels between the top of the window and the fixed element.
 * __limit__ (value|function) - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
-* __bottom__ - the number of pixels between the bottom of the window and the bottom of the fixed element.
+* __bottom__ - (fix to bottom) the number of pixels between the bottom of the window and the bottom of the fixed element.
 * __zIndex__ - the z-index of the fixed element.
 * __spacerClass__ - the class to add to the spacer for styling purposes.
 * __preFixed__ - the function handler triggered just before the element goes fixed.
