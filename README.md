@@ -62,15 +62,33 @@ $(document).ready(function() {
 });
 ```
 
-Triggers
+## Triggers ##
 
 ```javascript
   $('.header').trigger('remove'); // removes scrollToFixed from the element 
+
+  $('.header').trigger('resize'); // resizes the spacer in case the fixed element height changes.
+  
+  $(window).resize(); // causes the plugin to recalculate the element offsets.
+  
+  $(window).scroll(); // causes the plugin to recalculate the window scoll.
 ```
 
-```javascript
-  $('.header').trigger('resize'); // resizes the spacer in case the fixed element height changes.
-```
+## Options ##
+
+* __marginTop__ - the number of pixels between the top of the window and the fixed element.
+* __limit__ (value|function) - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
+* __bottom__ - the number of pixels between the bottom of the window and the bottom of the fixed element.
+* __zIndex__ - the z-index of the fixed element.
+* __spacerClass__ - the class to add to the spacer for styling purposes.
+* __preFixed__ - the function handler triggered just before the element goes fixed.
+* __fixed__ - the function handler triggered just after the element goes fixed.
+* __postFixed__ - the function handler triggered just after the element leaves fixed.
+* __preUnfixed__ - the function handler triggered just before the element goes unfixed.
+* __unfixed__ - the function handler triggered just after the element goes unfixed.
+* __postUnfixed__ - the function handler triggered just after the element leaves unfixed.
+* __preAbsolute__ - the function handler triggered just before the element goes absolute.
+* __postAbsolute__ - the function handler triggered just after the element leaves absolute.
 
 ## Demos ##
 
@@ -79,22 +97,6 @@ Triggers
 * http://jsfiddle.net/ZczEt/167/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/435/ - 2 cart summaries that scroll up and stop at different intervals.
 * http://jsfiddle.net/y3qV5/769/ - Another multi-cart example using floats, with section stops.
-
-## Options ##
-
-* marginTop - the number of pixels between the top of the window and the fixed element.
-* limit - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
-* bottom - the number of pixels between the bottom of the window and the bottom of the fixed element.
-* zIndex - the z-index of the fixed element.
-* spacerClass - the class to add to the spacer for styling purposes.
-* preFixed - a function handler triggered just before the element goes fixed.
-* fixed - a function handler triggered just after the element goes fixed.
-* postFixed - a function handler triggered just after the element leaves fixed.
-* preUnfixed - a function handler triggered just before the element goes unfixed.
-* unfixed - a function handler triggered just after the element goes unfixed.
-* postUnfixed - a function handler triggered just after the element leaves unfixed.
-* preAbsolute - a function handler triggered just before the element goes absolute.
-* postAbsolute - a function handler triggered just after the element leaves absolute.
 
 ## Contributors ##
 
