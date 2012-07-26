@@ -65,7 +65,7 @@ $(document).ready(function() {
 Triggers
 
 ```javascript
-  $('.header').trigger('remove'); // removes the scrollToFixed from the element 
+  $('.header').trigger('remove'); // removes scrollToFixed from the element 
 ```
 
 ```javascript
