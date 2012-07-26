@@ -62,10 +62,14 @@ $(document).ready(function() {
 });
 ```
 
-Remove
+Triggers
 
 ```javascript
-  $('.header').trigger('remove');
+  $('.header').trigger('remove'); // removes the scrollToFixed from the element 
+```
+
+```javascript
+  $('.header').trigger('resize'); // resizes the spacer in case the fixed element height changes.
 ```
 
 ## Demos ##
@@ -75,6 +79,22 @@ Remove
 * http://jsfiddle.net/ZczEt/167/ - very full example: fixed header, footer and floating summary, with events.
 * http://jsfiddle.net/y3qV5/435/ - 2 cart summaries that scroll up and stop at different intervals.
 * http://jsfiddle.net/y3qV5/769/ - Another multi-cart example using floats, with section stops.
+
+## Options ##
+
+* marginTop - the number of pixels between the top of the window and the fixed element.
+* limit - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
+* bottom - the number of pixels between the bottom of the window and the bottom of the fixed element.
+* zIndex - the z-index of the fixed element.
+* spacerClass - the class to add to the spacer for styling purposes.
+* preFixed - a function handler triggered just before the element goes fixed.
+* fixed - a function handler triggered just after the element goes fixed.
+* postFixed - a function handler triggered just after the element leaves fixed.
+* preUnfixed - a function handler triggered just before the element goes unfixed.
+* unfixed - a function handler triggered just after the element goes unfixed.
+* postUnfixed - a function handler triggered just after the element leaves unfixed.
+* preAbsolute - a function handler triggered just before the element goes absolute.
+* postAbsolute - a function handler triggered just after the element leaves absolute.
 
 ## Contributors ##
 
