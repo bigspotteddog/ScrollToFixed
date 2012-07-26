@@ -65,13 +65,19 @@ $(document).ready(function() {
 ## Triggers ##
 
 ```javascript
-  $('.header').trigger('remove'); // removes scrollToFixed from the element 
+  $('.header').trigger('remove'); // Removes scrollToFixed from the element.
 
-  $('.header').trigger('resize'); // resizes the spacer in case the fixed element height changes.
+  $('.header').trigger('resize'); // Resizes the spacer in case the fixed element height changes.
+                                  // Good for size changes to the fixed element.
   
-  $(window).resize(); // causes the plugin to recalculate the element offsets.
-  
-  $(window).scroll(); // causes the plugin to recalculate the window scoll.
+  $(window).scroll(); // Causes the plugin to recalculate the window scoll.
+                      // Good for layout changes that could change the fixed element's response to the scroll.
+                      // Example: the fixed element height expands which should cause it to invoke its limit.
+
+  $(window).resize(); // Causes the plugin to recalculate the element offsets, then the window scroll.
+                      // Good for layout changes that could cause the fixed element to move.
+                      // Example: the header height increases which should cause the fixed element to fix
+                      // at a greater vertical scroll position.  
 ```
 
 ## Options ##
