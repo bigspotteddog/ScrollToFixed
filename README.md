@@ -71,13 +71,14 @@ $(document).ready(function() {
                                   // Good for size changes to the fixed element.
   
   $(window).scroll(); // Causes the plugin to recalculate the window scoll.
-                      // Good for layout changes that could change the fixed element's response to the scroll.
-                      // Example: the fixed element height expands which should cause it to invoke its limit.
+                      // Good for layout changes that could change the fixed element's response to
+                      // the scroll.  Example: the fixed element height expands which should cause
+                      // it to invoke its limit.
 
   $(window).resize(); // Causes the plugin to recalculate the element offsets, then the window scroll.
                       // Good for layout changes that could cause the fixed element to move.
-                      // Example: the header height increases which should cause the fixed element to fix
-                      // at a greater vertical scroll position.  
+                      // Example: the header height increases which should cause the fixed 
+                      // element to fix at a greater vertical scroll position.  
 ```
 
 ## Options ##
