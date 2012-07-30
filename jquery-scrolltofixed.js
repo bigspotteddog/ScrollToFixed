@@ -1,18 +1,8 @@
-/**
- * This plugin is used to fix elements to the top of the page, if the element
- * would have been scrolled out of view, vertically; however, it does allow the
- * element to continue to move left or right with the horizontal scroll.
- * 
- * Given an option marginTop, the element will stop moving vertically upward
- * once the vertical scroll has reached the target position; but, the element
- * will still move horizontally as the page is scrolled left or right. Once the
- * page has been scrolled back down passed the target position, the element will
- * be restored to its original position on the page.
- * 
- * This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+,
- * and Internet Explorer 8/9.
- */
 (function($) {
+    $.isScrollToFixed = function(el) {
+        return $(el).data('ScrollToFixed') !== undefined;
+    };
+
     $.ScrollToFixed = function(el, options) {
         // To avoid scope issues, use 'base' instead of 'this' to reference this
         // class from internal events and functions.
@@ -71,7 +61,13 @@
             offsetTop = target.offset().top;
 
             // Capture the offset left of the target element.
-            offsetLeft = target.offset().left + (target.offset().left - target.position().left);
+            offsetLeft = target.offset().left;
+            
+            // If the offsets option is on, alter the left offset.
+            if (base.options.offsets) {
+                offsetLeft += (target.offset().left - target.position().left);
+            }
+            
             if (originalOffsetLeft == -1) {
                 originalOffsetLeft = offsetLeft;
             }
