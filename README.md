@@ -1,15 +1,9 @@
 ScrollToFixed
 ==========================
 
-This plugin is used to fix elements on the page (top, bottom, anywhere);
-however, it still allows the element to continue to move left or right
-with the horizontal scroll.
+This plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.
 
-Given an option marginTop, the element will stop moving vertically upward
-once the vertical scroll has reached the target position; but, the
-element will still move horizontally as the page is scrolled left or right.
-Once the page has been scrolled back down past the target position, the
-element will be restored to its original position on the page.
+Given an option marginTop, the element will stop moving vertically upward once the vertical scroll has reached the target position; but, the element will still move horizontally as the page is scrolled left or right. Once the page has been scrolled back down past the target position, the element will be restored to its original position on the page.
 
 This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
 
@@ -17,52 +11,91 @@ This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet
 
 Default options:
 
-    $(document).ready(function() {
-        $('#mydiv').scrollToFixed();
-    });
+```javascript
+$(document).ready(function() {
+  $('#mydiv').scrollToFixed();
+});
+```
 
 Margin and Limit options:
 
-    $(document).ready(function() {
-        $('#cart').scrollToFixed({ marginTop: 10, limit: $($('h2')[5]).offset().top });
-    });
+```javascript
+$(document).ready(function() {
+  $('#cart').scrollToFixed({ marginTop: 10, limit: $($('h2')[5]).offset().top });
+});
+```
 
 Fixed Header and Fixed Footer with a Limit
 
-    // The fixed footer will go unfixed to reveal whatever is below it when scrolled
-    // past the limit.
-    $(document).ready(function() {
-        $('.header').scrollToFixed();
-        $('.footer').scrollToFixed( { bottom: 0, limit: $('.footer').offset().top } );
-    });
+```javascript
+// The fixed footer will go unfixed to reveal whatever is below it when scrolled
+// past the limit.
+$(document).ready(function() {
+  $('.header').scrollToFixed();
+  $('.footer').scrollToFixed( { bottom: 0, limit: $('.footer').offset().top } );
+});
+```
 
 Very Full Example
 
-    $(document).ready(function() {
-        $('.header').scrollToFixed({
-            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
-            postFixed: function() { $(this).find('h1').css('color', ''); }
-        });
-        $('#summary').scrollToFixed({
-            marginTop: $('.header').outerHeight() + 10,
-            limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
-            zIndex: 999,
-            preFixed: function() { $(this).find('.title').css('color', 'blue'); },
-            preAbsolute: function() { $(this).find('.title').css('color', 'red'); },
-            postFixed: function() { $(this).find('.title').css('color', ''); },
-            postAbsolute: function() { $(this).find('.title').css('color', ''); }
-        });
-        $('.footer').scrollToFixed( {
-            bottom: 0,
-            limit: $('.footer').offset().top,
-            preFixed: function() { $(this).find('h1').css('color', 'blue'); },
-            postFixed: function() { $(this).find('h1').css('color', ''); }
-        });
+```javascript
+$(document).ready(function() {
+    $('.header').scrollToFixed({
+        preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+        postFixed: function() { $(this).find('h1').css('color', ''); }
     });
+    $('#summary').scrollToFixed({
+        marginTop: $('.header').outerHeight() + 10,
+        limit: $('.footer').offset().top - $('#summary').outerHeight() - 10,
+        zIndex: 999,
+        preFixed: function() { $(this).find('.title').css('color', 'blue'); },
+        preAbsolute: function() { $(this).find('.title').css('color', 'red'); },
+        postFixed: function() { $(this).find('.title').css('color', ''); },
+        postAbsolute: function() { $(this).find('.title').css('color', ''); }
+    });
+    $('.footer').scrollToFixed( {
+        bottom: 0,
+        limit: $('.footer').offset().top,
+        preFixed: function() { $(this).find('h1').css('color', 'blue'); },
+        postFixed: function() { $(this).find('h1').css('color', ''); }
+    });
+});
+```
 
-Remove
+## Triggers ##
 
-    $('.header').trigger('remove');
+```javascript
+  $('.header').trigger('remove'); // Removes scrollToFixed from the element.
+
+  $('.header').trigger('resize'); // Resizes the spacer in case the fixed element height changes.
+                                  // Good for size changes to the fixed element.
+  
+  $(window).scroll(); // Causes the plugin to recalculate the window scoll.
+                      // Good for layout changes that could change the fixed element's response to
+                      // the scroll.  Example: the fixed element height expands which should cause
+                      // it to invoke its limit.
+
+  $(window).resize(); // Causes the plugin to recalculate the element offsets, then the window scroll.
+                      // Good for layout changes that could cause the fixed element to move.
+                      // Example: the header height increases which should cause the fixed 
+                      // element to fix at a greater vertical scroll position.  
+```
+
+## Options ##
+
+* __marginTop__ - the number of pixels between the top of the window and the fixed element.
+* __limit__ (value|function) - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
+* __bottom__ - (fix to bottom) the number of pixels between the bottom of the window and the bottom of the fixed element.
+* __zIndex__ - the z-index of the fixed element.
+* __spacerClass__ - the class to add to the spacer for styling purposes.
+* __preFixed__ - the function handler triggered just before the element goes fixed.
+* __fixed__ - the function handler triggered just after the element goes fixed.
+* __postFixed__ - the function handler triggered just after the element leaves fixed.
+* __preUnfixed__ - the function handler triggered just before the element goes unfixed.
+* __unfixed__ - the function handler triggered just after the element goes unfixed.
+* __postUnfixed__ - the function handler triggered just after the element leaves unfixed.
+* __preAbsolute__ - the function handler triggered just before the element goes absolute.
+* __postAbsolute__ - the function handler triggered just after the element leaves absolute.
 
 ## Demos ##
 
@@ -76,3 +109,4 @@ Remove
 
 * [bigspotteddog](https://github.com/bigspotteddog)
 * [megamattron](https://github.com/megamattron)
+* [techpeace](https://github.com/techpeace)
