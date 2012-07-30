@@ -78,7 +78,9 @@
             isReset = true;
             
             if (base.options.bottom != -1) {
+                target.trigger('preFixed');
                 setFixed();
+                target.trigger('fixed');
             }
         }
 
@@ -390,13 +392,8 @@
                 base.$el.removeData("ScrollToFixed");
             });
             
-            if (base.options.bottom != -1) {
-                if (!isFixed()) {
-                    postPosition();
-                    target.trigger('preFixed.ScrollToFixed');
-                    setFixed();
-                }
-            }
+            // Reset everything.
+            windowResize();
         };
 
         // Initialize the plugin.

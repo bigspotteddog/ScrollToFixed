@@ -83,6 +83,16 @@ body ul {
         $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
         $('.header').bind('unfixed', function() { $(this).css('color', ''); });
 
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
+            preFixed: function() { $(this).css('color', 'blue'); },
+            postFixed: function() { $(this).css('color', ''); },
+        });
+
+        // Order matters here because we are dependent on the state of the footer above for
+        // our limit.  The footer must be set first; otherwise, we will not be in the right
+        // position on a window refresh, if the limit is supposed to be invoked.
         $('#summary').scrollToFixed({
             marginTop: $('.header').outerHeight(true) + 10,
             limit: function() {
@@ -106,13 +116,6 @@ body ul {
             console.log('summary fixed');
             $(this).css('color', 'red');
             $('.header').trigger('fixed');
-        });
-
-        $('.footer').scrollToFixed( {
-            bottom: 0,
-            limit: $('.footer').offset().top,
-            preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
         });
     });
 </script>
