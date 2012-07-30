@@ -379,10 +379,15 @@
             });
 
             target.bind('remove.ScrollToFixed', function() {
+                target.trigger('preUnfixed');
                 setUnfixed();
+                target.trigger("unfixed");
+
                 $(window).unbind('resize', windowResize);
                 $(window).unbind('scroll', windowScroll);
+
                 target.unbind('.ScrollToFixed');
+                base.$el.removeData("ScrollToFixed");
             });
             
             if (base.options.bottom != -1) {
