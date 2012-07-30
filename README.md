@@ -63,8 +63,8 @@ $(document).ready(function() {
 ```
 
 ```javascript
-    // returns whether or not the ScrollToFixed plugin has been applied to the element.
-    var b = $.isScrollToFixed('.header');
+// returns whether or not the ScrollToFixed plugin has been applied to the element.
+var b = $.isScrollToFixed('.header');
 ```
 
 ## Triggers ##
