@@ -101,7 +101,7 @@ var b = $.isScrollToFixed('.header');
 * __postUnfixed__ - the function handler triggered just after the element leaves unfixed.
 * __preAbsolute__ - the function handler triggered just before the element goes absolute.
 * __postAbsolute__ - the function handler triggered just after the element leaves absolute.
-* __offset__ - (true|false|not present) some websites have needed an adjustment to the left position of the element due to something in their layout.  This option turns this adjustment on.
+* __offsets__ - (true|false|not present) some websites have needed an adjustment to the left position of the element due to something in their layout.  This option turns this adjustment on.
 
 ## Demos ##
 
