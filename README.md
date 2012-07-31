@@ -7,6 +7,7 @@ Given an option marginTop, the element will stop moving vertically upward once t
 
 This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
 
+**IMPORTANT**: The latest version of this plugin reverts the offset adustment code that added the difference between the left offset and position.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
 ## Usage ##
 
 Default options:
