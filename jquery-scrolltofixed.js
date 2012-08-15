@@ -51,7 +51,9 @@
         // scrolled causes the element to become fixed too late.
         function resetScroll() {
             // Set the element to it original positioning.
+            target.trigger('preUnfixed');
             setUnfixed();
+            target.trigger("unfixed");
 
             // Reset the last offset used to determine if the page has moved
             // horizontally.
@@ -295,8 +297,12 @@
         }
 
         var windowResize = function(event) {
-            isReset = false;
-            checkScroll();
+            // Check if the element is visible before updating it's position, which
+            // improves behavior with responsive designs where this element is hidden.
+            if(target.is(':visible')) {
+                isReset = false;
+                checkScroll();
+			}
         }
 
         var windowScroll = function(event) {
@@ -376,7 +382,9 @@
             });
 
             target.bind('scroll.ScrollToFixed', function() {
+                target.trigger('preUnfixed');
                 setUnfixed();
+                target.trigger("unfixed");
                 checkScroll();
             });
 
