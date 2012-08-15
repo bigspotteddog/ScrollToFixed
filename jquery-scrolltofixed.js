@@ -295,8 +295,12 @@
         }
 
         var windowResize = function(event) {
-            isReset = false;
-            checkScroll();
+            // Check if the element is visible before updating it's position, which
+            // improves behavior with responsive designs where this element is hidden.
+            if(target.is(':visible')) {
+                isReset = false;
+                checkScroll();
+			}
         }
 
         var windowScroll = function(event) {
