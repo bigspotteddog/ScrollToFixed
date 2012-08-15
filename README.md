@@ -125,3 +125,4 @@ var b = $.isScrollToFixed('.header');
 * [bigspotteddog](https://github.com/bigspotteddog)
 * [megamattron](https://github.com/megamattron)
 * [techpeace](https://github.com/techpeace)
+* [jwoldan](https://github.com/jwoldan)
