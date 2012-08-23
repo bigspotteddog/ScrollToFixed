@@ -13,7 +13,7 @@
         base.el = el;
 
         // Add a reverse reference to the DOM object.
-        base.$el.data("ScrollToFixed", base);
+        base.$el.data('ScrollToFixed', base);
 
         // A flag so we know if the scroll has been reset.
         var isReset = false;
@@ -53,7 +53,7 @@
             // Set the element to it original positioning.
             target.trigger('preUnfixed');
             setUnfixed();
-            target.trigger("unfixed");
+            target.trigger('unfixed');
 
             // Reset the last offset used to determine if the page has moved
             // horizontally.
@@ -218,7 +218,7 @@
                     postPosition();
                     target.trigger('preUnfixed');
                     setUnfixed();
-                    target.trigger("unfixed");
+                    target.trigger('unfixed');
                 }
             } else if (base.options.bottom == -1) {
                 // If the vertical scroll position, plus the optional margin, would
@@ -257,7 +257,7 @@
                         postPosition();
                         target.trigger('preUnfixed');
                         setUnfixed();
-                        target.trigger("unfixed");
+                        target.trigger('unfixed');
                     }
                 }
             } else {
@@ -267,7 +267,7 @@
                             postPosition();
                             target.trigger('preUnfixed');
                             setUnfixed();
-                            target.trigger("unfixed");
+                            target.trigger('unfixed');
                         }
                     } else {
                         if (!isFixed()) {
@@ -276,7 +276,7 @@
                             setFixed();
                         }
                         setLeft(x);
-                        target.trigger("fixed");
+                        target.trigger('fixed');
                     }
                 } else {
                     setLeft(x);
@@ -320,7 +320,7 @@
             // Turn off this functionality for iOS devices until we figure out
             // what to do with them, or until iOS5 comes out which is supposed
             // to support position:fixed.
-            if (navigator.platform === 'iPad' || navigator.platform === 'iPhone' || navigator.platform === "iPod") {
+            if (navigator.platform === 'iPad' || navigator.platform === 'iPhone' || navigator.platform === 'iPod') {
                 if (!navigator.userAgent.match(/OS 5_.*\ like Mac OS X/i)) {
                     return;
                 }
@@ -377,27 +377,27 @@
                 spacer.addClass(base.options.spacerClass);
             }
 
-            target.bind('resize', function() {
+            target.bind('resize.ScrollToFixed', function() {
                 spacer.height(target.height());
             });
 
             target.bind('scroll.ScrollToFixed', function() {
                 target.trigger('preUnfixed');
                 setUnfixed();
-                target.trigger("unfixed");
+                target.trigger('unfixed');
                 checkScroll();
             });
 
             target.bind('remove.ScrollToFixed', function() {
                 target.trigger('preUnfixed');
                 setUnfixed();
-                target.trigger("unfixed");
+                target.trigger('unfixed');
 
-                $(window).unbind('resize', windowResize);
-                $(window).unbind('scroll', windowScroll);
+                $(window).unbind('resize.ScrollToFixed', windowResize);
+                $(window).unbind('scroll.ScrollToFixed', windowScroll);
 
                 target.unbind('.ScrollToFixed');
-                base.$el.removeData("ScrollToFixed");
+                base.$el.removeData('ScrollToFixed');
             });
             
             // Reset everything.
