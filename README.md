@@ -79,7 +79,7 @@ var b = $.isScrollToFixed('.header');
 ## Triggers ##
 
 ```javascript
-  $('.header').trigger('remove'); // Removes scrollToFixed from the element.
+  $('.header').trigger('remove.ScrollToFixed'); // Removes scrollToFixed from the element.
 
   $('.header').trigger('resize'); // Resizes the spacer in case the fixed element height changes.
                                   // Good for size changes to the fixed element.
