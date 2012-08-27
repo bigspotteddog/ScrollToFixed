@@ -87,7 +87,7 @@ body ul {
             bottom: 0,
             limit: $('.footer').offset().top,
             preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
+            postFixed: function() { $(this).css('color', ''); }
         });
 
         // Order matters here because we are dependent on the state of the footer above for
@@ -101,7 +101,7 @@ body ul {
             },
             minWidth: 1000,
             zIndex: 999,
-            fixed: function() {  },
+            fixed: function() {  }
         });
 
         $('#summary').bind('unfixed', function() {
