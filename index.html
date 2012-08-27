@@ -105,15 +105,15 @@ body ul {
         });
 
         $('#summary').bind('unfixed', function() {
-            console.log('summary preUnfixed');
+            if (window.console) console.log('summary preUnfixed');
         });
         $('#summary').bind('unfixed', function() {
-            console.log('summary unfixed');
+            if (window.console) console.log('summary unfixed');
             $(this).css('color', '');
             $('.header').trigger('unfixed');
         });
         $('#summary').bind('fixed', function() {
-            console.log('summary fixed');
+            if (window.console) console.log('summary fixed');
             $(this).css('color', 'red');
             $('.header').trigger('fixed');
         });
