@@ -193,6 +193,7 @@
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
+            if (!$.isScrollToFixed(target)) return;
             var wasReset = isReset;
 
             // If resetScroll has not yet been called, call it. This only
