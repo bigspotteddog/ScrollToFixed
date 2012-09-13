@@ -76,7 +76,7 @@ body ul {
 </style>
 <title>Scroll to Fixed Plugin Demo</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-<script src="jquery-scrolltofixed-min.js" type="text/javascript"></script>
+<script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $('.header').scrollToFixed();
@@ -87,7 +87,7 @@ body ul {
             bottom: 0,
             limit: $('.footer').offset().top,
             preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
+            postFixed: function() { $(this).css('color', ''); }
         });
 
         // Order matters here because we are dependent on the state of the footer above for
@@ -101,19 +101,19 @@ body ul {
             },
             minWidth: 1000,
             zIndex: 999,
-            fixed: function() {  },
+            fixed: function() {  }
         });
 
         $('#summary').bind('unfixed', function() {
-            console.log('summary preUnfixed');
+            if (window.console) console.log('summary preUnfixed');
         });
         $('#summary').bind('unfixed', function() {
-            console.log('summary unfixed');
+            if (window.console) console.log('summary unfixed');
             $(this).css('color', '');
             $('.header').trigger('unfixed');
         });
         $('#summary').bind('fixed', function() {
-            console.log('summary fixed');
+            if (window.console) console.log('summary fixed');
             $(this).css('color', 'red');
             $('.header').trigger('fixed');
         });
