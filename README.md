@@ -10,6 +10,8 @@ This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet
 **IMPORTANT**: The latest version of this plugin reverts the offset adustment code that added the difference between the left offset and position to the left offset.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
 ## Usage ##
 
+**UPDATE**: A new option 'dontCheckForPositionFixedSupport' was added to disable the check for position:fixed support. Some iOS and Android vesions now support position:fixed; we attempt to detect support and continue instantiating the plugin if supported.
+
 Default options:
 
 ```javascript
