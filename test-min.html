@@ -80,8 +80,8 @@ body ul {
 <script>
     $(document).ready(function() {
         $('.header').scrollToFixed();
-        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
+        $('.header').bind('fixed.ScrollToFixed', function() { $(this).css('color', 'red'); });
+        $('.header').bind('unfixed.ScrollToFixed', function() { $(this).css('color', ''); });
 
         $('.footer').scrollToFixed( {
             bottom: 0,
@@ -102,20 +102,21 @@ body ul {
             minWidth: 1000,
             zIndex: 999,
             fixed: function() {  },
+            dontCheckForPositionFixedSupport: true
         });
 
-        $('#summary').bind('unfixed', function() {
-            console.log('summary preUnfixed');
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
+            if (window.console) console.log('summary preUnfixed');
         });
-        $('#summary').bind('unfixed', function() {
-            console.log('summary unfixed');
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
+            if (window.console) console.log('summary unfixed');
             $(this).css('color', '');
-            $('.header').trigger('unfixed');
+            $('.header').trigger('unfixed.ScrollToFixed');
         });
-        $('#summary').bind('fixed', function() {
-            console.log('summary fixed');
+        $('#summary').bind('fixed.ScrollToFixed', function() {
+            if (window.console) console.log('summary fixed');
             $(this).css('color', 'red');
-            $('.header').trigger('fixed');
+            $('.header').trigger('fixed.ScrollToFixed');
         });
     });
 </script>

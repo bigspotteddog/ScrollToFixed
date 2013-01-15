@@ -114,6 +114,7 @@ var b = $.isScrollToFixed('.header');
 * __preAbsolute__ - the function handler triggered just before the element goes absolute.
 * __postAbsolute__ - the function handler triggered just after the element leaves absolute.
 * __offsets__ - (true|false|not present) some websites have needed an adjustment to the left position of the element due to something in their layout.  This option turns this adjustment on.
+* __dontCheckForPositionFixedSupport__ - (true|false|not present) some devices do not support position fixed; we check to see if it does.  This option turns off that check if set to true.
 
 ## Demos ##
 
