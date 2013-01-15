@@ -23,6 +23,7 @@
         var target = base.$el;
 
         var position;
+        var originalPosition;
 
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
@@ -45,15 +46,17 @@
 
         var spacerClass;
 
+        var className;
+
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
         // scrolled. For some reason, calling this before the page is first
         // scrolled causes the element to become fixed too late.
         function resetScroll() {
             // Set the element to it original positioning.
-            target.trigger('preUnfixed');
+            target.trigger('preUnfixed.ScrollToFixed');
             setUnfixed();
-            target.trigger('unfixed');
+            target.trigger('unfixed.ScrollToFixed');
 
             // Reset the last offset used to determine if the page has moved
             // horizontally.
@@ -80,9 +83,9 @@
             isReset = true;
             
             if (base.options.bottom != -1) {
-                target.trigger('preFixed');
+                target.trigger('preFixed.ScrollToFixed');
                 setFixed();
-                target.trigger('fixed');
+                target.trigger('fixed.ScrollToFixed');
             }
         }
 
@@ -131,8 +134,13 @@
                     'width' : target.width(),
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
-                    'bottom' : base.options.bottom == -1?'':base.options.bottom
+                    'bottom' : base.options.bottom == -1?'':base.options.bottom,
+                    'margin-left' : '0px'
                 });
+
+                if (base.options.className) {
+                    target.addClass(base.options.className);
+                }
 
                 position = 'fixed';
             }
@@ -143,7 +151,9 @@
                 'width' : target.width(),
                 'position' : 'absolute',
                 'top' : getLimit(),
-                'left' : offsetLeft
+                'left' : offsetLeft,
+                'margin-left' : '0px',
+                'bottom' : ''
             });
 
             position = 'absolute';
@@ -165,8 +175,13 @@
                     'width' : '',
                     'position' : '',
                     'left' : '',
-                    'top' : ''
+                    'top' : '',
+                    'margin-left' : ''
                 });
+
+                if (base.options.className) {
+                    target.removeClass(base.options.className);
+                }
 
                 position = null;
             }
@@ -217,9 +232,9 @@
             if (base.options.minWidth && $(window).width() < base.options.minWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
-                    target.trigger('preUnfixed');
+                    target.trigger('preUnfixed.ScrollToFixed');
                     setUnfixed();
-                    target.trigger('unfixed');
+                    target.trigger('unfixed.ScrollToFixed');
                 }
             } else if (base.options.bottom == -1) {
                 // If the vertical scroll position, plus the optional margin, would
@@ -228,9 +243,9 @@
                 if (limit > 0 && y >= limit - getMarginTop()) {
                     if (!isAbsolute() || !wasReset) {
                         postPosition();
-                        target.trigger('preAbsolute');
+                        target.trigger('preAbsolute.ScrollToFixed');
                         setAbsolute();
-                        target.trigger('unfixed');
+                        target.trigger('unfixed.ScrollToFixed');
                     }
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element above the top of the page, set the target
@@ -238,7 +253,7 @@
                 } else if (y >= offsetTop - getMarginTop()) {
                     if (!isFixed() || !wasReset) {
                         postPosition();
-                        target.trigger('preFixed');
+                        target.trigger('preFixed.ScrollToFixed');
 
                         // Set the target element to fixed.
                         setFixed();
@@ -246,7 +261,7 @@
                         // Reset the last offset left because we just went fixed.
                         lastOffsetLeft = -1;
 
-                        target.trigger('fixed');
+                        target.trigger('fixed.ScrollToFixed');
                     }
                     // If the page has been scrolled horizontally as well, move the
                     // target element accordingly.
@@ -256,28 +271,34 @@
                     // before.
                     if (!isUnfixed() || !wasReset) {
                         postPosition();
-                        target.trigger('preUnfixed');
+                        target.trigger('preUnfixed.ScrollToFixed');
                         setUnfixed();
-                        target.trigger('unfixed');
+                        target.trigger('unfixed.ScrollToFixed');
                     }
                 }
             } else {
                 if (limit > 0) {
-                    if (y + $(window).height() - target.outerHeight(true) >= limit - getMarginTop()) {
+                    if (y + $(window).height() - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
                         if (isFixed()) {
                             postPosition();
-                            target.trigger('preUnfixed');
-                            setUnfixed();
-                            target.trigger('unfixed');
+                            target.trigger('preUnfixed.ScrollToFixed');
+                            
+                            if (originalPosition === 'absolute') {
+                                setAbsolute();
+                            } else {
+                                setUnfixed();
+                            }
+
+                            target.trigger('unfixed.ScrollToFixed');
                         }
                     } else {
                         if (!isFixed()) {
                             postPosition();
-                            target.trigger('preFixed');
+                            target.trigger('preFixed.ScrollToFixed');
                             setFixed();
                         }
                         setLeft(x);
-                        target.trigger('fixed');
+                        target.trigger('fixed.ScrollToFixed');
                     }
                 } else {
                     setLeft(x);
@@ -285,15 +306,20 @@
             }
         }
 
+        function getBottom() {
+            if (!base.options.bottom) return 0;
+            return base.options.bottom;
+        }
+
         function postPosition() {
             var position = target.css('position');
             
             if (position == 'absolute') {
-                target.trigger('postAbsolute');
+                target.trigger('postAbsolute.ScrollToFixed');
             } else if (position == 'fixed') {
-                target.trigger('postFixed');
+                target.trigger('postFixed.ScrollToFixed');
             } else {
-                target.trigger('postUnfixed');
+                target.trigger('postUnfixed.ScrollToFixed');
             }
         }
 
@@ -310,21 +336,49 @@
             checkScroll();
         }
 
+        var isPositionFixedSupported = function() {
+            var container = document.body;
+
+            if (document.createElement && container && container.appendChild && container.removeChild) {
+                var el = document.createElement('div');
+
+                if (!el.getBoundingClientRect) return null;
+
+                el.innerHTML = 'x';
+                el.style.cssText = 'position:fixed;top:100px;';
+                container.appendChild(el);
+
+                var originalHeight = container.style.height,
+                originalScrollTop = container.scrollTop;
+
+                container.style.height = '3000px';
+                container.scrollTop = 500;
+
+                var elementTop = el.getBoundingClientRect().top;
+                container.style.height = originalHeight;
+
+                var isSupported = (elementTop === 100);
+                container.removeChild(el);
+                container.scrollTop = originalScrollTop;
+
+                return isSupported;
+            }
+
+            return null;
+        }
+
         // Initializes this plugin. Captures the options passed in, turns this
-        // off for iOS, adds the spacer, and binds to the window scroll and
-        // resize events.
+        // off for devices that do not support fixed position, adds the spacer,
+        // and binds to the window scroll and resize events.
         base.init = function() {
             // Capture the options for this plugin.
             base.options = $
                     .extend({}, $.ScrollToFixed.defaultOptions, options);
 
-            // Turn off this functionality for iOS devices until we figure out
-            // what to do with them, or until iOS5 comes out which is supposed
-            // to support position:fixed.
-            if (navigator.platform === 'iPad' || navigator.platform === 'iPhone' || navigator.platform === 'iPod') {
-                if (!navigator.userAgent.match(/OS 5_.*\ like Mac OS X/i)) {
-                    return;
-                }
+            // Turn off this functionality for devices that do not support it.
+            if (!base.options || !base.options.checkForPositionFixedSupport) {
+                var fixedSupported = isPositionFixedSupported();
+                if (!fixedSupported) return;
             }
 
             // Put the target element on top of everything that could be below
@@ -337,6 +391,7 @@
             spacer = $('<div />');
 
             position = target.css('position');
+            originalPosition = target.css('position');
 
             // Place the spacer right after the target element.
             if (isUnfixed()) base.$el.after(spacer);
@@ -383,16 +438,16 @@
             });
 
             target.bind('scroll.ScrollToFixed', function() {
-                target.trigger('preUnfixed');
+                target.trigger('preUnfixed.ScrollToFixed');
                 setUnfixed();
-                target.trigger('unfixed');
+                target.trigger('unfixed.ScrollToFixed');
                 checkScroll();
             });
 
             target.bind('remove.ScrollToFixed', function() {
-                target.trigger('preUnfixed');
+                target.trigger('preUnfixed.ScrollToFixed');
                 setUnfixed();
-                target.trigger('unfixed');
+                target.trigger('unfixed.ScrollToFixed');
 
                 $(window).unbind('resize.ScrollToFixed', windowResize);
                 $(window).unbind('scroll.ScrollToFixed', windowScroll);
