@@ -105,15 +105,15 @@ body ul {
         });
 
         $('#summary').bind('unfixed.ScrollToFixed', function() {
-            console.log('summary preUnfixed');
+            if (window.console) console.log('summary preUnfixed');
         });
         $('#summary').bind('unfixed.ScrollToFixed', function() {
-            console.log('summary unfixed');
+            if (window.console) console.log('summary unfixed');
             $(this).css('color', '');
             $('.header').trigger('unfixed.ScrollToFixed');
         });
         $('#summary').bind('fixed.ScrollToFixed', function() {
-            console.log('summary fixed');
+            if (window.console) console.log('summary fixed');
             $(this).css('color', 'red');
             $('.header').trigger('fixed.ScrollToFixed');
         });
