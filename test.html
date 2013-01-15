@@ -80,8 +80,8 @@ body ul {
 <script>
     $(document).ready(function() {
         $('.header').scrollToFixed();
-        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
+        $('.header').bind('fixed.ScrollToFixed', function() { $(this).css('color', 'red'); });
+        $('.header').bind('unfixed.ScrollToFixed', function() { $(this).css('color', ''); });
 
         $('.footer').scrollToFixed( {
             bottom: 0,
@@ -104,18 +104,18 @@ body ul {
             fixed: function() {  },
         });
 
-        $('#summary').bind('unfixed', function() {
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
             console.log('summary preUnfixed');
         });
-        $('#summary').bind('unfixed', function() {
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
             console.log('summary unfixed');
             $(this).css('color', '');
-            $('.header').trigger('unfixed');
+            $('.header').trigger('unfixed.ScrollToFixed');
         });
-        $('#summary').bind('fixed', function() {
+        $('#summary').bind('fixed.ScrollToFixed', function() {
             console.log('summary fixed');
             $(this).css('color', 'red');
-            $('.header').trigger('fixed');
+            $('.header').trigger('fixed.ScrollToFixed');
         });
     });
 </script>
