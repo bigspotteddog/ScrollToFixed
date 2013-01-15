@@ -58,7 +58,7 @@ body ul {
 }
 #summary {
     border: 1px solid #dddddd;
-    position: absolute;
+    float: right;
     top: 300px;
     width: 150px;
 }
@@ -80,14 +80,14 @@ body ul {
 <script>
     $(document).ready(function() {
         $('.header').scrollToFixed();
-        $('.header').bind('fixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed', function() { $(this).css('color', ''); });
+        $('.header').bind('fixed.ScrollToFixed', function() { $(this).css('color', 'red'); });
+        $('.header').bind('unfixed.ScrollToFixed', function() { $(this).css('color', ''); });
 
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
             preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); }
+            postFixed: function() { $(this).css('color', ''); },
         });
 
         // Order matters here because we are dependent on the state of the footer above for
@@ -101,21 +101,21 @@ body ul {
             },
             minWidth: 1000,
             zIndex: 999,
-            fixed: function() {  }
+            fixed: function() {  },
         });
 
-        $('#summary').bind('unfixed', function() {
-            if (window.console) console.log('summary preUnfixed');
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
+            console.log('summary preUnfixed');
         });
-        $('#summary').bind('unfixed', function() {
-            if (window.console) console.log('summary unfixed');
+        $('#summary').bind('unfixed.ScrollToFixed', function() {
+            console.log('summary unfixed');
             $(this).css('color', '');
-            $('.header').trigger('unfixed');
+            $('.header').trigger('unfixed.ScrollToFixed');
         });
-        $('#summary').bind('fixed', function() {
-            if (window.console) console.log('summary fixed');
+        $('#summary').bind('fixed.ScrollToFixed', function() {
+            console.log('summary fixed');
             $(this).css('color', 'red');
-            $('.header').trigger('fixed');
+            $('.header').trigger('fixed.ScrollToFixed');
         });
     });
 </script>
