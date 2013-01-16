@@ -367,6 +367,14 @@
             return null;
         }
 
+        var preventDefault = function(e) {
+            e = e || window.event;
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.returnValue = false;
+        }
+
         // Initializes this plugin. Captures the options passed in, turns this
         // off for devices that do not support fixed position, adds the spacer,
         // and binds to the window scroll and resize events.
@@ -444,7 +452,9 @@
                 checkScroll();
             });
 
-            target.bind('remove.ScrollToFixed', function() {
+            target.bind('remove.ScrollToFixed', function(ev) {
+                preventDefault(ev);
+                
                 target.trigger('preUnfixed.ScrollToFixed');
                 setUnfixed();
                 target.trigger('unfixed.ScrollToFixed');
