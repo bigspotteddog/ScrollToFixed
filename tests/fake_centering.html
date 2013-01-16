@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Test Float For Position</title>
+	<style type="text/css" media="screen, print, projection">
+	body,
+	html {
+		margin:0;
+		padding:0;
+		color:#000;
+		background:#a7a09a;
+	}
+	#wrap {
+		width:750px;
+		margin:0 auto;
+		background:#99c;
+	}
+	#header {
+    	padding:45px 10px;
+		background:#ddd;
+	}
+	h1 {
+	    margin:0;
+    }
+	#main {
+		float:left;
+		width:480px;
+		padding:10px;
+		background:#9c9;
+	}
+	h2 {
+		margin:0 0 1em;
+	}
+	#sidebar {
+		float:right;
+		width:230px;
+		padding:10px;
+		background:#99c;
+	}
+    .full-width {
+        position: relative;
+        padding-left: 50%;
+        padding-right: 50%;
+        left: -50%;
+        width: 100%;
+    }
+    #test {
+        background: #f00;
+    }
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header"><h1>Test for esoteric centering</h1></div>
+    <div id="test" class="full-width">
+        floatScroll this element
+        <pre>
+        position: relative;
+        padding-left: 50%;
+        padding-right: 50%;
+        left: -50%;
+        width: 100%;
+        </pre>
+    </div>
+	<div id="main">
+		<h2>Column 1</h2>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris vel magna. Mauris risus nunc, tristique varius, gravida in, lacinia vel, elit. Nam ornare, felis non faucibus molestie, nulla augue adipiscing mauris, a nonummy diam ligula ut risus. Praesent varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+		<p>Nulla a lacus. Nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pulvinar lobortis purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec semper ipsum et urna. Ut consequat neque vitae felis. Suspendisse dapibus, magna quis pulvinar laoreet, dolor neque lacinia arcu, et luctus mi erat vestibulum sem. Mauris faucibus iaculis lacus. Aliquam nec ante in quam sollicitudin congue. Quisque congue egestas elit. Quisque viverra. Donec feugiat elementum est. Etiam vel lorem.</p>
+		<p>Aenean tempor. Mauris tortor quam, elementum eu, convallis a, semper quis, purus. Cras at tortor in purus tincidunt tristique. In hac habitasse platea dictumst. Ut eu lectus eu metus molestie iaculis. In ornare. Donec at enim vel erat tempor congue. Nullam varius. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla feugiat hendrerit risus. Integer enim velit, gravida id, sollicitudin at, consequat sit amet, leo. Fusce imperdiet condimentum velit. Phasellus nonummy interdum est. Pellentesque quam.</p>
+		<h3>Consectetuer adipiscing elit</h3>
+		<p>Nulla dictum. Praesent turpis libero, pretium in, pretium ac, malesuada sed, ligula. Sed a urna eu ipsum luctus faucibus. Curabitur fringilla. Suspendisse sit amet quam. Sed vel pede id libero luctus fermentum. Vestibulum volutpat tempor lectus. Vivamus convallis tempus ante. Nullam adipiscing dui blandit ipsum. Nullam convallis lacus ut quam. Mauris semper elit at ante. Vivamus tristique. Pellentesque pharetra ante at pede. In ultrices arcu vitae purus. In rutrum, erat at mollis consequat, leo massa consequat libero, ac vestibulum libero tellus sed risus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+		<p>Maecenas eu velit nec magna venenatis consequat. In neque. Vivamus pellentesque, lacus eu aliquet semper, lorem metus rhoncus metus, a ornare orci ante a diam. Nunc sem nisl, aliquet quis, elementum nec, imperdiet in, wisi. Proin in lorem. Etiam molestie diam eget ante. Morbi quis tortor id lacus mollis venenatis. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam vel orci sit amet tellus mollis eleifend. Donec urna diam, viverra eget, ultricies gravida, ultrices eu, erat. Proin vel arcu. Sed diam. Cras hendrerit arcu sed augue. Sed justo felis, luctus a, accumsan in, tincidunt facilisis, libero. Phasellus eu eros.</p>
+        <p>Donec luctus mauris a nulla tempor viverra. Sed molestie dui non nibh mattis vel blandit purus porttitor. Aliquam posuere, neque vel pharetra suscipit, nisi nibh condimentum justo, sit amet accumsan tortor felis eu odio. Morbi fringilla fermentum dui vel dictum. Mauris dapibus ipsum id lacus interdum pretium. Aliquam pellentesque dui vel justo eleifend ornare. Maecenas pulvinar, justo vel rhoncus cursus, nisl arcu euismod lorem, sit amet lacinia sem purus non turpis. Vivamus ultricies scelerisque urna et gravida. Praesent sed lectus nisl, et interdum enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+        <p>Ut pharetra iaculis nisi, sit amet lobortis nibh auctor eget. Phasellus feugiat enim et odio lobortis eget ullamcorper eros blandit. Aenean lectus nisi, ultrices nec placerat ut, ullamcorper tempor eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec elementum lectus eget neque vulputate ultricies. Ut ut pulvinar dolor. Sed congue arcu vel velit placerat mollis. Morbi sollicitudin tortor nunc, at pellentesque odio.</p>
+
+        <p>Sed at nisi sed metus dignissim dignissim in eget tortor. Etiam accumsan auctor dolor eget tincidunt. Maecenas eleifend vulputate libero at dictum. Proin et diam quis nulla imperdiet convallis. Mauris dignissim eros ut lacus imperdiet consequat. Nulla pulvinar metus id velit tristique vitae facilisis lorem egestas. Praesent in nulla neque. Fusce nec tincidunt arcu. Cras tortor odio, interdum non tempor et, pretium et erat. Sed sit amet felis sit amet lectus semper rutrum et eget odio.</p>
+
+        <p>Praesent vel dapibus augue. Vestibulum non orci eget dui ullamcorper placerat. Vivamus consectetur felis eu ipsum convallis vehicula. Donec non velit purus. Quisque eu nisl id ante pharetra egestas nec et enim. Aenean viverra commodo ante, sit amet convallis risus adipiscing quis. Suspendisse et nisl sed est cursus auctor nec sit amet diam. Praesent malesuada odio et erat auctor in fermentum orci dictum. Etiam nisi ante, lacinia a tempus nec, scelerisque consequat odio. Nunc tristique nulla at justo sollicitudin quis convallis enim pulvinar. Nam malesuada lorem lacinia leo interdum fermentum. Pellentesque porta mollis accumsan. Phasellus pulvinar laoreet ante, vitae elementum elit ornare sed. Proin non erat diam. Curabitur adipiscing purus sit amet felis luctus mattis. In hac habitasse platea dictumst.</p>
+        <p>Vivamus blandit ante sed arcu vehicula quis bibendum velit ultricies. Pellentesque imperdiet, sapien a luctus congue, urna justo vulputate turpis, at viverra eros ligula id dolor. Sed pulvinar sodales consequat. Quisque placerat lacus non purus gravida quis interdum urna lobortis. Quisque scelerisque ultricies est sit amet luctus. Duis leo arcu, tempus non vestibulum a, convallis ac tortor. Maecenas et metus nisl, eget fermentum ante. Suspendisse nec ipsum erat, ac luctus elit. Pellentesque tellus lorem, sollicitudin euismod imperdiet a, porta at enim. Nulla posuere luctus orci et bibendum. Praesent feugiat rutrum faucibus. In neque tellus, lobortis id lacinia sed, dictum accumsan velit. Fusce at commodo sapien. Donec imperdiet risus vitae nulla placerat nec posuere metus aliquet. Suspendisse et nulla ante.</p>
+	</div>
+	<div id="sidebar">
+		<ul>
+			<li><a href="/">Link 1</a></li>
+			<li><a href="/">Link 2</a></li>
+			<li><a href="/">Link 3</a></li>
+			<li><a href="/">Link 4</a></li>
+			<li><a href="/">Link 5</a></li>
+			<li><a href="/">Link 6</a></li>
+			<li><a href="/">Link 7</a></li>
+			<li><a href="/">Link 8</a></li>
+			<li><a href="/">Link 9</a></li>
+			<li><a href="/">Link 10</a></li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery-scrolltofixed.js"></script>
+<script type="text/javascript">
+    $('#test').scrollToFixed();
+</script>
+</body>
+</html>

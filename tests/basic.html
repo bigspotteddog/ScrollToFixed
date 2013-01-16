@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>The most basic floatScroll test</title>
+	<style type="text/css" media="screen, print, projection">
+	body,
+	html {
+		margin:0;
+		padding:0;
+		color:#000;
+		background:#a7a09a;
+        height: 5000px;
+	}
+    #test {
+        background: #f00;
+    }
+	</style>
+</head>
+<body>
+    <h1>The most basic floatScroll test</h1>
+    <div id="test">
+        floatScroll this element.
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery-scrolltofixed.js"></script>
+    <script type="text/javascript">
+        $('#test').scrollToFixed();
+    </script>
+</body>
+</html>
