@@ -9,7 +9,7 @@ This plugin is used to fix elements on the page (top, bottom, anywhere); however
 
 Given an option marginTop, the element will stop moving vertically upward once the vertical scroll has reached the target position; but, the element will still move horizontally as the page is scrolled left or right. Once the page has been scrolled back down past the target position, the element will be restored to its original position on the page.
 
-This plugin has been tested in Firefox 3+, Google Chrome 10+ Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
+This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
 
 **IMPORTANT**: The latest version of this plugin reverts the offset adustment code that added the difference between the left offset and position to the left offset.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
 
