@@ -135,3 +135,5 @@ var b = $.isScrollToFixed('.header');
 * [techpeace](https://github.com/techpeace)
 * [jwoldan](https://github.com/jwoldan)
 * [stanislaw](https://github.com/stanislaw)
+* [glench](https://github.com/Glench)
+
