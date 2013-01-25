@@ -1,3 +1,5 @@
+Demo: http://bigspotteddog.github.com/ScrollToFixed/
+
 ScrollToFixed
 ==========================
 
