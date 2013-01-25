@@ -1,4 +1,4 @@
-Demo: http://bigspotteddog.github.com/ScrollToFixed/
+**Demo**: http://bigspotteddog.github.com/ScrollToFixed/
 
 More fiddle links below.
 
