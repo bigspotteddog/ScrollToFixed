@@ -336,6 +336,7 @@
             checkScroll();
         }
 
+        // From: http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
         var isPositionFixedSupported = function() {
             var container = document.body;
 
@@ -452,7 +453,7 @@
                 checkScroll();
             });
 
-            target.bind('remove.ScrollToFixed', function(ev) {
+            target.bind('detach.ScrollToFixed', function(ev) {
                 preventDefault(ev);
                 
                 target.trigger('preUnfixed.ScrollToFixed');

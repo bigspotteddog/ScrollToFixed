@@ -86,10 +86,11 @@ var b = $.isScrollToFixed('.header');
 ## Triggers ##
 
 ```javascript
-  $('.header').trigger('remove.ScrollToFixed'); // Removes scrollToFixed from the element.  The
+  $('.header').trigger('detach.ScrollToFixed'); // Removes scrollToFixed from the element.  The
                                                 // namespace ensures remove will not be called
                                                 // on other plugins that may be listening for
-                                                // that event!
+                                                // that event!  NOTE: Renamed as "detach" to
+                                                // avoid the new Chrome native "remove" method.
 
   $('.header').trigger('resize'); // Resizes the spacer in case the fixed element height changes.
                                   // Good for size changes to the fixed element.
