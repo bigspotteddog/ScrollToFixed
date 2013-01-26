@@ -2,14 +2,9 @@
 <head>
 <style>
 body {
-    font-family: arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0 auto 0;
-    width: 960px;
-}
-body h1, h2 {
-    font-weight: bold;
-    font-size: 120%;
-    margin-top: 12px;
+    width: 940px;
 }
 body p {
     margin-top: 8px;
@@ -20,135 +15,306 @@ body ul {
     margin: 0px;
 }
 .banner {
-    background-color: #aaa;
-    height: 80px;
-    padding: 5px;
-    width: 100%;
+    background-color: #333333;
+    color: #fefefe;
+    padding: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.title {
+    font-size: 140%;
+    font-weight: bold;
 }
 .header {
     background-color: #eee;
-    height: 50px;
-    padding: 5px;
-    width: 100%;
+    padding: 20px;
+}
+.header.scroll-to-fixed-fixed {
+    color: red;
 }
 .content {
-    padding: 5px;
-}
-.content li {
-    display: inline-block;
-    vertical-align: top;
+    padding: 20px;
 }
 .footer {
     background-color: #eee;
-    height: 50px;
-    padding: 5px;
-    width: 100%;
+    padding: 20px;
+}
+.footer.scroll-to-fixed-fixed {
+    color: red;
 }
 .footer-content {
     background-color: #aaa;
-    padding: 5px;
-    width: 100%;
+    padding: 20px;
+}
+.demos li {
+    margin-bottom: 20px;
 }
 #left {
-    width: 770px;
+    width: 700px;
 }
 #right {
-    width: 150px;
-    margin-left: 20px;
+    float: right;
 }
-#summary {
+.summary {
     border: 1px solid #dddddd;
-    position: absolute;
-    top: 300px;
-    width: 150px;
+    overflow: hidden;
 }
-#summary .title {
+.summary .caption {
     border-bottom: 1px solid #dddddd;
-    width: 100%;
     background-color: #dddddd;
     font-size: 12pt;
     font-weight: bold;
+    padding: 5px;
 }
-#summary .contents {
-    margin: 5px;
+.summary.scroll-to-fixed-fixed .caption {
+    color: red;
+}
+.contents {
+    width: 150px;
+    margin: 10px;
     font-size: 80%;
 }
 </style>
-<title>Scroll to Fixed Plugin Demo</title>
+<title>ScrollToFixed Plugin Demo</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $('.header').scrollToFixed();
-        $('.header').bind('fixed.ScrollToFixed', function() { $(this).css('color', 'red'); });
-        $('.header').bind('unfixed.ScrollToFixed', function() { $(this).css('color', ''); });
+
+        var h2 = $('h2');
+
+        $('#summary1').data('anchor', h2[0]);
+        $('#summary2').data('anchor', h2[3]);
+        $('#summary3').data('anchor', h2[10]);
+
+        var summary = $('.summary');
+        summary.each(function(i) {
+            var s = $(summary[i]);
+            s.css({
+                position: 'absolute',
+                top: $(s.data('anchor')).offset().top
+            });
+        });
+
+        summary.scrollToFixed({
+            marginTop: $('.header').outerHeight(true) + 10,
+            limit: function() {
+                var self = $(this);
+                var next = self.next();
+                var limit = 0;
+                if (next.length > 0) {
+                    limit = $(next).offset().top - self.outerHeight(true) - 10;
+                } else {
+                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
+                }
+
+                return limit;
+            },
+            zIndex: 999
+        });
 
         $('.footer').scrollToFixed( {
             bottom: 0,
             limit: $('.footer').offset().top,
-            preFixed: function() { $(this).css('color', 'blue'); },
-            postFixed: function() { $(this).css('color', ''); },
-        });
-
-        // Order matters here because we are dependent on the state of the footer above for
-        // our limit.  The footer must be set first; otherwise, we will not be in the right
-        // position on a window refresh, if the limit is supposed to be invoked.
-        $('#summary').scrollToFixed({
-            marginTop: $('.header').outerHeight(true) + 10,
-            limit: function() {
-                var limit = $('.footer').offset().top - $('#summary').outerHeight(true) - 10;
-                return limit;
-            },
-            minWidth: 1000,
-            zIndex: 999,
-            fixed: function() {  },
-            dontCheckForPositionFixedSupport: true
-        });
-
-        $('#summary').bind('unfixed.ScrollToFixed', function() {
-            if (window.console) console.log('summary preUnfixed');
-        });
-        $('#summary').bind('unfixed.ScrollToFixed', function() {
-            if (window.console) console.log('summary unfixed');
-            $(this).css('color', '');
-            $('.header').trigger('unfixed.ScrollToFixed');
-        });
-        $('#summary').bind('fixed.ScrollToFixed', function() {
-            if (window.console) console.log('summary fixed');
-            $(this).css('color', 'red');
-            $('.header').trigger('fixed.ScrollToFixed');
-        });
+        });        
     });
 </script>
 </head>
 <body>
     <ul>
         <li class="banner">
-            <h1>Banner</h1>
+            <span class="title">Banner</span><span> - This banner will scroll out of view.</span>
         </li>
         <li class="header">
-            <h1>Header</h1>
+            <span class="title">Header</span><span> - This header will dock to the top of the window.</span>
         </li>
         <li class="content">
             <ul>
                 <li id="left">
-                    <h1>Lorem ipsum dolor</h1><h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p><h2>Velit sed eget donec placerat vestibulum</h2><p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p><h2>Scelerisque in justo neque ultricies vel eget libero quam vitae metus ante nonummy amet augue</h2><p>Velit tellus enim. Vitae et ultrices. Odio torquent ligula. Quam in a scelerisque malesuada non. Sem enim congue sed odio libero. Lacinia commodo feugiat sed nonummy lobortis erat maecenas vivamus. Lectus diam pede. Eget risus mauris. In dapibus libero suspendisse pellentesque urna. Id metus libero. Metus id accumsan curabitur id congue. Elementum diam placerat posuere vivamus felis. Arcu ante vestibulum. Orci ut ut magna nibh eu aliquam mi qui vel pretium nullam. Tellus ligula malesuada. Consequat id nulla. Feugiat suscipit ligula dolor amet congue urna etiam amet accumsan consequat distinctio natoque placerat nec. Eget lectus mauris molestie fusce dui. Vel consectetuer imperdiet tempus at sed. Proin aliquam nec. Ligula sit elit eget faucibus cras arcu in rhoncus. Lorem id integer. Vestibulum nec cum. Ligula aliquam tellus elit nisl lectus in diam tortor wisi mauris tempus.</p><p>Fermentum ipsum augue. Lectus in nunc vulputate tellus neque tortor erat cursus. Congue wisi enim. Nam eget dui auctor amet quis donec ipsum nibh. Nisl leo magna officia leo nibh.</p><h2>Mollis in ornare</h2><p>Nec a ut. Ut nullam urna. Quis tortor mauris blandit non corrupti. Rutrum in at id dignissim dictum. Duis ac ornare parturient ultrices amet odio feugiat aenean cras mus pede. Praesent egestas netus. Urna esse pharetra commodi commodo curabitur. A lacinia sed etiam ut vel maxime platea porta odio mollis non nisl nulla nullam. Vitae impedit pulvinar.</p><h2>Sem velit maiores</h2><p>Accumsan blandit ut. Varius velit ante. Leo tincidunt nulla lorem gravida nulla tempus volutpat donec phasellus aliquet nec. Sapien tempor id pharetra magna mi. Nunc fusce venenatis nam mi nam. Eget senectus convallis donec urna suscipit donec natoque lacinia rutrum lorem est adipiscing sed lectus. Dictumst faucibus ut. Vulputate sodales ipsum. Purus vehicula sed vestibulum eget integer.</p><h2>Ut turpis tempor integer fusce bibendum sem ipsum rutrum</h2><p>Nec in nibh. A amet condimentum. Commodo fringilla amet sit ut quis. Facilisi ac a ut id morbi. Aut pretium orci donec dui vel risus eros amet quis ut molestiae. Molestie nulla sem vestibulum urna aptent aliquam etiam auctor. Erat eu duis. Imperdiet vestibulum ut. Nibh risus fusce viverra wisi lectus.</p><h2>Sed curabitur ut vel condimentum fermentum a felis suspendisse</h2><p>Neque lacus lorem ut massa lacinia. Amet nulla est. Vitae in vel turpis diam elit lacinia amet quis. Sem a in. Architecto magna sit vel vehicula elit ullam consectetuer non. Vel vulputate elit facilisis accumsan justo. Ridiculus pharetra fusce. A volutpat curabitur. Senectus amet in elementum ipsum ut sit eros tellus.</p><h2>Phasellus enim metus vestibulum scelerisque mauris</h2><p>Donec nisl massa. Hendrerit suscipit turpis sed eget quis. Mauris wisi aenean amet semper morbi. Orci hendrerit vestibulum dolor a semper nullam nesciunt amet.</p><p>Erat ac non. Accumsan arcu mauris. Consectetuer vivamus convallis. Vestibulum neque vitae risus vivamus ut. Egestas elit eget. Venenatis mattis orci. Malesuada eget massa vitae est nec lacus et parturient nunc enim curabitur mollis vitae dictumst et malesuada non amet wisi amet sit lacus cras quis accumsan tortor tempore vulputate ante. Corrupti est sem dignissim ante vehicula ac cursus in tempus suspendisse at. Neque pariatur sed. Ac malesuada a. Hac duis pellentesque. Libero varius fugiat. Iaculis aliquam ac eros tempus sit sit in fusce. Luctus wisi amet. Vestibulum est vitae ut libero massa. Eu hendrerit velit. Et per massa congue vivamus sapien. Nibh nibh pulvinar. Libero velit est. Et lorem ipsum. Pretium sagittis nisl. Id ut viverra. Arcu dis sapien vehicula amet lacus sodales sagittis quam minim in mauris integer ante eu. Nisl id id eget sed molestie nec ac mauris nonummy proin porttitor. Vestibulum orci a sed in ligula.</p><h2>Lorem pede adipiscing massa eu eros</h2><p>Proin a at. Sagittis congue vitae. Eu arcu sem. A pede cras volutpat faucibus dui. Est ridiculus vestibulum blandit a dui montes dignissim mauris ac tellus diam. Rutrum gravida orci id eget morbi. Nec ut mollis. Dolore nulla donec. Nunc accumsan consectetuer. Erat orci vel. Primis erat nostra nec laoreet tempor eos porttitor sem hendrerit dignissim venenatis faucibus vel pellentesque. Lobortis in mi vitae donec metus faucibus amet viverra at ut dolor varius felis ante blandit sit litora ac autem ante. Pellentesque pede quisque. In nonummy pulvinar. Eget nunc quam. Massa torquent ut penatibus hendrerit et nulla scelerisque odio dolor vitae quis. In in quam dolor nec arcu. Magna vitae feugiat. Donec fermentum bibendum.</p><h2>Pretium dui dui</h2><p>Convallis wisi urna. Ipsum tellus ultricies. Non ac pretium. In non accumsan purus nec aliquip hendrerit fusce ornare ut turpis quis dictum tincidunt in vestibulum fringilla ad. In et dui. Eget tellus quisque arcu varius per tellus neque sit convallis nulla tellus. Nam faucibus aliquam. Vitae vel sed turpis nascetur ultricies aliquam vitae ultricies sed lobortis vestibulum sapien non eu. Sem amet nulla. Leo elit ipsum imperdiet sit dictumst. Enim turpis vivamus. Posuere odio ipsum in augue quisque nisl duis metus. Etiam imperdiet curabitur. Quis velit arcu. Ipsum turpis libero vel donec et. Ac risus a tempus.</p><h2>Sit amet dolore</h2><p>Praesent ipsum nibh ut curabitur justo. Ut proin faucibus. Ornare molestie magnis nec tempus ultricies eu amet sed. Et egestas aptent. Vel dignissim justo sodales suscipit lorem quis ullamcorper lacinia. Ac ligula nascetur. Tortor non leo at lacus non feugiat nisl aut suscipit nec ac rhoncus sed ipsum. Mauris condimentum erat rutrum ultricies justo.</p><h2>Rhoncus mauris vivamus</h2><p>Consectetuer quam euismod id accumsan a tellus ultrices quam suspendisse metus sit aliquam nec fermentum. Fusce aenean wisi. Purus eget rutrum non risus duis. Risus varius commodo egestas diam est. Dictum tellus nullam pede in ligula egestas neque pharetra vel justo non. Eu pharetra vestibulum. Mauris pede mauris. Erat a tellus. Orci vivamus mauris in morbi et.</p><h2>Scelerisque diamlorem sollicitudin</h2><p>Elementum libero etiam magna vitae velit scelerisque purus suspendisse. Amet torquent diam. In lacus vestibulum a ligula etiam. Vel convallis sapien. Cras platea rutrum. Leo pede volutpat. Ullamcorper dui sollicitudin consectetuer donec amet cras lorem nunc mattis sed dapibus metus enim ligula. Volutpat eu dictum mus vel ultrices. Sit nunc mattis. Mus donec tellus amet in a quaerat non vivamus sed in condimentum. Lacus posuere in. Condimentum sodales lacinia. Eget ante sagittis quisque duis scelerisque praesent tristique ut. Ipsum justo nulla viverra ornare in nam lectus aliquam.</p><p>Donec eget id est nulla nisl ipsa sollicitudin lectus vel fusce neque. Phasellus egestas commodo. Orci ipsum ut. Etiam vitae turpis vitae sed velit. Orci sollicitudin at. Felis id sem. Pharetra nisl dui nam enim non. Donec ullamcorper cras ligula dui mattis eget proin vitae. Nisl suspendisse tristique laoreet in etiam. Ac maecenas bibendum dis vel suspendisse. Et quisque integer. In lacus magna vel in aenean dolor facilisis nec. Mi ad tincidunt a nec felis duis nec nulla id sit vitae elementum egestas gravida. Wisi maecenas lectus. Nec ut nullam.</p><h2>Asperiores lectus minim</h2><p>Lorem integer faucibus lorem eget augue. Vulputate eget facilisis eu sollicitudin eget. Justo libero tincidunt tincidunt quam lacus. Leo ipsum felis. Eget potenti suscipit. Porta at omnis aliquam eleifend luctus. Est morbi tristique libero pellentesque nunc nec consectetuer in eget ante arcu eget sit integer. Metus magna sem vitae quam luctus id in sit neque suspendisse lacinia. Et arcu eget ac ante vivamus. Vitae magna cursus. Sollicitudin a vivamus. Pede eu nunc vehicula erat ipsum. Fusce quisque tincidunt. Fermentum sed aliquam elementum ut vitae wisi curabitur eget. Posuere nulla in curabitur sapien nascetur. Et proin maecenas integer hendrerit ultricies sed sed eu eget feugiat sem pellentesque velit eu. Suspendisse dui lectus. Ut tincidunt vitae. Et molestie donec.</p><h2>Auctor malesuada lorem</h2><p>In feugiat ut aliquam turpis vehicula. Dolor aut in gravida in nam eget euismod erat. Dignissim dictum non. Elit erat lorem ipsum lorem ac leo at turpis tristique amet aliquam morbi et per aliquam suspendisse cras. Sed elementum mi. Magna gravida facilisis ante dis mattis. Accumsan magnis elementum. Lacus dolor dictum. Sit vivamus integer. Nonummy ut torquent. Massa penatibus sit. Condimentum pulvinar ullamcorper. Vulputate laoreet primis lacus nec donec dictum eu pellentesque eros dictum amet risus dui.</p>
+                    <h1>ScrollToFixed Demo</h1>
+
+                    <h2>What?</h2>
+
+                    <p>This jQuery plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.</p>
+
+                    <p>Given an option marginTop, the element will stop moving vertically upward once the vertical scroll has reached the target position; but, the element will still move horizontally as the page is scrolled left or right. Once the page has been scrolled back down past the target position, the element will be restored to its original position on the page.</p>
+
+                    <p>This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+, Internet Explorer 8/9, and Opera 11.60+.</p>
+
+                    <p>This plugin was inspired by the excellent tutorial presented by Remy Sharp, titled &quot;Fixed Floating Elements&quot;.  You will find that tutorial <a href="http://jqueryfordesigners.com/fixed-floating-elements/">here</a>.</p>
+
+                    <h2>How?</h2>
+
+                    <p>You can get the plugin <a href="https://github.com/bigspotteddog/ScrollToFixed">here</a>.</p>
+
+                    <p>The code below fixes the header to the top of the window and the footer to the bottom of the window.  The footer will reveal more content once the window is scrolled low enough.  Three summary elements on the right follow their respective sections, docking at the top of the window until the next section arrives.  Once the footer is undocked, it will push the last summary up the page to reveal its contents.</p>
+
+                    <pre>
+    $(document).ready(function() {
+
+        // Dock the header to the top of the window when scrolled past the banner.
+        // This is the default behavior.
+
+        $('.header').scrollToFixed();
+
+        
+        // Anchor the summaries to their respective sections.
+        
+        var h2 = $('h2');
+        $('#summary1').data('anchor', h2[1]);
+        $('#summary2').data('anchor', h2[7]);
+        $('#summary3').data('anchor', h2[10]);
+
+        var summary = $('.summary');
+        summary.each(function(i) {
+            var s = $(summary[i]);
+            s.css({
+                position: 'absolute',
+                top: $(s.data('anchor')).offset().top
+            });
+        });
+
+        
+        // Dock each summary as it arrives just below the docked header, pushing the
+        // previous summary up the page.
+        
+        summary.scrollToFixed({
+            marginTop: $('.header').outerHeight(true) + 10,
+            limit: function() {
+                var self = $(this);
+                var next = self.next();
+                var limit = 0;
+                if (next.length > 0) {
+                    limit = $(next).offset().top - self.outerHeight(true) - 10;
+                } else {
+                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
+                }
+
+                return limit;
+            },
+            zIndex: 999
+        });
+
+
+        // Dock the footer to the bottom of the page, but scroll up to reveal more
+        // content if the page is scrolled far enough.
+
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
+        });
+    });
+</pre>             
+                    <p>The rest of this is all Greek to me :)</p>
+
+                    <p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
+
+                    <h2>Scelerisque in justo neque ultricies vel eget libero quam vitae metus ante nonummy amet augue</h2>
+
+                    <p>Velit tellus enim. Vitae et ultrices. Odio torquent ligula. Quam in a scelerisque malesuada non. Sem enim congue sed odio libero. Lacinia commodo feugiat sed nonummy lobortis erat maecenas vivamus. Lectus diam pede. Eget risus mauris. In dapibus libero suspendisse pellentesque urna. Id metus libero. Metus id accumsan curabitur id congue. Elementum diam placerat posuere vivamus felis. Arcu ante vestibulum. Orci ut ut magna nibh eu aliquam mi qui vel pretium nullam. Tellus ligula malesuada. Consequat id nulla. Feugiat suscipit ligula dolor amet congue urna etiam amet accumsan consequat distinctio natoque placerat nec. Eget lectus mauris molestie fusce dui. Vel consectetuer imperdiet tempus at sed. Proin aliquam nec. Ligula sit elit eget faucibus cras arcu in rhoncus. Lorem id integer. Vestibulum nec cum. Ligula aliquam tellus elit nisl lectus in diam tortor wisi mauris tempus.</p><p>Fermentum ipsum augue. Lectus in nunc vulputate tellus neque tortor erat cursus. Congue wisi enim. Nam eget dui auctor amet quis donec ipsum nibh. Nisl leo magna officia leo nibh.</p>
+
+                    <h2>Mollis in ornare</h2>
+
+                    <p>Nec a ut. Ut nullam urna. Quis tortor mauris blandit non corrupti. Rutrum in at id dignissim dictum. Duis ac ornare parturient ultrices amet odio feugiat aenean cras mus pede. Praesent egestas netus. Urna esse pharetra commodi commodo curabitur. A lacinia sed etiam ut vel maxime platea porta odio mollis non nisl nulla nullam. Vitae impedit pulvinar.</p>
+
+                    <h2>Sem velit maiores</h2>
+
+                    <p>Accumsan blandit ut. Varius velit ante. Leo tincidunt nulla lorem gravida nulla tempus volutpat donec phasellus aliquet nec. Sapien tempor id pharetra magna mi. Nunc fusce venenatis nam mi nam. Eget senectus convallis donec urna suscipit donec natoque lacinia rutrum lorem est adipiscing sed lectus. Dictumst faucibus ut. Vulputate sodales ipsum. Purus vehicula sed vestibulum eget integer.</p>
+
+                    <h2>Ut turpis tempor integer fusce bibendum sem ipsum rutrum</h2>
+
+                    <p>Nec in nibh. A amet condimentum. Commodo fringilla amet sit ut quis. Facilisi ac a ut id morbi. Aut pretium orci donec dui vel risus eros amet quis ut molestiae. Molestie nulla sem vestibulum urna aptent aliquam etiam auctor. Erat eu duis. Imperdiet vestibulum ut. Nibh risus fusce viverra wisi lectus.</p>
+
+                    <h2>Sed curabitur ut vel condimentum fermentum a felis suspendisse</h2>
+
+                    <p>Neque lacus lorem ut massa lacinia. Amet nulla est. Vitae in vel turpis diam elit lacinia amet quis. Sem a in. Architecto magna sit vel vehicula elit ullam consectetuer non. Vel vulputate elit facilisis accumsan justo. Ridiculus pharetra fusce. A volutpat curabitur. Senectus amet in elementum ipsum ut sit eros tellus.</p>
+
+                    <h2>Phasellus enim metus vestibulum scelerisque mauris</h2>
+
+                    <p>Donec nisl massa. Hendrerit suscipit turpis sed eget quis. Mauris wisi aenean amet semper morbi. Orci hendrerit vestibulum dolor a semper nullam nesciunt amet.</p><p>Erat ac non. Accumsan arcu mauris. Consectetuer vivamus convallis. Vestibulum neque vitae risus vivamus ut. Egestas elit eget. Venenatis mattis orci. Malesuada eget massa vitae est nec lacus et parturient nunc enim curabitur mollis vitae dictumst et malesuada non amet wisi amet sit lacus cras quis accumsan tortor tempore vulputate ante. Corrupti est sem dignissim ante vehicula ac cursus in tempus suspendisse at. Neque pariatur sed. Ac malesuada a. Hac duis pellentesque. Libero varius fugiat. Iaculis aliquam ac eros tempus sit sit in fusce. Luctus wisi amet. Vestibulum est vitae ut libero massa. Eu hendrerit velit. Et per massa congue vivamus sapien. Nibh nibh pulvinar. Libero velit est. Et lorem ipsum. Pretium sagittis nisl. Id ut viverra. Arcu dis sapien vehicula amet lacus sodales sagittis quam minim in mauris integer ante eu. Nisl id id eget sed molestie nec ac mauris nonummy proin porttitor. Vestibulum orci a sed in ligula.</p>
+
+                    <h2>Lorem pede adipiscing massa eu eros</h2>
+
+                    <p>Proin a at. Sagittis congue vitae. Eu arcu sem. A pede cras volutpat faucibus dui. Est ridiculus vestibulum blandit a dui montes dignissim mauris ac tellus diam. Rutrum gravida orci id eget morbi. Nec ut mollis. Dolore nulla donec. Nunc accumsan consectetuer. Erat orci vel. Primis erat nostra nec laoreet tempor eos porttitor sem hendrerit dignissim venenatis faucibus vel pellentesque. Lobortis in mi vitae donec metus faucibus amet viverra at ut dolor varius felis ante blandit sit litora ac autem ante. Pellentesque pede quisque. In nonummy pulvinar. Eget nunc quam. Massa torquent ut penatibus hendrerit et nulla scelerisque odio dolor vitae quis. In in quam dolor nec arcu. Magna vitae feugiat. Donec fermentum bibendum.</p>
+
+                    <h2>Pretium dui dui</h2>
+
+                    <p>Convallis wisi urna. Ipsum tellus ultricies. Non ac pretium. In non accumsan purus nec aliquip hendrerit fusce ornare ut turpis quis dictum tincidunt in vestibulum fringilla ad. In et dui. Eget tellus quisque arcu varius per tellus neque sit convallis nulla tellus. Nam faucibus aliquam. Vitae vel sed turpis nascetur ultricies aliquam vitae ultricies sed lobortis vestibulum sapien non eu. Sem amet nulla. Leo elit ipsum imperdiet sit dictumst. Enim turpis vivamus. Posuere odio ipsum in augue quisque nisl duis metus. Etiam imperdiet curabitur. Quis velit arcu. Ipsum turpis libero vel donec et. Ac risus a tempus.</p>
+
+                    <h2>Sit amet dolore</h2>
+
+                    <p>Praesent ipsum nibh ut curabitur justo. Ut proin faucibus. Ornare molestie magnis nec tempus ultricies eu amet sed. Et egestas aptent. Vel dignissim justo sodales suscipit lorem quis ullamcorper lacinia. Ac ligula nascetur. Tortor non leo at lacus non feugiat nisl aut suscipit nec ac rhoncus sed ipsum. Mauris condimentum erat rutrum ultricies justo.</p>
+
+                    <h2>Rhoncus mauris vivamus</h2>
+
+                    <p>Consectetuer quam euismod id accumsan a tellus ultrices quam suspendisse metus sit aliquam nec fermentum. Fusce aenean wisi. Purus eget rutrum non risus duis. Risus varius commodo egestas diam est. Dictum tellus nullam pede in ligula egestas neque pharetra vel justo non. Eu pharetra vestibulum. Mauris pede mauris. Erat a tellus. Orci vivamus mauris in morbi et.</p>
+
+                    <h2>Scelerisque diamlorem sollicitudin</h2>
+
+                    <p>Elementum libero etiam magna vitae velit scelerisque purus suspendisse. Amet torquent diam. In lacus vestibulum a ligula etiam. Vel convallis sapien. Cras platea rutrum. Leo pede volutpat. Ullamcorper dui sollicitudin consectetuer donec amet cras lorem nunc mattis sed dapibus metus enim ligula. Volutpat eu dictum mus vel ultrices. Sit nunc mattis. Mus donec tellus amet in a quaerat non vivamus sed in condimentum. Lacus posuere in. Condimentum sodales lacinia. Eget ante sagittis quisque duis scelerisque praesent tristique ut. Ipsum justo nulla viverra ornare in nam lectus aliquam.</p><p>Donec eget id est nulla nisl ipsa sollicitudin lectus vel fusce neque. Phasellus egestas commodo. Orci ipsum ut. Etiam vitae turpis vitae sed velit. Orci sollicitudin at. Felis id sem. Pharetra nisl dui nam enim non. Donec ullamcorper cras ligula dui mattis eget proin vitae. Nisl suspendisse tristique laoreet in etiam. Ac maecenas bibendum dis vel suspendisse. Et quisque integer. In lacus magna vel in aenean dolor facilisis nec. Mi ad tincidunt a nec felis duis nec nulla id sit vitae elementum egestas gravida. Wisi maecenas lectus. Nec ut nullam.</p>
+
+                    <h2>Asperiores lectus minim</h2>
+
+                    <p>Lorem integer faucibus lorem eget augue. Vulputate eget facilisis eu sollicitudin eget. Justo libero tincidunt tincidunt quam lacus. Leo ipsum felis. Eget potenti suscipit. Porta at omnis aliquam eleifend luctus. Est morbi tristique libero pellentesque nunc nec consectetuer in eget ante arcu eget sit integer. Metus magna sem vitae quam luctus id in sit neque suspendisse lacinia. Et arcu eget ac ante vivamus. Vitae magna cursus. Sollicitudin a vivamus. Pede eu nunc vehicula erat ipsum. Fusce quisque tincidunt. Fermentum sed aliquam elementum ut vitae wisi curabitur eget. Posuere nulla in curabitur sapien nascetur. Et proin maecenas integer hendrerit ultricies sed sed eu eget feugiat sem pellentesque velit eu. Suspendisse dui lectus. Ut tincidunt vitae. Et molestie donec.</p>
+
+                    <h2>Auctor malesuada lorem</h2>
+
+                    <p>In feugiat ut aliquam turpis vehicula. Dolor aut in gravida in nam eget euismod erat. Dignissim dictum non. Elit erat lorem ipsum lorem ac leo at turpis tristique amet aliquam morbi et per aliquam suspendisse cras. Sed elementum mi. Magna gravida facilisis ante dis mattis. Accumsan magnis elementum. Lacus dolor dictum. Sit vivamus integer. Nonummy ut torquent. Massa penatibus sit. Condimentum pulvinar ullamcorper. Vulputate laoreet primis lacus nec donec dictum eu pellentesque eros dictum amet risus dui.</p>
                 </li>
                 <li id="right">
-                    <ul id="summary">
-                        <li class="title">Summary</li>
+                    <ul id="summary1" class="summary">
+                        <li class="caption">Summary 1</li>
                         <li class="contents">
-                            <p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse.</p><p>Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient.</p><p>Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+                            <p>There are three floating summaries on the right of this page.  They are anchored to their respective sections.</p>
+
+                            <p>Once a summary reaches the bottom of the header above, it will stop there until the next section summary arrives.  Then, it will continue up the page.</p>
+
+                            <p>The last summary will get pushed up the page by the footer once it undocks to reveal the content below it.</p>
                         </li>
                     </ul>
+                    <ul id="summary2" class="summary">
+                        <li class="caption">Summary 2</li>
+                        <li class="contents">
+                            <p>This plugin has actually been in the wild for nearly two years.  Thankfully, others have contributed feedback, code, tests, and demos to help it mature.</p>
+
+                            <p>Originally, it was used to dock a the header row of a long table to the top of the window so we knew what each column was.  Every feature added from there was prompted by request.</p>
+
+                            <p>I don't get a lot of time to work on this, so all of the help is much appreciated.</p>
+                        </li>
+                    </ul>                    
+                    <ul id="summary3" class="summary">
+                        <li class="caption">Summary 3</li>
+                        <li class="contents">
+                            <p>Here is a list of the fiddles created to demonstrate the plugin:</p>
+                            <ul class="demos">
+                                <li><a href="http://jsfiddle.net/y3qV5/434/">Floating cart summary with a limit.</a></li>
+                                <li><a href="http://jsfiddle.net/k2R3G/81/">Fixed header; allows content to flow under it.</a></li>
+                                <li><a href="http://jsfiddle.net/ZczEt/167/">Very full example: fixed header, footer and floating summary, with events.</a></li>
+                                <li><a href="http://jsfiddle.net/y3qV5/435/">Two cart summaries that scroll up and stop at different intervals.</a></li>
+                                <li><a href="http://jsfiddle.net/y3qV5/769/">Another multi-cart example using floats, with section stops.</a></li>
+                                <li><a href="http://jsfiddle.net/ZZYpG/2/">Endlessly scrolling date markers.</a></li>
+                            </ul>
+                        </li>
+                    </ul>                    
                 </li>
             </ul>
         </li>
         <li class="footer">
-            <h1>Footer</h1>
+            <span class="title">Footer</span><span> - This footer is docked to the bottom of the window, but will reveal more content when scrolled far enough.</span>
         </li>
         <li class="footer-content">
-            <h2>Sit amet justo</h2><p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p><h2>Velit sed eget donec placerat vestibulum</h2><p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
+            
+
+            <h2>Sit amet justo</h2>
+
+            <p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+
+            <h2>Velit sed eget donec placerat vestibulum</h2>
+
+            <p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
+
+            <h2>Sit amet mi</h2><p>Porttitor adipiscing erat. Mollis libero sit porttitor cursus posuere tortor suspendisse lectus vel vestibulum mi. Libero dapibus vitae. Lorem massa blandit in turpis consectetuer quisque rhoncus morbi nulla magna rutrum praesent per ridiculus pellentesque ipsum adipiscing. Tellus rutrum aliquam. Natoque augue ut sem quam metus. Phasellus sit nec imperdiet eleifend tincidunt. Morbi erat accumsan.</p><h2>Curabitur lorem fames nunc gravida et</h2><p>Ut tellus massa consequat vitae quisque. Neque eleifend vestibulum maecenas nunc felis. Vitae praesent lacus. Tristique augue id in turpis vestibulum erat placerat ornare. A consectetuer accumsan et donec vehicula sed nunc non. Velit in nec. Maecenas orci erat gravida sit dui. Fusce repellendus nec pellentesque ligula ligula. Sit ligula commodo nulla nulla dui.</p><h2>Con ut tincidunt</h2><p>Eleifend non sodales cursus metus ligula risus luctus eleifend. Nulla integer arcu suspendisse ligula sed. Aliquet fames morbi. Ut sed dictumst. Nec nulla risus diam faucibus nam donec orci fermentum hac ullamcorper a. Justo in a molestie praesent tellus. In eget non. Sagittis arcu vitae lacinia sed dolor. Mattis suspendisse amet sed elit aenean in vel pulvinar.</p><h2>Sem facilisis ultricies</h2><p>Justo luctus molestie. Ante feugiat nulla. Faucibus cras lectus condimentum proident morbi. Urna porta eros pellentesque elit sit sed tristique feugiat nullam eu inceptos a voluptatem vestibulum. Vitae faucibus eros eros dui curabitur praesent eu eu. Taciti et mi. Aliqua quo integer. Euismod donec vitae. Dapibus mauris donec ante diam metus dui sit eget nulla nisl etiam.</p><h2>Praesent metus facilis elit sed urna pede vel porttitor</h2><p>Enim orci consequat. Ac adipiscing consectetuer. Class porttitor ac. Nec pellentesque commodo at et mauris. Vestibulum quis risus vel nec metus. Suspendisse molestie vehicula donec fermentum eu massa suspendisse vel enim orci at. Sed lacus dignissim. Nunc vestibulum erat non eget mattis ut arcu vitae. Placerat leo metus mauris pharetra tempus.</p>
         </li>
     </ul>
 </body>
