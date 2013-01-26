@@ -5,11 +5,13 @@
 ScrollToFixed
 ==========================
 
-This plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.
+This jQuery plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.
 
 Given an option marginTop, the element will stop moving vertically upward once the vertical scroll has reached the target position; but, the element will still move horizontally as the page is scrolled left or right. Once the page has been scrolled back down past the target position, the element will be restored to its original position on the page.
 
 This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+, Internet Explorer 8/9, and Opera 11.60+.
+
+This plugin was inspired by the excellent tutorial presented by Remy Sharp, titled "Fixed Floating Elements". You will find that tutorial [here](http://jqueryfordesigners.com/fixed-floating-elements/).
 
 **IMPORTANT**: The latest version of this plugin reverts the offset adustment code that added the difference between the left offset and position to the left offset.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
 
