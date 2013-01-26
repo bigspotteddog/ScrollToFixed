@@ -15,6 +15,8 @@ This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+, Interne
 
 **UPDATE**: A new option 'dontCheckForPositionFixedSupport' was added to disable the check for position:fixed support. Some iOS and Android vesions now support position:fixed; we attempt to detect support and continue instantiating the plugin if supported.
 
+**UPDATE**: The "remove" trigger was renamed as "detach" to avoid Google Chrome's new native "remove" method.
+
 ## Usage ##
 
 Default options:
