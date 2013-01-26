@@ -25,6 +25,8 @@
         var position;
         var originalPosition;
 
+        var originalOffset;
+
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
         var offsetTop = 0;
@@ -94,7 +96,7 @@
             if (!limit) return 0;
 
             if (typeof(limit) === 'function') {
-                return limit();
+                return limit.apply(target);
             }
             return limit;
         }
@@ -138,6 +140,8 @@
                     'margin-left' : '0px'
                 });
 
+                target.addClass('scroll-to-fixed-fixed');
+
                 if (base.options.className) {
                     target.addClass(base.options.className);
                 }
@@ -173,11 +177,13 @@
                 // This will reverse the target back to the its original style.
                 target.css({
                     'width' : '',
-                    'position' : '',
+                    'position' : originalPosition,
                     'left' : '',
-                    'top' : '',
+                    'top' : originalOffset.top,
                     'margin-left' : ''
                 });
+
+                target.removeClass('scroll-to-fixed-fixed');
 
                 if (base.options.className) {
                     target.removeClass(base.options.className);
@@ -202,7 +208,13 @@
         }
 
         function getMarginTop() {
-            return base.options.marginTop;
+            var marginTop = base.options.marginTop;
+            if (!marginTop) return 0;
+
+            if (typeof(marginTop) === 'function') {
+                return marginTop.apply(target);
+            }
+            return marginTop;
         }
 
         // Checks to see if we need to do something based on new scroll position
@@ -401,6 +413,8 @@
 
             position = target.css('position');
             originalPosition = target.css('position');
+
+            originalOffset = $.extend({}, target.offset());
 
             // Place the spacer right after the target element.
             if (isUnfixed()) base.$el.after(spacer);
