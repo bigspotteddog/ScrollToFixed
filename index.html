@@ -84,7 +84,7 @@ body ul {
 <script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        $('.header').scrollToFixed();
+        $('.header').scrollToFixed({dontCheckForPositionFixedSupport: true});
 
         $('.footer').scrollToFixed( {
             bottom: 0,
