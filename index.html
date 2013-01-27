@@ -86,13 +86,9 @@ body ul {
     $(document).ready(function() {
         $('.header').scrollToFixed();
 
-        var originalFooterTop = $('.footer').offset().top;
-
         $('.footer').scrollToFixed({
             bottom: 0,
-            limit: function() {
-                return originalFooterTop;
-            }
+            limit: $('.footer').offset().top
         });
 
         var h2 = $('h2');
