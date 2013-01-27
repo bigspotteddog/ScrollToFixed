@@ -86,9 +86,11 @@ body ul {
     $(document).ready(function() {
         $('.header').scrollToFixed();
 
+        var originalFooterTop = $('.footer').offset().top;
+
         $('.footer').scrollToFixed( {
             bottom: 0,
-            limit: $('.footer').offset().top
+            limit: originalFooterTop
         });
 
         var h2 = $('h2');
@@ -105,7 +107,7 @@ body ul {
                 if (next.length > 0) {
                     limit = $(next).offset().top - self.outerHeight(true) - 10;
                 } else {
-                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
+                    limit = originalFooterTop - self.outerHeight(true) - 10;
                 }
 
                 return limit;
