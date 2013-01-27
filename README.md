@@ -17,6 +17,8 @@ This plugin was inspired by the excellent tutorial presented by Remy Sharp, titl
 
 **UPDATE**: A new option 'dontCheckForPositionFixedSupport' was added to disable the check for position:fixed support. Some iOS and Android vesions now support position:fixed; we attempt to detect support and continue instantiating the plugin if supported.
 
+**UPDATE**: The fixed position support detection (above) is now turned off completely.
+
 **UPDATE**: The "remove" trigger was renamed as "detach" to avoid the new Google Chrome (24) native "remove" method.
 
 ## Usage ##
