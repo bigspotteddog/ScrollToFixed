@@ -86,12 +86,12 @@ body ul {
     $(document).ready(function() {
         $('.header').scrollToFixed();
 
-        // var originalFooterTop = $('.footer').offset().top;
+        var originalFooterTop = $('.footer').offset().top;
 
-        // $('.footer').scrollToFixed({
-        //     bottom: 0,
-        //     limit: $('.footer').offset().top
-        // });
+        $('.footer').scrollToFixed({
+            bottom: 0,
+            limit: originalFooterTop
+        });
 
         var h2 = $('h2');
         $('#summary1').css({ position: 'absolute', top: $(h2[0]).offset().top });
