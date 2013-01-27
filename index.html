@@ -89,7 +89,10 @@ body ul {
         var originalFooterTop = $('.footer').offset().top;
 
         $('.footer').scrollToFixed({
-            bottom: 0
+            bottom: 0,
+            limit: function() {
+                return originalFooterTop;
+            }
         });
 
         var h2 = $('h2');
