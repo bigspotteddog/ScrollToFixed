@@ -84,7 +84,9 @@ body ul {
 <script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        $('.header').scrollToFixed({dontCheckForPositionFixedSupport: true});
+        $('.header').scrollToFixed();
+
+        var lastSummaryLimit = $('.footer').offset().top - self.outerHeight(true) - 10;
 
         $('.footer').scrollToFixed( {
             bottom: 0,
@@ -105,7 +107,7 @@ body ul {
                 if (next.length > 0) {
                     limit = $(next).offset().top - self.outerHeight(true) - 10;
                 } else {
-                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
+                    limit = lastSummaryLimit;
                 }
 
                 return limit;
@@ -176,7 +178,7 @@ body ul {
         summary.scrollToFixed({
             marginTop: $('.header').outerHeight(true) + 10,
             limit: function() {
-                var self = $(this);
+                var self = $(this); 
                 var next = self.next();
                 var limit = 0;
                 if (next.length > 0) {
