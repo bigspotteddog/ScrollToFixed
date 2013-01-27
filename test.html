@@ -182,32 +182,27 @@ body ul {
         });
 
 
-        // Anchor the summaries to their respective sections.
-
-        var h2 = $('h2');
-        $('#summary1').css({ position: 'absolute', top: $(h2[0]).offset().top });
-        $('#summary2').css({ position: 'absolute', top: $(h2[3]).offset().top });
-        $('#summary3').css({ position: 'absolute', top: $(h2[10]).offset().top });
-
-
         // Dock each summary as it arrives just below the docked header, pushing the
         // previous summary up the page.
 
-        $('.summary').scrollToFixed({
-            marginTop: $('.header').outerHeight(true) + 10,
-            limit: function() {
-                var self = $(this);
-                var next = $(self.next());
-                var limit = 0;
-                if (next.length > 0) {
-                    limit = next.offset().top - self.outerHeight(true) - 10;
-                } else {
-                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
-                }
+        var summaries = $('.summary');
+        summaries.each(function(i) {
+            var summary = $(summaries[i]);
+            var next = summaries[i + 1];
 
-                return limit;
-            },
-            zIndex: 999
+            summary.scrollToFixed({
+                marginTop: $('.header').outerHeight(true) + 10,
+                limit: function() {
+                    var limit = 0;
+                    if (next) {
+                        limit = $(next).offset().top - $(this).outerHeight(true) - 10;
+                    } else {
+                        limit = $('.footer').offset().top - $(this).outerHeight(true) - 10;
+                    }
+                    return limit;
+                },
+                zIndex: 999
+            });
         });
     });
 </pre>             
