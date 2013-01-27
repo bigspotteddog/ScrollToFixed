@@ -3,8 +3,7 @@
 <style>
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0 auto 0;
-    width: 940px;
+    margin: 0px;
 }
 body p {
     margin-top: 8px;
@@ -13,6 +12,10 @@ body ul {
     list-style: none;
     padding: 0px;
     margin: 0px;
+}
+.main {
+    margin: 0 auto 0;
+    width: 940px;
 }
 .banner {
     background-color: #333333;
@@ -124,12 +127,12 @@ body ul {
 <body>
     <ul>
         <li class="banner">
-            <span class="title">Banner</span><span> - This banner will scroll out of view.</span>
+            <div class="main"><span class="title">Banner</span><span> - This banner will scroll out of view.</span></div>
         </li>
         <li class="header">
-            <span class="title">Header</span><span> - This header will dock to the top of the window.</span>
+            <div class="main"><span class="title">Header</span><span> - This header will dock to the top of the window.</span></div>
         </li>
-        <li class="content">
+        <li class="content main">
             <ul>
                 <li id="left">
                     <h1>ScrollToFixed Demo</h1>
@@ -301,20 +304,22 @@ body ul {
             </ul>
         </li>
         <li class="footer">
-            <span class="title">Footer</span><span> - This footer is docked to the bottom of the window, but will reveal more content when scrolled far enough.</span>
+            <div class="main"><span class="title">Footer</span><span> - This footer is docked to the bottom of the window, but will reveal more content when scrolled far enough.</span></div>
         </li>
         <li class="footer-content">
-            
+            <div class="main">
 
-            <h2>Sit amet justo</h2>
+                <h2>Sit amet justo</h2>
 
-            <p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
+                <p>Leo sed sed pulvinar et magna id eget condimentum laborum vel suspendisse. Porttitor mattis aenean. Accumsan sed adipiscing. Amet penatibus rutrum vitae vehicula viverra amet nibh semper nunc libero tincidunt massa vitae sagittis urna consectetuer magna a diam parturient. Nec nec dolor. Venenatis purus quis. In turpis in. Officiis hic mauris lorem wisi maecenas.</p>
 
-            <h2>Velit sed eget donec placerat vestibulum</h2>
+                <h2>Velit sed eget donec placerat vestibulum</h2>
 
-            <p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
+                <p>Orci id gravida per neque nibh. Nullam sit commodo tincidunt et diam vitae pharetra sed. Tempus sit sodales. Voluptatem wisi mattis inceptos tellus dolor rhoncus sed et eu turpis torquent ligula eu dui lorem nec accumsan platea lacinia ac. Non faucibus per sit in vehicula magna lacus deleniti. Tincidunt per aliquam. Vestibulum adipiscing laoreet eget eros commodo. Laoreet molestie a eros in nec sed justo venenatis. Eu lorem gravida. Nisl non a sociis convallis leo. Est nunc nisl porta dignissim turpis. Sapien sed nulla. Amet mi diam. Sem risus accumsan. Posuere viverra convallis. Est at netus. Tortor eget quam. Wisi nulla erat vestibulum tempor eu hendrerit vel dolor. Aliquam magnis sed etiam felis eros.</p>
 
-            <h2>Sit amet mi</h2><p>Porttitor adipiscing erat. Mollis libero sit porttitor cursus posuere tortor suspendisse lectus vel vestibulum mi. Libero dapibus vitae. Lorem massa blandit in turpis consectetuer quisque rhoncus morbi nulla magna rutrum praesent per ridiculus pellentesque ipsum adipiscing. Tellus rutrum aliquam. Natoque augue ut sem quam metus. Phasellus sit nec imperdiet eleifend tincidunt. Morbi erat accumsan.</p><h2>Curabitur lorem fames nunc gravida et</h2><p>Ut tellus massa consequat vitae quisque. Neque eleifend vestibulum maecenas nunc felis. Vitae praesent lacus. Tristique augue id in turpis vestibulum erat placerat ornare. A consectetuer accumsan et donec vehicula sed nunc non. Velit in nec. Maecenas orci erat gravida sit dui. Fusce repellendus nec pellentesque ligula ligula. Sit ligula commodo nulla nulla dui.</p><h2>Con ut tincidunt</h2><p>Eleifend non sodales cursus metus ligula risus luctus eleifend. Nulla integer arcu suspendisse ligula sed. Aliquet fames morbi. Ut sed dictumst. Nec nulla risus diam faucibus nam donec orci fermentum hac ullamcorper a. Justo in a molestie praesent tellus. In eget non. Sagittis arcu vitae lacinia sed dolor. Mattis suspendisse amet sed elit aenean in vel pulvinar.</p><h2>Sem facilisis ultricies</h2><p>Justo luctus molestie. Ante feugiat nulla. Faucibus cras lectus condimentum proident morbi. Urna porta eros pellentesque elit sit sed tristique feugiat nullam eu inceptos a voluptatem vestibulum. Vitae faucibus eros eros dui curabitur praesent eu eu. Taciti et mi. Aliqua quo integer. Euismod donec vitae. Dapibus mauris donec ante diam metus dui sit eget nulla nisl etiam.</p><h2>Praesent metus facilis elit sed urna pede vel porttitor</h2><p>Enim orci consequat. Ac adipiscing consectetuer. Class porttitor ac. Nec pellentesque commodo at et mauris. Vestibulum quis risus vel nec metus. Suspendisse molestie vehicula donec fermentum eu massa suspendisse vel enim orci at. Sed lacus dignissim. Nunc vestibulum erat non eget mattis ut arcu vitae. Placerat leo metus mauris pharetra tempus.</p>
+                <h2>Sit amet mi</h2><p>Porttitor adipiscing erat. Mollis libero sit porttitor cursus posuere tortor suspendisse lectus vel vestibulum mi. Libero dapibus vitae. Lorem massa blandit in turpis consectetuer quisque rhoncus morbi nulla magna rutrum praesent per ridiculus pellentesque ipsum adipiscing. Tellus rutrum aliquam. Natoque augue ut sem quam metus. Phasellus sit nec imperdiet eleifend tincidunt. Morbi erat accumsan.</p><h2>Curabitur lorem fames nunc gravida et</h2><p>Ut tellus massa consequat vitae quisque. Neque eleifend vestibulum maecenas nunc felis. Vitae praesent lacus. Tristique augue id in turpis vestibulum erat placerat ornare. A consectetuer accumsan et donec vehicula sed nunc non. Velit in nec. Maecenas orci erat gravida sit dui. Fusce repellendus nec pellentesque ligula ligula. Sit ligula commodo nulla nulla dui.</p><h2>Con ut tincidunt</h2><p>Eleifend non sodales cursus metus ligula risus luctus eleifend. Nulla integer arcu suspendisse ligula sed. Aliquet fames morbi. Ut sed dictumst. Nec nulla risus diam faucibus nam donec orci fermentum hac ullamcorper a. Justo in a molestie praesent tellus. In eget non. Sagittis arcu vitae lacinia sed dolor. Mattis suspendisse amet sed elit aenean in vel pulvinar.</p><h2>Sem facilisis ultricies</h2><p>Justo luctus molestie. Ante feugiat nulla. Faucibus cras lectus condimentum proident morbi. Urna porta eros pellentesque elit sit sed tristique feugiat nullam eu inceptos a voluptatem vestibulum. Vitae faucibus eros eros dui curabitur praesent eu eu. Taciti et mi. Aliqua quo integer. Euismod donec vitae. Dapibus mauris donec ante diam metus dui sit eget nulla nisl etiam.</p><h2>Praesent metus facilis elit sed urna pede vel porttitor</h2><p>Enim orci consequat. Ac adipiscing consectetuer. Class porttitor ac. Nec pellentesque commodo at et mauris. Vestibulum quis risus vel nec metus. Suspendisse molestie vehicula donec fermentum eu massa suspendisse vel enim orci at. Sed lacus dignissim. Nunc vestibulum erat non eget mattis ut arcu vitae. Placerat leo metus mauris pharetra tempus.</p>
+
+            </div>
         </li>
     </ul>
     <a href="https://github.com/bigspotteddog/ScrollToFixed"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>    
