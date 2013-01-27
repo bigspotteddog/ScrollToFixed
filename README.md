@@ -13,7 +13,7 @@ This plugin has been tested in Firefox 3+, Google Chrome 10+, Safari 5+, Interne
 
 This plugin was inspired by the excellent tutorial presented by Remy Sharp, titled "Fixed Floating Elements". You will find that tutorial [here](http://jqueryfordesigners.com/fixed-floating-elements/).
 
-**IMPORTANT**: The latest version of this plugin reverts the offset adustment code that added the difference between the left offset and position to the left offset.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
+**IMPORTANT**: The latest version of this plugin reverts the offset adjustment code that added the difference between the left offset and position to the left offset.  For anyone that needed it, that code is now turned on by using the **offsets: true** option.
 
 **UPDATE**: A new option 'dontCheckForPositionFixedSupport' was added to disable the check for position:fixed support. Some iOS and Android vesions now support position:fixed; we attempt to detect support and continue instantiating the plugin if supported.
 
