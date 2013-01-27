@@ -397,10 +397,10 @@
                     .extend({}, $.ScrollToFixed.defaultOptions, options);
 
             // Turn off this functionality for devices that do not support it.
-            if (!(base.options && base.options.dontCheckForPositionFixedSupport)) {
-                var fixedSupported = isPositionFixedSupported();
-                if (!fixedSupported) return;
-            }
+            // if (!(base.options && base.options.dontCheckForPositionFixedSupport)) {
+            //     var fixedSupported = isPositionFixedSupported();
+            //     if (!fixedSupported) return;
+            // }
 
             // Put the target element on top of everything that could be below
             // it. This reduces flicker when the target element is transitioning
