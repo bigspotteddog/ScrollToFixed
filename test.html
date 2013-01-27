@@ -23,8 +23,8 @@ body ul {
     background-color: #333333;
     color: #fefefe;
     padding: 20px;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 .title {
     font-size: 140%;
@@ -67,6 +67,7 @@ body ul {
 .summary {
     border: 1px solid #dddddd;
     overflow: hidden;
+    margin-top: 20px;
 }
 .summary .caption {
     border-bottom: 1px solid #dddddd;
@@ -74,6 +75,9 @@ body ul {
     font-size: 12pt;
     font-weight: bold;
     padding: 5px;
+}
+.summary.scroll-to-fixed-fixed {
+    margin-top: 0px;
 }
 .summary.scroll-to-fixed-fixed .caption {
     color: red;
@@ -85,7 +89,7 @@ body ul {
 }
 </style>
 <title>ScrollToFixed Plugin Demo</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
 <script src="jquery-scrolltofixed.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
@@ -261,7 +265,7 @@ body ul {
                     <ul id="summary2" class="summary">
                         <li class="caption">Summary 2</li>
                         <li class="contents">
-                            <p>This plugin has actually been in the wild for nearly two years.  Thankfully, others have contributed feedback, code, tests, and demos to help it mature.</p>
+                            <p>This plugin has actually been in the wild for nearly two years.  I made it so I could learn jQuery and JavaScript.  Thankfully, others have contributed feedback, code, tests, and demos to help it mature.</p>
 
                             <p>Originally, it was used to dock the header row of a long table to the top of the window so we knew what each column was.  Every feature added from there was prompted by request.</p>
 
@@ -294,7 +298,7 @@ body ul {
                     <ul id="summary3" class="summary">
                         <li class="caption">Summary 3</li>
                         <li class="contents">
-                            <p>Here is a list of the fiddles created to demonstrate the plugin:</p>
+                            <p>Here are the fiddles created to demonstrate the plugin:</p>
                             <ul class="demos">
                                 <li><a href="http://jsfiddle.net/y3qV5/434/">Floating cart summary with a limit.</a></li>
                                 <li><a href="http://jsfiddle.net/k2R3G/81/">Fixed header; allows content to flow under it.</a></li>
