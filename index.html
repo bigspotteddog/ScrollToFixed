@@ -56,11 +56,11 @@ body ul {
 .demos li {
     margin-bottom: 20px;
 }
-#left {
+.left {
     float: left;
     width: 700px;
 }
-#right {
+.right {
     float: left;
     margin-left: 40px;
 }
@@ -105,32 +105,27 @@ body ul {
         });
 
 
-        // Anchor the summaries to their respective sections.
-
-        var h2 = $('h2');
-        $('#summary1').css({ position: 'absolute', top: $(h2[0]).offset().top });
-        $('#summary2').css({ position: 'absolute', top: $(h2[3]).offset().top });
-        $('#summary3').css({ position: 'absolute', top: $(h2[10]).offset().top });
-
-
         // Dock each summary as it arrives just below the docked header, pushing the
         // previous summary up the page.
 
-        $('.summary').scrollToFixed({
-            marginTop: $('.header').outerHeight(true) + 10,
-            limit: function() {
-                var self = $(this);
-                var next = $(self.next());
-                var limit = 0;
-                if (next.length > 0) {
-                    limit = next.offset().top - self.outerHeight(true) - 10;
-                } else {
-                    limit = $('.footer').offset().top - self.outerHeight(true) - 10;
-                }
+        var summaries = $('.summary');
+        summaries.each(function(i) {
+            var summary = $(summaries[i]);
+            var next = summaries[i + 1];
 
-                return limit;
-            },
-            zIndex: 999
+            summary.scrollToFixed({
+                marginTop: $('.header').outerHeight(true) + 10,
+                limit: function() {
+                    var limit = 0;
+                    if (next) {
+                        limit = $(next).offset().top - $(this).outerHeight(true) - 10;
+                    } else {
+                        limit = $('.footer').offset().top - $(this).outerHeight(true) - 10;
+                    }
+                    return limit;
+                },
+                zIndex: 999
+            });
         });
     });
 </script>
@@ -145,9 +140,10 @@ body ul {
         </li>
         <li class="content main">
             <ul>
-                <li id="left">
+                <li class="left">
                     <h1>ScrollToFixed Demo</h1>
-
+                </li>
+                <li class="left">
                     <h2>What?</h2>
 
                     <p>This jQuery plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.</p>
@@ -219,6 +215,20 @@ body ul {
 
                     <p>Velit tellus enim. Vitae et ultrices. Odio torquent ligula. Quam in a scelerisque malesuada non. Sem enim congue sed odio libero. Lacinia commodo feugiat sed nonummy lobortis erat maecenas vivamus. Lectus diam pede. Eget risus mauris. In dapibus libero suspendisse pellentesque urna. Id metus libero. Metus id accumsan curabitur id congue. Elementum diam placerat posuere vivamus felis. Arcu ante vestibulum. Orci ut ut magna nibh eu aliquam mi qui vel pretium nullam. Tellus ligula malesuada. Consequat id nulla. Feugiat suscipit ligula dolor amet congue urna etiam amet accumsan consequat distinctio natoque placerat nec. Eget lectus mauris molestie fusce dui. Vel consectetuer imperdiet tempus at sed. Proin aliquam nec. Ligula sit elit eget faucibus cras arcu in rhoncus. Lorem id integer. Vestibulum nec cum. Ligula aliquam tellus elit nisl lectus in diam tortor wisi mauris tempus.</p><p>Fermentum ipsum augue. Lectus in nunc vulputate tellus neque tortor erat cursus. Congue wisi enim. Nam eget dui auctor amet quis donec ipsum nibh. Nisl leo magna officia leo nibh.</p>
 
+                </li>
+                <li class="right">
+                    <ul id="summary1" class="summary">
+                        <li class="caption">Summary 1</li>
+                        <li class="contents">
+                            <p>There are three floating summaries on the right of this page.  They are anchored to their respective sections.</p>
+
+                            <p>Once a summary reaches the bottom of the header above, it will stop there until the next section summary arrives.  Then, it will continue up the page.</p>
+
+                            <p>The last summary will get pushed up the page by the footer once it undocks to reveal the content below it.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="left">
                     <h2>Mollis in ornare</h2>
 
                     <p>Nec a ut. Ut nullam urna. Quis tortor mauris blandit non corrupti. Rutrum in at id dignissim dictum. Duis ac ornare parturient ultrices amet odio feugiat aenean cras mus pede. Praesent egestas netus. Urna esse pharetra commodi commodo curabitur. A lacinia sed etiam ut vel maxime platea porta odio mollis non nisl nulla nullam. Vitae impedit pulvinar.</p>
@@ -246,7 +256,20 @@ body ul {
                     <h2>Pretium dui dui</h2>
 
                     <p>Convallis wisi urna. Ipsum tellus ultricies. Non ac pretium. In non accumsan purus nec aliquip hendrerit fusce ornare ut turpis quis dictum tincidunt in vestibulum fringilla ad. In et dui. Eget tellus quisque arcu varius per tellus neque sit convallis nulla tellus. Nam faucibus aliquam. Vitae vel sed turpis nascetur ultricies aliquam vitae ultricies sed lobortis vestibulum sapien non eu. Sem amet nulla. Leo elit ipsum imperdiet sit dictumst. Enim turpis vivamus. Posuere odio ipsum in augue quisque nisl duis metus. Etiam imperdiet curabitur. Quis velit arcu. Ipsum turpis libero vel donec et. Ac risus a tempus.</p>
+                </li>
+                <li class="right">
+                    <ul id="summary2" class="summary">
+                        <li class="caption">Summary 2</li>
+                        <li class="contents">
+                            <p>This plugin has actually been in the wild for nearly two years.  Thankfully, others have contributed feedback, code, tests, and demos to help it mature.</p>
 
+                            <p>Originally, it was used to dock the header row of a long table to the top of the window so we knew what each column was.  Every feature added from there was prompted by request.</p>
+
+                            <p>I don't get a lot of time to work on this, so all of the help is much appreciated.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="left">
                     <h2>Sit amet dolore</h2>
 
                     <p>Praesent ipsum nibh ut curabitur justo. Ut proin faucibus. Ornare molestie magnis nec tempus ultricies eu amet sed. Et egestas aptent. Vel dignissim justo sodales suscipit lorem quis ullamcorper lacinia. Ac ligula nascetur. Tortor non leo at lacus non feugiat nisl aut suscipit nec ac rhoncus sed ipsum. Mauris condimentum erat rutrum ultricies justo.</p>
@@ -267,27 +290,7 @@ body ul {
 
                     <p>In feugiat ut aliquam turpis vehicula. Dolor aut in gravida in nam eget euismod erat. Dignissim dictum non. Elit erat lorem ipsum lorem ac leo at turpis tristique amet aliquam morbi et per aliquam suspendisse cras. Sed elementum mi. Magna gravida facilisis ante dis mattis. Accumsan magnis elementum. Lacus dolor dictum. Sit vivamus integer. Nonummy ut torquent. Massa penatibus sit. Condimentum pulvinar ullamcorper. Vulputate laoreet primis lacus nec donec dictum eu pellentesque eros dictum amet risus dui.</p>
                 </li>
-                <li id="right">
-                    <ul id="summary1" class="summary">
-                        <li class="caption">Summary 1</li>
-                        <li class="contents">
-                            <p>There are three floating summaries on the right of this page.  They are anchored to their respective sections.</p>
-
-                            <p>Once a summary reaches the bottom of the header above, it will stop there until the next section summary arrives.  Then, it will continue up the page.</p>
-
-                            <p>The last summary will get pushed up the page by the footer once it undocks to reveal the content below it.</p>
-                        </li>
-                    </ul>
-                    <ul id="summary2" class="summary">
-                        <li class="caption">Summary 2</li>
-                        <li class="contents">
-                            <p>This plugin has actually been in the wild for nearly two years.  Thankfully, others have contributed feedback, code, tests, and demos to help it mature.</p>
-
-                            <p>Originally, it was used to dock the header row of a long table to the top of the window so we knew what each column was.  Every feature added from there was prompted by request.</p>
-
-                            <p>I don't get a lot of time to work on this, so all of the help is much appreciated.</p>
-                        </li>
-                    </ul>                    
+                <li class="right">
                     <ul id="summary3" class="summary">
                         <li class="caption">Summary 3</li>
                         <li class="contents">
@@ -301,7 +304,7 @@ body ul {
                                 <li><a href="http://jsfiddle.net/ZZYpG/2/">Endlessly scrolling date markers.</a></li>
                             </ul>
                         </li>
-                    </ul>                    
+                    </ul>
                 </li>
             </ul>
         </li>
