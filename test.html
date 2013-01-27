@@ -86,22 +86,17 @@ body ul {
     $(document).ready(function() {
         $('.header').scrollToFixed();
 
-        var h2 = $('h2');
-
-        $('#summary1').data('anchor', h2[0]);
-        $('#summary2').data('anchor', h2[3]);
-        $('#summary3').data('anchor', h2[10]);
-
-        var summary = $('.summary');
-        summary.each(function(i) {
-            var s = $(summary[i]);
-            s.css({
-                position: 'absolute',
-                top: $(s.data('anchor')).offset().top
-            });
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
         });
 
-        summary.scrollToFixed({
+        var h2 = $('h2');
+        $('#summary1').css({ position: 'absolute', top: $(h2[0]).offset().top });
+        $('#summary2').css({ position: 'absolute', top: $(h2[3]).offset().top });
+        $('#summary3').css({ position: 'absolute', top: $(h2[10]).offset().top });
+
+        $('.summary').scrollToFixed({
             marginTop: $('.header').outerHeight(true) + 10,
             limit: function() {
                 var self = $(this);
@@ -117,11 +112,6 @@ body ul {
             },
             zIndex: 999
         });
-
-        $('.footer').scrollToFixed( {
-            bottom: 0,
-            limit: $('.footer').offset().top,
-        });        
     });
 </script>
 </head>
@@ -163,21 +153,21 @@ body ul {
         $('.header').scrollToFixed();
 
         
+        // Dock the footer to the bottom of the page, but scroll up to reveal more
+        // content if the page is scrolled far enough.
+
+        $('.footer').scrollToFixed( {
+            bottom: 0,
+            limit: $('.footer').offset().top,
+        });
+
+
         // Anchor the summaries to their respective sections.
         
         var h2 = $('h2');
-        $('#summary1').data('anchor', h2[1]);
-        $('#summary2').data('anchor', h2[7]);
-        $('#summary3').data('anchor', h2[10]);
-
-        var summary = $('.summary');
-        summary.each(function(i) {
-            var s = $(summary[i]);
-            s.css({
-                position: 'absolute',
-                top: $(s.data('anchor')).offset().top
-            });
-        });
+        $('#summary1').css({ position: 'absolute', top: $(h2[0]).offset().top });
+        $('#summary2').css({ position: 'absolute', top: $(h2[3]).offset().top });
+        $('#summary3').css({ position: 'absolute', top: $(h2[10]).offset().top });
 
         
         // Dock each summary as it arrives just below the docked header, pushing the
@@ -198,15 +188,6 @@ body ul {
                 return limit;
             },
             zIndex: 999
-        });
-
-
-        // Dock the footer to the bottom of the page, but scroll up to reveal more
-        // content if the page is scrolled far enough.
-
-        $('.footer').scrollToFixed( {
-            bottom: 0,
-            limit: $('.footer').offset().top,
         });
     });
 </pre>             
