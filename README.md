@@ -114,7 +114,7 @@ var b = $.isScrollToFixed('.header');
 
 ## Options ##
 
-* __marginTop__ - the number of pixels between the top of the window and the fixed element.
+* __marginTop__ (value|function) - the number of pixels between the top of the window and the fixed element.
 * __limit__ (value|function) - the vertical scroll position at which the element will begin to scroll up the page (absolutely).
 * __bottom__ - (fix to bottom) the number of pixels between the bottom of the window and the bottom of the fixed element.
 * __zIndex__ - the z-index of the fixed element.
@@ -128,6 +128,7 @@ var b = $.isScrollToFixed('.header');
 * __preAbsolute__ - the function handler triggered just before the element goes absolute.
 * __postAbsolute__ - the function handler triggered just after the element leaves absolute.
 * __offsets__ - (true|false|not present) some websites have needed an adjustment to the left position of the element due to something in their layout.  This option turns this adjustment on.
+* __minWidth__ (number) - the minimum width the window must be to "fix" the target element.  Turns off the functionaility when the window width is less than specified.
 * __dontCheckForPositionFixedSupport__ - (true|false|not present) some devices do not support position fixed; we check to see if it does.  This option turns off that check if set to true.
 
 ## Demos ##
