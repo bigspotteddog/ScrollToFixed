@@ -151,11 +151,20 @@
         }
 
         function setAbsolute() {
+
+            var top = getLimit();
+            var left = offsetLeft;
+
+            if (base.options.removeOffsets) {
+                left = 0;
+                top = top - offsetTop;
+            }
+
             target.css({
                 'width' : target.width(),
                 'position' : 'absolute',
-                'top' : getLimit(),
-                'left' : offsetLeft,
+                'top' : top,
+                'left' : left,
                 'margin-left' : '0px',
                 'bottom' : ''
             });
