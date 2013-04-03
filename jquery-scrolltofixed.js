@@ -133,12 +133,14 @@
                 // not fill the rest of the page horizontally. Also, set its top
                 // to the margin top specified in the options.
                 target.css({
-                    'width' : target.width(),
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
                 });
+                if (!base.options.dontSetWidth) {
+                  target.css("width", target.width());
+                }
 
                 target.addClass('scroll-to-fixed-fixed');
 
@@ -161,13 +163,15 @@
             }
 
             target.css({
-                'width' : target.width(),
                 'position' : 'absolute',
                 'top' : top,
                 'left' : left,
                 'margin-left' : '0px',
                 'bottom' : ''
             });
+            if (!base.options.dontSetWidth) {
+              target.css("width", target.width());
+            }
 
             position = 'absolute';
         }
