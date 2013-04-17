@@ -138,7 +138,7 @@
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
                 });
-                if (!base.options.dontSetWidth) {
+                if (!base.options.dontSetWidth||base.options.dontSetWidth==null) {
                   target.css("width", target.width());
                 }
 
@@ -169,9 +169,10 @@
                 'margin-left' : '0px',
                 'bottom' : ''
             });
-            if (!base.options.dontSetWidth) {
+            if (!base.options.dontSetWidth||base.options.dontSetWidth==null) {
               target.css("width", target.width());
             }
+
 
             position = 'absolute';
         }
