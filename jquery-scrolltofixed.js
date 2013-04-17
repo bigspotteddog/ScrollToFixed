@@ -132,16 +132,17 @@
                 // Set the target element to fixed and set its width so it does
                 // not fill the rest of the page horizontally. Also, set its top
                 // to the margin top specified in the options.
-                target.css({
+                
+                cssOptions={
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
-                });
-                if (!base.options.dontSetWidth) {
-                  target.css("width", target.width());
                 }
-
+                if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
+                
+                target.css(cssOptions);
+                
                 target.addClass('scroll-to-fixed-fixed');
 
                 if (base.options.className) {
@@ -162,16 +163,16 @@
                 top = top - offsetTop;
             }
 
-            target.css({
-                'position' : 'absolute',
-                'top' : top,
-                'left' : left,
-                'margin-left' : '0px',
-                'bottom' : ''
-            });
-            if (!base.options.dontSetWidth) {
-              target.css("width", target.width());
-            }
+            cssOptions={
+              'position' : 'absolute',
+              'top' : top,
+              'left' : left,
+              'margin-left' : '0px',
+              'bottom' : ''
+            }            
+            if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
+            
+            target.css(cssOptions);
 
             position = 'absolute';
         }
