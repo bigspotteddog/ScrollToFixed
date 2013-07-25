@@ -1,6 +1,6 @@
 (function($) {
     $.isScrollToFixed = function(el) {
-        return $(el).data('ScrollToFixed') !== undefined;
+        return !!$(el).data('ScrollToFixed');
     };
 
     $.ScrollToFixed = function(el, options) {
