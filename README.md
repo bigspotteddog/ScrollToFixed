@@ -157,5 +157,5 @@ var b = $.isScrollToFixed('.header');
 * [stanislaw](https://github.com/stanislaw)
 * [glench](https://github.com/Glench)
 * [murb](https://github.com/murb)
-* [DukeBG](https://github.com/DukeBG)
+* [dukebg](https://github.com/DukeBG)
 
