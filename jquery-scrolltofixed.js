@@ -25,7 +25,7 @@
         var position;
         var originalPosition;
 
-        var originalOffset;
+        var originalOffsetTop;
 
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
@@ -193,7 +193,7 @@
                     'width' : '',
                     'position' : originalPosition,
                     'left' : '',
-                    'top' : originalOffset.top,
+                    'top' : originalOffsetTop,
                     'margin-left' : ''
                 });
 
@@ -428,7 +428,7 @@
             position = target.css('position');
             originalPosition = target.css('position');
 
-            originalOffset = $.extend({}, target.offset());
+            originalOffsetTop = target.css('top');
 
             // Place the spacer right after the target element.
             if (isUnfixed()) base.$el.after(spacer);
