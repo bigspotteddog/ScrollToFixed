@@ -159,7 +159,7 @@
             var left = offsetLeft;
 
             if (base.options.removeOffsets) {
-                left = 0;
+                left = '';
                 top = top - offsetTop;
             }
 
