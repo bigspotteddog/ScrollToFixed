@@ -6,7 +6,7 @@
   "main": "jquery-scrolltofixed.js",
   "dependencies": {
     "jquery": ">=1.6",
-  }
+  },
   "keywords": [
     "jQuery", "scroll", "fixed"
   ],
