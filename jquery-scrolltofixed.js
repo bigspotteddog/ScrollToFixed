@@ -141,6 +141,9 @@
                 }
                 if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
 
+		//Set width to fix responsive, specially for Twitter bootstrap 3 
+		cssOptions['width']=target.outerWidth(true)+'px';
+                
                 target.css(cssOptions);
 
                 target.addClass('scroll-to-fixed-fixed');
