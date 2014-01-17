@@ -25,7 +25,7 @@
         var position;
         var originalPosition;
 
-        var originalOffset;
+        var originalOffsetTop;
 
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
@@ -193,7 +193,7 @@
                     'width' : '',
                     'position' : originalPosition,
                     'left' : '',
-                    'top' : originalOffset.top,
+                    'top' : originalOffsetTop,
                     'margin-left' : ''
                 });
 
@@ -256,6 +256,13 @@
             // put the target element at the specified limit, set the target
             // element to absolute.
             if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+                if (!isUnfixed() || !wasReset) {
+                    postPosition();
+                    target.trigger('preUnfixed.ScrollToFixed');
+                    setUnfixed();
+                    target.trigger('unfixed.ScrollToFixed');
+                }
+            } else if (base.options.maxWidth && $(window).width() > base.options.maxWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed.ScrollToFixed');
@@ -355,7 +362,7 @@
             if(target.is(':visible')) {
                 isReset = false;
                 checkScroll();
-			}
+            }
         }
 
         var windowScroll = function(event) {
@@ -428,7 +435,7 @@
             position = target.css('position');
             originalPosition = target.css('position');
 
-            originalOffset = $.extend({}, target.offset());
+            originalOffsetTop = target.css('top');
 
             // Place the spacer right after the target element.
             if (isUnfixed()) base.$el.after(spacer);
