@@ -262,6 +262,13 @@
                     setUnfixed();
                     target.trigger('unfixed.ScrollToFixed');
                 }
+            } else if (base.options.maxWidth && $(window).width() > base.options.maxWidth) {
+                if (!isUnfixed() || !wasReset) {
+                    postPosition();
+                    target.trigger('preUnfixed.ScrollToFixed');
+                    setUnfixed();
+                    target.trigger('unfixed.ScrollToFixed');
+                }
             } else if (base.options.bottom == -1) {
                 // If the vertical scroll position, plus the optional margin, would
                 // put the target element at the specified limit, set the target
@@ -355,7 +362,7 @@
             if(target.is(':visible')) {
                 isReset = false;
                 checkScroll();
-			}
+            }
         }
 
         var windowScroll = function(event) {

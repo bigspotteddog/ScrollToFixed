@@ -135,6 +135,7 @@ var b = $.isScrollToFixed('.header');
 * __postAbsolute__ - the function handler triggered just after the element leaves absolute.
 * __offsets__ - (true|false|not present) some websites have needed an adjustment to the left position of the element due to something in their layout.  This option turns this adjustment on.
 * __minWidth__ (number) - the minimum width the window must be to "fix" the target element.  Turns off the functionaility when the window width is less than specified.
+* __maxWidth__ (number) - the maximum width the window must be to "fix" the target element.  Turns off the functionaility when the window width is more than specified.
 * __dontCheckForPositionFixedSupport__ - (true|false|not present) some devices do not support position fixed; we check to see if it does.  This option turns off that check if set to true.
 * __dontSetWidth__ - (true|false|not set) box sizing that does not set the width on the target element when it goes fixed or absolute.
 * __removeOffsets__ - (true|false|not set) recalculate top offset and delete left offset when the element goes absolute.
