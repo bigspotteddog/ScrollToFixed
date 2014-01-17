@@ -106,7 +106,7 @@ var b = $.isScrollToFixed('.header');
 
   $('.header').trigger('resize'); // Resizes the spacer in case the fixed element height changes.
                                   // Good for size changes to the fixed element.
-  
+
   $(window).scroll(); // Causes the plugin to recalculate the window scoll.
                       // Good for layout changes that could change the fixed element's response to
                       // the scroll.  Example: the fixed element height expands which should cause
@@ -114,8 +114,8 @@ var b = $.isScrollToFixed('.header');
 
   $(window).resize(); // Causes the plugin to recalculate the element offsets, then the window scroll.
                       // Good for layout changes that could cause the fixed element to move.
-                      // Example: the header height increases which should cause the fixed 
-                      // element to fix at a greater vertical scroll position.  
+                      // Example: the header height increases which should cause the fixed
+                      // element to fix at a greater vertical scroll position.
 ```
 
 ## Options ##
@@ -149,15 +149,3 @@ var b = $.isScrollToFixed('.header');
 * http://jsfiddle.net/y3qV5/769/ - Another multi-cart example using floats, with section stops.
 * http://jsfiddle.net/ZZYpG/68/   - Endlessly scrolling date markers.
 * http://jsfiddle.net/y3qV5/1730/ - Yahoo's new sidebar.
- 
-## Contributors ##
-
-* [bigspotteddog](https://github.com/bigspotteddog)
-* [megamattron](https://github.com/megamattron)
-* [techpeace](https://github.com/techpeace)
-* [jwoldan](https://github.com/jwoldan)
-* [stanislaw](https://github.com/stanislaw)
-* [glench](https://github.com/Glench)
-* [murb](https://github.com/murb)
-* [dukebg](https://github.com/DukeBG)
-
