@@ -1,3 +1,10 @@
+/*
+ * ScrollToFixed
+ * https://github.com/bigspotteddog/ScrollToFixed
+ * 
+ * Copyright (c) 2011 Joseph Cava-Lynch
+ * MIT license
+ */
 (function($) {
     $.isScrollToFixed = function(el) {
         return !!$(el).data('ScrollToFixed');
