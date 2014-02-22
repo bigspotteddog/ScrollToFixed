@@ -142,9 +142,9 @@
                 if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
 
                 target.css(cssOptions);
-
-                target.addClass('scroll-to-fixed-fixed');
-
+                
+                target.addClass(base.options.baseClassName);
+                
                 if (base.options.className) {
                     target.addClass(base.options.className);
                 }
@@ -519,7 +519,8 @@
         marginTop : 0,
         limit : 0,
         bottom : -1,
-        zIndex : 1000
+        zIndex : 1000,
+        baseClassName: 'scroll-to-fixed-fixed'
     };
 
     // Returns enhanced elements that will fix to the top of the page when the
