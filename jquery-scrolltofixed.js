@@ -31,8 +31,8 @@
 
         var position;
         var originalPosition;
-
         var originalOffsetTop;
+        var originalZIndex;
 
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
@@ -197,6 +197,7 @@
                 // Remove the style attributes that were added to the target.
                 // This will reverse the target back to the its original style.
                 target.css({
+                    'z-index' : originalZIndex,
                     'width' : '',
                     'position' : originalPosition,
                     'left' : '',
@@ -433,6 +434,7 @@
             // Put the target element on top of everything that could be below
             // it. This reduces flicker when the target element is transitioning
             // to fixed.
+            originalZIndex = target.css('z-index')
             base.$el.css('z-index', base.options.zIndex);
 
             // Create a spacer element to fill the void left by the target
