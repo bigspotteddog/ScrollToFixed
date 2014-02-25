@@ -141,6 +141,7 @@
                 // to the margin top specified in the options.
 
                 cssOptions={
+                    'z-index' : base.options.zIndex,
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
@@ -422,8 +423,9 @@
         // and binds to the window scroll and resize events.
         base.init = function() {
             // Capture the options for this plugin.
-            base.options = $
-                    .extend({}, $.ScrollToFixed.defaultOptions, options);
+            base.options = $.extend({}, $.ScrollToFixed.defaultOptions, options);
+
+            originalZIndex = target.css('z-index')
 
             // Turn off this functionality for devices that do not support it.
             // if (!(base.options && base.options.dontCheckForPositionFixedSupport)) {
@@ -434,7 +436,6 @@
             // Put the target element on top of everything that could be below
             // it. This reduces flicker when the target element is transitioning
             // to fixed.
-            originalZIndex = target.css('z-index')
             base.$el.css('z-index', base.options.zIndex);
 
             // Create a spacer element to fill the void left by the target
