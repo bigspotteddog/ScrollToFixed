@@ -248,6 +248,15 @@
             // happens once.
             if (!isReset) {
                 resetScroll();
+            } else if (isUnfixed()) {
+                // if the offset has changed since the last scroll,
+                // we need to get it again.
+
+                // Capture the offset top of the target element.
+                offsetTop = target.offset().top;
+
+                // Capture the offset left of the target element.
+                offsetLeft = target.offset().left;
             }
 
             // Grab the current horizontal scroll position.
