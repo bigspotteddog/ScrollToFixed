@@ -373,7 +373,7 @@
         }
 
         var windowScroll = function(event) {
-            checkScroll();
+            (!!window.requestAnimationFrame) ? requestAnimationFrame(checkScroll) : checkScroll();
         }
 
         // From: http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
