@@ -31,8 +31,8 @@
 
         var position;
         var originalPosition;
-
         var originalOffsetTop;
+        var originalZIndex;
 
         // The offset top of the element when resetScroll was called. This is
         // used to determine if we have scrolled past the top of the element.
@@ -141,6 +141,7 @@
                 // to the margin top specified in the options.
 
                 cssOptions={
+                    'z-index' : base.options.zIndex,
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
@@ -197,6 +198,7 @@
                 // Remove the style attributes that were added to the target.
                 // This will reverse the target back to the its original style.
                 target.css({
+                    'z-index' : originalZIndex,
                     'width' : '',
                     'position' : originalPosition,
                     'left' : '',
@@ -421,8 +423,9 @@
         // and binds to the window scroll and resize events.
         base.init = function() {
             // Capture the options for this plugin.
-            base.options = $
-                    .extend({}, $.ScrollToFixed.defaultOptions, options);
+            base.options = $.extend({}, $.ScrollToFixed.defaultOptions, options);
+
+            originalZIndex = target.css('z-index')
 
             // Turn off this functionality for devices that do not support it.
             // if (!(base.options && base.options.dontCheckForPositionFixedSupport)) {
