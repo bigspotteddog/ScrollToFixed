@@ -1,7 +1,7 @@
 /*
  * ScrollToFixed
  * https://github.com/bigspotteddog/ScrollToFixed
- * 
+ *
  * Copyright (c) 2011 Joseph Cava-Lynch
  * MIT license
  */
@@ -52,10 +52,6 @@
         // This is the element used to fill the void left by the target element
         // when it goes fixed; otherwise, everything below it moves up the page.
         var spacer = null;
-
-        var spacerClass;
-
-        var className;
 
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
@@ -140,19 +136,21 @@
                 // not fill the rest of the page horizontally. Also, set its top
                 // to the margin top specified in the options.
 
-                cssOptions={
+                var cssOptions = {
                     'z-index' : base.options.zIndex,
                     'position' : 'fixed',
-                    'top' : base.options.bottom == -1?getMarginTop():'',
-                    'bottom' : base.options.bottom == -1?'':base.options.bottom,
+                    'top' : base.options.bottom === -1 ? getMarginTop() : '',
+                    'bottom' : base.options.bottom === -1 ? '' : base.options.bottom,
                     'margin-left' : '0px'
+                };
+                if (!base.options.dontSetWidth){
+                  cssOptions.width = target.outerWidth(true) + 'px';
                 }
-                if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
 
                 target.css(cssOptions);
-                
+
                 target.addClass(base.options.baseClassName);
-                
+
                 if (base.options.className) {
                     target.addClass(base.options.className);
                 }
@@ -171,14 +169,16 @@
                 top = top - offsetTop;
             }
 
-            cssOptions={
+            var cssOptions = {
               'position' : 'absolute',
               'top' : top,
               'left' : left,
               'margin-left' : '0px',
               'bottom' : ''
+            };
+            if (!base.options.dontSetWidth){
+              cssOptions.width = target.outerWidth(true) + 'px';
             }
-            if (!base.options.dontSetWidth){ cssOptions['width']=target.width(); };
 
             target.css(cssOptions);
 
@@ -381,11 +381,16 @@
                 isReset = false;
                 checkScroll();
             }
-        }
+        };
 
         var windowScroll = function(event) {
-            (!!window.requestAnimationFrame) ? requestAnimationFrame(checkScroll) : checkScroll();
-        }
+            if (!!window.requestAnimationFrame) {
+              window.requestAnimationFrame(checkScroll);
+            }
+            else {
+              checkScroll();
+            }
+        };
 
         // From: http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
         var isPositionFixedSupported = function() {
@@ -417,7 +422,7 @@
             }
 
             return null;
-        }
+        };
 
         var preventDefault = function(e) {
             e = e || window.event;
@@ -425,7 +430,7 @@
                 e.preventDefault();
             }
             e.returnValue = false;
-        }
+        };
 
         // Initializes this plugin. Captures the options passed in, turns this
         // off for devices that do not support fixed position, adds the spacer,
@@ -434,7 +439,7 @@
             // Capture the options for this plugin.
             base.options = $.extend({}, $.ScrollToFixed.defaultOptions, options);
 
-            originalZIndex = target.css('z-index')
+            originalZIndex = target.css('z-index');
 
             // Turn off this functionality for devices that do not support it.
             // if (!(base.options && base.options.dontCheckForPositionFixedSupport)) {
@@ -449,7 +454,7 @@
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
-            spacer = $('<div />');
+            spacer = $(document.createElement('DIV'));
 
             position = target.css('position');
             originalPosition = target.css('position');
@@ -461,63 +466,62 @@
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
-            $(window).bind('resize.ScrollToFixed', windowResize);
+            $(window).on('resize.ScrollToFixed', windowResize);
 
             // When the window scrolls, check to see if we need to fix or unfix
             // the target element.
-            $(window).bind('scroll.ScrollToFixed', windowScroll);
+            $(window).on('scroll.ScrollToFixed', windowScroll);
 
             if (base.options.preFixed) {
-                target.bind('preFixed.ScrollToFixed', base.options.preFixed);
+                target.on('preFixed.ScrollToFixed', base.options.preFixed);
             }
             if (base.options.postFixed) {
-                target.bind('postFixed.ScrollToFixed', base.options.postFixed);
+                target.on('postFixed.ScrollToFixed', base.options.postFixed);
             }
             if (base.options.preUnfixed) {
-                target.bind('preUnfixed.ScrollToFixed', base.options.preUnfixed);
+                target.on('preUnfixed.ScrollToFixed', base.options.preUnfixed);
             }
             if (base.options.postUnfixed) {
-                target.bind('postUnfixed.ScrollToFixed', base.options.postUnfixed);
+                target.on('postUnfixed.ScrollToFixed', base.options.postUnfixed);
             }
             if (base.options.preAbsolute) {
-                target.bind('preAbsolute.ScrollToFixed', base.options.preAbsolute);
+                target.on('preAbsolute.ScrollToFixed', base.options.preAbsolute);
             }
             if (base.options.postAbsolute) {
-                target.bind('postAbsolute.ScrollToFixed', base.options.postAbsolute);
+                target.on('postAbsolute.ScrollToFixed', base.options.postAbsolute);
             }
             if (base.options.fixed) {
-                target.bind('fixed.ScrollToFixed', base.options.fixed);
+                target.on('fixed.ScrollToFixed', base.options.fixed);
             }
             if (base.options.unfixed) {
-                target.bind('unfixed.ScrollToFixed', base.options.unfixed);
+                target.on('unfixed.ScrollToFixed', base.options.unfixed);
             }
 
             if (base.options.spacerClass) {
                 spacer.addClass(base.options.spacerClass);
             }
 
-            target.bind('resize.ScrollToFixed', function() {
+            target.on('resize.ScrollToFixed', function() {
                 spacer.height(target.height());
             });
 
-            target.bind('scroll.ScrollToFixed', function() {
+            target.on('scroll.ScrollToFixed', function() {
                 target.trigger('preUnfixed.ScrollToFixed');
                 setUnfixed();
                 target.trigger('unfixed.ScrollToFixed');
                 checkScroll();
             });
 
-            target.bind('detach.ScrollToFixed', function(ev) {
+            target.on('detach.ScrollToFixed', function(ev) {
                 preventDefault(ev);
 
                 target.trigger('preUnfixed.ScrollToFixed');
                 setUnfixed();
                 target.trigger('unfixed.ScrollToFixed');
 
-                $(window).unbind('resize.ScrollToFixed', windowResize);
-                $(window).unbind('scroll.ScrollToFixed', windowScroll);
+                $(window).off('.ScrollToFixed');
 
-                target.unbind('.ScrollToFixed');
+                target.off('.ScrollToFixed');
 
                 //remove spacer from dom
                 spacer.remove();
