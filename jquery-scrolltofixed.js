@@ -467,6 +467,12 @@
             // the target element.
             $(window).bind('scroll.ScrollToFixed', windowScroll);
 
+            // For touch devices, call checkScroll directlly rather than
+            // rAF wrapped windowScroll to animate the element
+            if ('ontouchmove' in window) {
+              $(window).bind('touchmove.ScrollToFixed', checkScroll);
+            }
+
             if (base.options.preFixed) {
                 target.bind('preFixed.ScrollToFixed', base.options.preFixed);
             }
