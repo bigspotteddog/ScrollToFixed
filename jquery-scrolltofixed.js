@@ -31,6 +31,7 @@
 
         var position;
         var originalPosition;
+        var originalFloat;
         var originalOffsetTop;
         var originalZIndex;
 
@@ -133,7 +134,7 @@
                     'display' : target.css('display'),
                     'width' : target.outerWidth(true),
                     'height' : target.outerHeight(true),
-                    'float' : target.css('float')
+                    'float' : originalFloat
                 });
 
                 // Set the target element to fixed and set its width so it does
@@ -453,7 +454,7 @@
 
             position = target.css('position');
             originalPosition = target.css('position');
-
+            originalFloat = target.css('float');
             originalOffsetTop = target.css('top');
 
             // Place the spacer right after the target element.
