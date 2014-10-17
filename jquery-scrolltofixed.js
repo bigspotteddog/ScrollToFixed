@@ -293,7 +293,7 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (limit > 0 && y >= limit - getMarginTop()) {
-                    if (!isAbsolute() || !wasReset) {
+                    if (isFixed() && (!isAbsolute() || !wasReset)) {
                         postPosition();
                         target.trigger('preAbsolute.ScrollToFixed');
                         setAbsolute();
