@@ -246,6 +246,7 @@
         function checkScroll() {
             if (!$.isScrollToFixed(target)) return;
             var wasReset = isReset;
+            var wasUnfixed = isUnfixed();
 
             // If resetScroll has not yet been called, call it. This only
             // happens once.
@@ -293,7 +294,7 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (limit > 0 && y >= limit - getMarginTop()) {
-                    if (isFixed() && (!isAbsolute() || !wasReset)) {
+                    if (!wasUnfixed && (!isAbsolute() || !wasReset)) {
                         postPosition();
                         target.trigger('preAbsolute.ScrollToFixed');
                         setAbsolute();
