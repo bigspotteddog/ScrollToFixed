@@ -127,12 +127,16 @@
         function setFixed() {
             // Only fix the target element and the spacer if we need to.
             if (!isFixed()) {
+                //get REAL dimensions (decimal fix)
+                //Ref. http://stackoverflow.com/questions/3603065/how-to-make-jquery-to-not-round-value-returned-by-width
+                var dimensions = target[0].getBoundingClientRect();
+                
                 // Set the spacer to fill the height and width of the target
                 // element, then display it.
                 spacer.css({
                     'display' : target.css('display'),
-                    'width' : target.outerWidth(true),
-                    'height' : target.outerHeight(true),
+                    'width' : dimensions.width,
+                    'height' : dimensions.height,
                     'float' : target.css('float')
                 });
 
