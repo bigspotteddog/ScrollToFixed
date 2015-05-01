@@ -1,5 +1,5 @@
 {
-  "name": "ScrollToFixed",
+  "name": "scrolltofixed",
   "version": "1.0.6",
   "description": "This plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.",
   "main": "jquery-scrolltofixed.js",
@@ -11,5 +11,17 @@
   "bugs": {
     "url": "https://github.com/bigspotteddog/ScrollToFixed/issues"
   },
-  "homepage": "https://github.com/bigspotteddog/ScrollToFixed"
+  "homepage": "https://github.com/bigspotteddog/ScrollToFixed",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scroll",
+    "fixed",
+    "jquery"
+  ],
+  "license": "MIT"
 }
