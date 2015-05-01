@@ -31,6 +31,7 @@
 
         var position;
         var originalPosition;
+        var originalFloat;
         var originalOffsetTop;
         var originalZIndex;
 
@@ -133,7 +134,7 @@
                     'display' : target.css('display'),
                     'width' : target.outerWidth(true),
                     'height' : target.outerHeight(true),
-                    'float' : target.css('float')
+                    'float' : originalFloat
                 });
 
                 // Set the target element to fixed and set its width so it does
@@ -245,6 +246,7 @@
         function checkScroll() {
             if (!$.isScrollToFixed(target)) return;
             var wasReset = isReset;
+            var wasUnfixed = isUnfixed();
 
             // If resetScroll has not yet been called, call it. This only
             // happens once.
@@ -292,7 +294,7 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (limit > 0 && y >= limit - getMarginTop()) {
-                    if (!isAbsolute() || !wasReset) {
+                    if (!wasUnfixed && (!isAbsolute() || !wasReset)) {
                         postPosition();
                         target.trigger('preAbsolute.ScrollToFixed');
                         setAbsolute();
@@ -453,7 +455,7 @@
 
             position = target.css('position');
             originalPosition = target.css('position');
-
+            originalFloat = target.css('float');
             originalOffsetTop = target.css('top');
 
             // Place the spacer right after the target element.
