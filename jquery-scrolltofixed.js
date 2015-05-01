@@ -1,7 +1,7 @@
 /*
  * ScrollToFixed
  * https://github.com/bigspotteddog/ScrollToFixed
- * 
+ *
  * Copyright (c) 2011 Joseph Cava-Lynch
  * MIT license
  */
@@ -31,6 +31,7 @@
 
         var position;
         var originalPosition;
+        var originalFloat;
         var originalOffsetTop;
         var originalZIndex;
 
@@ -130,7 +131,7 @@
                 //get REAL dimensions (decimal fix)
                 //Ref. http://stackoverflow.com/questions/3603065/how-to-make-jquery-to-not-round-value-returned-by-width
                 var dimensions = target[0].getBoundingClientRect();
-                
+
                 // Set the spacer to fill the height and width of the target
                 // element, then display it.
                 spacer.css({
@@ -154,9 +155,9 @@
                 if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
 
                 target.css(cssOptions);
-                
+
                 target.addClass(base.options.baseClassName);
-                
+
                 if (base.options.className) {
                     target.addClass(base.options.className);
                 }
@@ -249,6 +250,7 @@
         function checkScroll() {
             if (!$.isScrollToFixed(target) || target.is(':hidden')) return;
             var wasReset = isReset;
+            var wasUnfixed = isUnfixed();
 
             // If resetScroll has not yet been called, call it. This only
             // happens once.
@@ -296,7 +298,7 @@
                 // put the target element at the specified limit, set the target
                 // element to absolute.
                 if (limit > 0 && y >= limit - getMarginTop()) {
-                    if (!isAbsolute() || !wasReset) {
+                    if (!wasUnfixed && (!isAbsolute() || !wasReset)) {
                         postPosition();
                         target.trigger('preAbsolute.ScrollToFixed');
                         setAbsolute();
@@ -457,7 +459,7 @@
 
             position = target.css('position');
             originalPosition = target.css('position');
-
+            originalFloat = target.css('float');
             originalOffsetTop = target.css('top');
 
             // Place the spacer right after the target element.
