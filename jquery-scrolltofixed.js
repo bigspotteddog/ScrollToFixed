@@ -138,7 +138,7 @@
                     'display' : target.css('display'),
                     'width' : dimensions.width,
                     'height' : dimensions.height,
-                    'float' : target.css('float')
+                    'float' : originalFloat
                 });
 
                 // Set the target element to fixed and set its width so it does
