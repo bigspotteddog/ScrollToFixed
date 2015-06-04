@@ -187,6 +187,10 @@
 
             target.css(cssOptions);
 
+            // If the static target becomes absolute positioned
+            // it requires the spacer.
+            spacer.css('display', target.css('display'));
+
             position = 'absolute';
         }
 
