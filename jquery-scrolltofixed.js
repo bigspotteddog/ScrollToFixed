@@ -59,6 +59,7 @@
         var className;
 
         var $window = $(window);
+        var $offsetParent = $(target[0].offsetParent);
 
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
@@ -155,7 +156,7 @@
                     'margin-left' : '0px'
                 }
                 if (!base.options.dontSetWidth) {
-                    cssOptions['width'] = window.getComputedStyle(target[0], null).getPropertyValue("width")
+                    cssOptions['width'] = dimensions.width;
                 };
 
                 target.css(cssOptions);
@@ -172,8 +173,9 @@
 
         function setAbsolute() {
 
-            var top = getLimit();
-            var left = offsetLeft;
+            var parentOffset = $offsetParent.offset();
+            var top = getLimit() - parentOffset.top;
+            var left = offsetLeft - parentOffset.left;
 
             if (base.options.removeOffsets) {
                 left = '';
@@ -188,7 +190,7 @@
               'bottom' : ''
             }
             if (!base.options.dontSetWidth) {
-                cssOptions['width'] = window.getComputedStyle(target[0], null).getPropertyValue("width");
+                cssOptions['width'] = target[0].getBoundingClientRect().width;
             };
 
             target.css(cssOptions);
