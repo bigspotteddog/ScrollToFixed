@@ -154,7 +154,9 @@
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
                 }
-                if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
+                if (!base.options.dontSetWidth) {
+                    cssOptions['width'] = window.getComputedStyle(target[0], null).getPropertyValue("width")
+                };
 
                 target.css(cssOptions);
 
@@ -185,7 +187,9 @@
               'margin-left' : '0px',
               'bottom' : ''
             }
-            if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
+            if (!base.options.dontSetWidth) {
+                cssOptions['width'] = window.getComputedStyle(target[0], null).getPropertyValue("width");
+            };
 
             target.css(cssOptions);
 
