@@ -58,6 +58,8 @@
 
         var className;
 
+        var $window = $(window);
+
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
         // scrolled. For some reason, calling this before the page is first
@@ -272,10 +274,10 @@
             }
 
             // Grab the current horizontal scroll position.
-            var x = $(window).scrollLeft();
+            var x = $window.scrollLeft();
 
             // Grab the current vertical scroll position.
-            var y = $(window).scrollTop();
+            var y = $window.scrollTop();
 
             // Get the limit, if there is one.
             var limit = getLimit();
@@ -283,14 +285,14 @@
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+            if (base.options.minWidth && $window.width() < base.options.minWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed.ScrollToFixed');
                     setUnfixed();
                     target.trigger('unfixed.ScrollToFixed');
                 }
-            } else if (base.options.maxWidth && $(window).width() > base.options.maxWidth) {
+            } else if (base.options.maxWidth && $window.width() > base.options.maxWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed.ScrollToFixed');
@@ -339,7 +341,7 @@
                 }
             } else {
                 if (limit > 0) {
-                    if (y + $(window).height() - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
+                    if (y + $window.height() - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed.ScrollToFixed');
@@ -471,16 +473,16 @@
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
-            $(window).bind('resize.ScrollToFixed', windowResize);
+            $window.bind('resize.ScrollToFixed', windowResize);
 
             // When the window scrolls, check to see if we need to fix or unfix
             // the target element.
-            $(window).bind('scroll.ScrollToFixed', windowScroll);
+            $window.bind('scroll.ScrollToFixed', windowScroll);
 
             // For touch devices, call checkScroll directlly rather than
             // rAF wrapped windowScroll to animate the element
             if ('ontouchmove' in window) {
-              $(window).bind('touchmove.ScrollToFixed', checkScroll);
+              $window.bind('touchmove.ScrollToFixed', checkScroll);
             }
 
             if (base.options.preFixed) {
@@ -531,8 +533,8 @@
                 setUnfixed();
                 target.trigger('unfixed.ScrollToFixed');
 
-                $(window).unbind('resize.ScrollToFixed', windowResize);
-                $(window).unbind('scroll.ScrollToFixed', windowScroll);
+                $window.unbind('resize.ScrollToFixed', windowResize);
+                $window.unbind('scroll.ScrollToFixed', windowScroll);
 
                 target.unbind('.ScrollToFixed');
 
