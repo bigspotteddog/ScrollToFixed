@@ -516,12 +516,13 @@
                 spacer.height(target.height());
             });
 
-            target.bind('scroll.ScrollToFixed', function() {
-                target.trigger('preUnfixed.ScrollToFixed');
-                setUnfixed();
-                target.trigger('unfixed.ScrollToFixed');
-                checkScroll();
-            });
+            // If the target has scrollbars this code breaks its behaviour.
+            // target.bind('scroll.ScrollToFixed', function() {
+            //     target.trigger('preUnfixed.ScrollToFixed');
+            //     setUnfixed();
+            //     target.trigger('unfixed.ScrollToFixed');
+            //     checkScroll();
+            // });
 
             target.bind('detach.ScrollToFixed', function(ev) {
                 preventDefault(ev);
