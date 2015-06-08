@@ -260,6 +260,7 @@
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
+
             if (!$.isScrollToFixed(target) || target.is(':hidden')) return;
             var wasReset = isReset;
             var wasUnfixed = isUnfixed();
@@ -467,7 +468,7 @@
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
-            spacer = $('<div />');
+            spacer = $('<div />').css('display', 'none');
 
             position = target.css('position');
             originalPosition = target.css('position');
@@ -546,10 +547,8 @@
 
                 //remove spacer from dom
                 spacer.remove();
-
                 base.$el.removeData('ScrollToFixed');
             });
-
             // Reset everything.
             windowResize();
         };
