@@ -348,7 +348,7 @@
                 }
             } else {
                 if (limit > 0) {
-                    if (y + $window.height() - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
+                    if (y + window.innerHeight - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed.ScrollToFixed');
