@@ -1,6 +1,6 @@
 {
   "name": "scrolltofixed",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This plugin is used to fix elements on the page (top, bottom, anywhere); however, it still allows the element to continue to move left or right with the horizontal scroll.",
   "main": "jquery-scrolltofixed.js",
   "repository": {
