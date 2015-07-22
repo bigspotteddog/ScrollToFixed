@@ -386,6 +386,9 @@
             if(target.is(':visible')) {
                 isReset = false;
                 checkScroll();
+            } else {
+              // Ensure the spacer is hidden
+              setUnfixed();
             }
         }
 
