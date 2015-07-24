@@ -58,6 +58,9 @@
 
         var className;
 
+        var $window = $(window);
+        var $offsetParent = $(target[0].offsetParent);
+
         // Capture the original offsets for the target element. This needs to be
         // called whenever the page size changes or when the page is first
         // scrolled. For some reason, calling this before the page is first
@@ -138,7 +141,7 @@
                     'display' : target.css('display'),
                     'width' : dimensions.width,
                     'height' : dimensions.height,
-                    'float' : target.css('float')
+                    'float' : originalFloat
                 });
 
                 // Set the target element to fixed and set its width so it does
@@ -152,7 +155,9 @@
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
                 }
-                if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
+                if (!base.options.dontSetWidth) {
+                    cssOptions['width'] = dimensions.width;
+                };
 
                 target.css(cssOptions);
 
@@ -168,8 +173,9 @@
 
         function setAbsolute() {
 
-            var top = getLimit();
-            var left = offsetLeft;
+            var parentOffset = $offsetParent.offset();
+            var top = getLimit() - parentOffset.top;
+            var left = offsetLeft - parentOffset.left;
 
             if (base.options.removeOffsets) {
                 left = '';
@@ -183,9 +189,15 @@
               'margin-left' : '0px',
               'bottom' : ''
             }
-            if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
+            if (!base.options.dontSetWidth) {
+                cssOptions['width'] = target[0].getBoundingClientRect().width;
+            };
 
             target.css(cssOptions);
+
+            // If the static target becomes absolute positioned
+            // it requires the spacer.
+            spacer.css('display', target.css('display'));
 
             position = 'absolute';
         }
@@ -248,6 +260,7 @@
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
+
             if (!$.isScrollToFixed(target) || target.is(':hidden')) return;
             var wasReset = isReset;
             var wasUnfixed = isUnfixed();
@@ -268,10 +281,10 @@
             }
 
             // Grab the current horizontal scroll position.
-            var x = $(window).scrollLeft();
+            var x = $window.scrollLeft();
 
             // Grab the current vertical scroll position.
-            var y = $(window).scrollTop();
+            var y = $window.scrollTop();
 
             // Get the limit, if there is one.
             var limit = getLimit();
@@ -279,14 +292,14 @@
             // If the vertical scroll position, plus the optional margin, would
             // put the target element at the specified limit, set the target
             // element to absolute.
-            if (base.options.minWidth && $(window).width() < base.options.minWidth) {
+            if (base.options.minWidth && $window.width() < base.options.minWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed.ScrollToFixed');
                     setUnfixed();
                     target.trigger('unfixed.ScrollToFixed');
                 }
-            } else if (base.options.maxWidth && $(window).width() > base.options.maxWidth) {
+            } else if (base.options.maxWidth && $window.width() > base.options.maxWidth) {
                 if (!isUnfixed() || !wasReset) {
                     postPosition();
                     target.trigger('preUnfixed.ScrollToFixed');
@@ -335,7 +348,7 @@
                 }
             } else {
                 if (limit > 0) {
-                    if (y + $(window).height() - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
+                    if (y + window.innerHeight - target.outerHeight(true) >= limit - (getMarginTop() || -getBottom())) {
                         if (isFixed()) {
                             postPosition();
                             target.trigger('preUnfixed.ScrollToFixed');
@@ -458,7 +471,7 @@
 
             // Create a spacer element to fill the void left by the target
             // element when it goes fixed.
-            spacer = $('<div />');
+            spacer = $('<div />').css('display', 'none');
 
             position = target.css('position');
             originalPosition = target.css('position');
@@ -470,16 +483,16 @@
 
             // Reset the target element offsets when the window is resized, then
             // check to see if we need to fix or unfix the target element.
-            $(window).bind('resize.ScrollToFixed', windowResize);
+            $window.bind('resize.ScrollToFixed', windowResize);
 
             // When the window scrolls, check to see if we need to fix or unfix
             // the target element.
-            $(window).bind('scroll.ScrollToFixed', windowScroll);
+            $window.bind('scroll.ScrollToFixed', windowScroll);
 
             // For touch devices, call checkScroll directlly rather than
             // rAF wrapped windowScroll to animate the element
             if ('ontouchmove' in window) {
-              $(window).bind('touchmove.ScrollToFixed', checkScroll);
+              $window.bind('touchmove.ScrollToFixed', checkScroll);
             }
 
             if (base.options.preFixed) {
@@ -515,12 +528,13 @@
                 spacer.height(target.height());
             });
 
-            target.bind('scroll.ScrollToFixed', function() {
-                target.trigger('preUnfixed.ScrollToFixed');
-                setUnfixed();
-                target.trigger('unfixed.ScrollToFixed');
-                checkScroll();
-            });
+            // If the target has scrollbars this code breaks its behaviour.
+            // target.bind('scroll.ScrollToFixed', function() {
+            //     target.trigger('preUnfixed.ScrollToFixed');
+            //     setUnfixed();
+            //     target.trigger('unfixed.ScrollToFixed');
+            //     checkScroll();
+            // });
 
             target.bind('detach.ScrollToFixed', function(ev) {
                 preventDefault(ev);
@@ -529,17 +543,15 @@
                 setUnfixed();
                 target.trigger('unfixed.ScrollToFixed');
 
-                $(window).unbind('resize.ScrollToFixed', windowResize);
-                $(window).unbind('scroll.ScrollToFixed', windowScroll);
+                $window.unbind('resize.ScrollToFixed', windowResize);
+                $window.unbind('scroll.ScrollToFixed', windowScroll);
 
                 target.unbind('.ScrollToFixed');
 
                 //remove spacer from dom
                 spacer.remove();
-
                 base.$el.removeData('ScrollToFixed');
             });
-
             // Reset everything.
             windowResize();
         };
