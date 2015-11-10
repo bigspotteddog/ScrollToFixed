@@ -561,7 +561,7 @@
     // page is scrolled.
     $.fn.scrollToFixed = function(options) {
         return this.each(function() {
-            (new $.ScrollToFixed(this, options));
+            ($.isScrollToFixed(this) ? this : new $.ScrollToFixed(this, options));
         });
     };
 })(jQuery);
