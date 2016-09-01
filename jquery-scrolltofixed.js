@@ -176,7 +176,7 @@
                 top = top - offsetTop;
             }
 
-            cssOptions={
+            var cssOptions={
               'position' : 'absolute',
               'top' : top,
               'left' : left,
