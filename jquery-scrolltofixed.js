@@ -564,4 +564,37 @@
             (new $.ScrollToFixed(this, options));
         });
     };
+
+    // Seperate function for refreshing limit in selected element
+    $.fn.scrollToFixedRefresh = function(limit){
+        // saving previous data
+        var info = this.data('ScrollToFixed');
+        var refreshValue = 0;
+        var def = info['options']['limit'];
+
+        // default init if element is not activated
+        if (info === undefined){
+            this.scrollToFixed();
+        }
+
+        // checking type of argument
+        switch(typeof limit) {
+            case 'number':
+                refreshValue = limit;
+                break;
+            case 'function':
+                var returned = limit();            
+                if (returned !== undefined && typeof returned === 'number')
+                    refreshValue = returned;
+                else
+                    refreshValue = def;
+                break;
+            default:
+                refreshValue = def;
+        }
+        
+        //updating limit in data attr
+        info['options']['limit'] = refreshValue;
+        this.data('ScrollToFixed', info);
+    }
 })(jQuery);
