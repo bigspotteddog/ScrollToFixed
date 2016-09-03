@@ -116,6 +116,11 @@ var b = $.isScrollToFixed('.header');
                       // Good for layout changes that could cause the fixed element to move.
                       // Example: the header height increases which should cause the fixed
                       // element to fix at a greater vertical scroll position.
+
+  $('.header').scrollToFixedRefresh(limit); // Causes plugin to change limit option according to 
+                      // the provided value. Attribute `limit` can be number or function that returns number.
+                      // Helps when layout updates dynamically (e.g. ajax calls that update content)
+                      // for recalculation of available space
 ```
 
 ## Options ##
@@ -139,6 +144,7 @@ var b = $.isScrollToFixed('.header');
 * __dontCheckForPositionFixedSupport__ - (true|false|not present) some devices do not support position fixed; we check to see if it does.  This option turns off that check if set to true.
 * __dontSetWidth__ - (true|false|not set) box sizing that does not set the width on the target element when it goes fixed or absolute.
 * __removeOffsets__ - (true|false|not set) recalculate top offset and delete left offset when the element goes absolute.
+
 
 ## Demos ##
 
