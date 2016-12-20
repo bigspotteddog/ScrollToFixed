@@ -211,7 +211,7 @@
                     'margin-left' : ''
                 });
 
-                target.removeClass('scroll-to-fixed-fixed');
+                target.removeClass(base.options.className);
 
                 if (base.options.className) {
                     target.removeClass(base.options.className);
