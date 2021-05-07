@@ -516,9 +516,6 @@
             });
 
             target.bind('scroll.ScrollToFixed', function() {
-                target.trigger('preUnfixed.ScrollToFixed');
-                setUnfixed();
-                target.trigger('unfixed.ScrollToFixed');
                 checkScroll();
             });
 
