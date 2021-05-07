@@ -145,7 +145,7 @@
                 // not fill the rest of the page horizontally. Also, set its top
                 // to the margin top specified in the options.
 
-                cssOptions={
+                var cssOptions={
                     'z-index' : base.options.zIndex,
                     'position' : 'fixed',
                     'top' : base.options.bottom == -1?getMarginTop():'',
@@ -176,7 +176,7 @@
                 top = top - offsetTop;
             }
 
-            cssOptions={
+            var cssOptions={
               'position' : 'absolute',
               'top' : top,
               'left' : left,
@@ -211,7 +211,7 @@
                     'margin-left' : ''
                 });
 
-                target.removeClass('scroll-to-fixed-fixed');
+                target.removeClass(base.options.baseClassName);
 
                 if (base.options.className) {
                     target.removeClass(base.options.className);
