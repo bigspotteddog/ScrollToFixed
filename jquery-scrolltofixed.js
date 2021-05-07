@@ -151,10 +151,13 @@
                     'top' : base.options.bottom == -1?getMarginTop():'',
                     'bottom' : base.options.bottom == -1?'':base.options.bottom,
                     'margin-left' : '0px'
-                }
+                };
                 if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
 
                 target.css(cssOptions);
+
+                // fadeIn if fade option is set to true
+                if (base.options.fade) {target.fadeIn(300);}
 
                 target.addClass(base.options.baseClassName);
 
@@ -182,10 +185,18 @@
               'left' : left,
               'margin-left' : '0px',
               'bottom' : ''
-            }
+            };
             if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
 
-            target.css(cssOptions);
+            // fadeOut if fade option is set to true
+            if (base.options.fade) {
+                //Ensure fade out occurs prior to modifying css
+                target.fadeOut(300, function(){
+                    target.css(cssOptions);
+                });
+            } else {
+                target.css(cssOptions);
+            }
 
             position = 'absolute';
         }
@@ -248,7 +259,7 @@
         // Checks to see if we need to do something based on new scroll position
         // of the page.
         function checkScroll() {
-            if (!$.isScrollToFixed(target) || target.is(':hidden')) return;
+            if (!$.isScrollToFixed(target) || (target.is(':hidden') && !base.options.fade)) return;
             var wasReset = isReset;
             var wasUnfixed = isUnfixed();
 
