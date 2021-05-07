@@ -154,6 +154,9 @@
                 }
                 if (!base.options.dontSetWidth){ cssOptions['width']=target.css('width'); };
 
+		//Set width to fix responsive, specially for Twitter bootstrap 3 
+		cssOptions['width']=target.outerWidth(true)+'px';
+                
                 target.css(cssOptions);
 
                 target.addClass(base.options.baseClassName);
